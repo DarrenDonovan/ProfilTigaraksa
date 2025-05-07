@@ -1,26 +1,31 @@
-# Gunakan image PHP sebagai base image
 FROM php:8.3-fpm
 
-# Install dependencies tambahan
-RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    zip \
+    unzip \
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www
 
-# Salin file aplikasi Laravel ke dalam container
+# Copy source code
 COPY . .
 
-# Install dependencies Laravel dengan Composer
+# Install PHP dependencies
 RUN composer install
 
 # Expose port
 EXPOSE 8000
 
-# Jalankan perintah default
-CMD ["php-fpm"]
+# Run Laravel dev server
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
