@@ -4,35 +4,28 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateUsersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // bigint unsigned, auto increment
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->rememberToken(); // varchar(100), nullable
+            $table->timestamps(); // created_at & updated_at
             $table->string('role');
-            $table->foreignId('id_wilayah')->constrained('wilayah', 'id_wilayah');
+            $table->unsignedBigInteger('id_wilayah')->index();
+
+            // Foreign key ke tabel wilayah
+            $table->foreign('id_wilayah')->references('id_wilayah')->on('wilayah')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users');
     }
-};
+}
