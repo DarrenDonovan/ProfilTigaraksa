@@ -31,7 +31,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayah->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -54,7 +55,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -100,15 +101,20 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
-						</a>
-					</li>
-					<li class="nav-item">
 						<a href="{{ route('admin.wisata') }}">
 							<p>Wisata</p>
 						</a>
 					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+					<a href="{{ route('admin.penginapan') }}">
+						<p>Penginapan</p>
+					</a>
+				</li>
 					<li class="nav-item">
 						<a href="{{ route('admin.umkm') }}">
 							<p>UMKM</p>
@@ -155,7 +161,7 @@
 											<div class="col col-md-8">
 												<div class="card-body">
 													<p class="card-text fs-3 fw-bold mb-0">Jumlah Penduduk</p>
-													<p class="card-text fs-2 pl-5 fw-bold ml-4">{{ $total_jenis_kelamin->laki_laki + $total_jenis_kelamin->perempuan }}</p>
+													<p class="card-text fs-2 pl-5 fw-bold ml-4">{{ $jenis_kelamin_per_wilayah->laki_laki + $jenis_kelamin_per_wilayah->perempuan }}</p>
 												</div>
 											</div>
 										</div>
@@ -180,7 +186,8 @@
 
 						<!-- Chart Jumlah Penduduk di Kecamatan -->
 						<div class="row">
-							<div class="col">
+							<div class="col col-md-8">
+								@if(Auth::check() && Auth::user()->role === 'superadmin')
 								<div class="card">
 									<div class="card-header">
 										<h4 class="card-title">Jumlah Penduduk Kecamatan Tigaraksa</h4>
@@ -189,92 +196,94 @@
 										<canvas id="Chart1"></canvas>
 									</div>
 								</div>
+								@elseif(Auth::check() && Auth::user()->role === 'admin')
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Jumlah Penduduk {{ $wilayah->nama_wilayah }} Berdasarkan Pendidikan</h4>
+									</div>
+									<div class="card-body">
+										<canvas id="Chart6"></canvas>
+									</div>
+								</div>
+								@endif
+							</div>
+							<div class="col col-md-4">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Sebaran Penduduk {{ $wilayah->nama_wilayah }} Berdasarkan Jenis Kelamin</h4>
+									</div>
+									<div class="card-body">
+										<canvas id="Chart2" style="max-width: 400px; max-height: 400px"></canvas>
+									</div>
+								</div>
 							</div>
 						<div class="row">
-							<div class="col">
+							<div class="col col-md-4">
 								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Sebaran Penduduk {{ $wilayah->nama_wilayah }} Berdasarkan Kelompok Umur</h4>
+									</div>
 									<div class="card-body">
-										<table class="table table-striped mt-3">
-											<tbody>
-        										<tr>
-													<th>Nama Wilayah</th>
-													@foreach ($jumlah_penduduk as $jumlahPenduduk)
-            											<td>{{ $jumlahPenduduk->nama_wilayah }}</td>
-													@endforeach
-												</tr>
-												<tr>
-													<th>Jumlah Penduduk</th>
-            										@foreach ($jumlah_penduduk as $jumlahPenduduk)
-            											<td>{{ $jumlahPenduduk->jumlah_penduduk }}</td>
-													@endforeach
-												</tr>
-											</tbody>
-										</table>
+										<canvas id="Chart3" style="max-width: 400px; max-height: 400px"></canvas>
 									</div>
 								</div>
 							</div>
-						</div>
+							<div class="col col-md-8">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Sebaran Penduduk {{ $wilayah->nama_wilayah }} Berdasarkan Agama</h4>
+									</div>
+									<div class="card-body">
+										<canvas id="Chart5"></canvas>
+									</div>
+								</div>
+							</div>
+						<div class="row">
+							<div class="col col-md-6">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Sebaran Penduduk {{ $wilayah->nama_wilayah }} Berdasarkan Pekerjaan</h4>
+									</div>
+									<div class="card-body">
+										<canvas id="Chart4"></canvas>
+									</div>
+								</div>
+							</div>
+							<div class="col col-md-6">
+								@if(Auth::check() && Auth::user()->role === 'superadmin')
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Sebaran Penduduk {{ $wilayah->nama_wilayah }} Berdasarkan Pendidikan</h4>
+									</div>
+									<div class="card-body">
+										<canvas id="Chart6"></canvas>
+									</div>
+								</div>
+								@endif
+							</div>
 
 
-						<!-- Chart Sebaran Penduduk Berdasarkan Jenis Kelamin -->
-						<div class="col-md-6">
-								<div class="card">
-									<div class="card-header ">
-										<h4 class="card-title">Sebaran Penduduk Berdasarkan Jenis Kelamin di Kecamatan Tigaraksa</h4>
-									</div>
-									<div class="card-body">
-										<canvas id="Chart2"></canvas>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="card">
-									<div class="card-header ">
-										<h4 class="card-title">Tabel Data Penduduk Berdasarkan Jenis Kelamin</h4>
-									</div>
-									<div class="card-body">
-										<table class="table table-striped mt-3">
-											<thead>
-												<tr>
-													<th scope="col">Jenis Kelamin</th>
-													<th scope="col">Jumlah Penduduk</th>
-												</tr>
-											</thead>
-											<tbody>
-        										<tr>
-            										<td><p>Laki-Laki</p></td>
-													<td>{{ $jenis_kelamin_per_wilayah->laki_laki }}</td>
-												</tr>
-                                                <tr>
-            										<td><p>Perempuan</p></td>
-													<td>{{ $jenis_kelamin_per_wilayah->perempuan }}</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
+
+						
 				</div>	
 			</div>
 		</div>
 	</div> 
 	
-</body>
+
 <script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
+<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+<script src="{{url('js/admin/ready.min.js')}}"></script>
+<script src="{{url('js/admin/demo.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
@@ -315,85 +324,163 @@
 	});
 
 	const ctx2 = document.getElementById('Chart2');
-          new Chart(ctx2, {
-            type: 'pie',
-            data: {
-              labels: ['Laki-Laki', 'Perempuan'], 
-              datasets: [{
+    new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Laki-Laki', 'Perempuan'],
+            datasets: [{
                 label: 'Jumlah Penduduk',
                 data: {!! json_encode(array_values($rasio_jenis_kelamin)) !!}, 
                 backgroundColor: [
-				  'rgba(54, 162, 235, 0.6)',
-                  'rgba(255, 99, 132, 0.6)' 
-                ]
-              }]
-            },
-            plugins: [ChartDataLabels],
-            options: {
-                plugins: {
-                    datalabels: {
-                        formatter: function (value) {
-                            return value.toLocaleString();
-                        },
-                        color: 'black',
-                        font: {
-                            size: 14
-                        }
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)'
+                ],
+                datalabels: {
+                    color: 'black'
+                }
+            }]
+        },
+        plugins: [ChartDataLabels],
+        options: {
+            plugins: {
+                datalabels: {
+                    formatter: function (value) {
+                        return value.toLocaleString();
+                    },
+                    color: 'black',
+                    font: {
+                        size: 14
                     }
                 }
             }
-          });
+        }
+    });
 
 
-	const ctx3 = document.getElementById('Chart3');
-          new Chart(ctx3, {
-            type: 'doughnut',
-            data: {
-              labels: {!! json_encode($kelompok_umur_per_wilayah->pluck('kelompok_umur')) !!}, 
-              datasets: [{
-                label: 'Jumlah Orang',
-                data: {!! json_encode($kelompok_umur_per_wilayah->pluck('jumlah_penduduk')) !!}, 
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.6)', 
-                  'rgba(54, 162, 235, 0.6)', 
-                  'rgba(255, 206, 86, 0.6)', 
-                  'rgba(75, 192, 192, 0.6)',
-                  'rgba(153, 102, 255, 0.6)',
-                  'rgba(0, 255, 255, 0.6)'
-                ]
-              }]
-            }
-          });
 
-		  const ctx4 = document.getElementById('Chart4');
-          new Chart(ctx4, {
-            type: 'pie',
-            data: {
-              labels: ['Laki-Laki', 'Perempuan'], 
-              datasets: [{
-                label: 'Jumlah Penduduk',
-                data: {!! json_encode(array_values($rasio_jenis_kelamin)) !!}, 
-                backgroundColor: [
-				  'rgba(54, 162, 235, 0.6)',
-                  'rgba(255, 99, 132, 0.6)' 
-                ]
-              }]
-            },
-            plugins: [ChartDataLabels],
-            options: {
-                plugins: {
-                    datalabels: {
-                        formatter: function (value) {
-                            return value.toLocaleString();
-                        },
-                        color: 'black',
-                        font: {
-                            size: 14
-                        }
-                    }
-                }
-            }
-          });
+
+    const ctx3 = document.getElementById('Chart3');
+    new Chart(ctx3, {
+      type: 'doughnut',
+      data: {
+        labels: {!! json_encode($kelompok_umur_per_wilayah->pluck('kelompok_umur')) !!}, 
+        datasets: [{
+          label: 'Jumlah Orang',
+          data: {!! json_encode($kelompok_umur_per_wilayah->pluck('jumlah_penduduk')) !!}, 
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.6)', 
+            'rgba(54, 162, 235, 0.6)', 
+            'rgba(255, 206, 86, 0.6)', 
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(0, 255, 255, 0.6)'
+          ]
+        }]
+      }
+    });
+
+
+    const ctx4 = document.getElementById('Chart4');
+    new Chart(ctx4, {
+      type: 'bar',
+      data: {
+        labels: {!! json_encode($pekerjaan->pluck('pekerjaan')) !!},
+        datasets: [{
+          label: 'Jumlah Penduduk',
+          data: {!! json_encode($pekerjaan->pluck('jumlah_pekerja')) !!},
+          borderWidth: 1,
+          datalabels: {
+              anchor:'end',
+              align:'top',
+              offset: 5
+          },
+        }]
+      },
+      plugins: [ChartDataLabels],
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          datalabels: {
+              formatter: function (value) {
+                  return value.toLocaleString(); 
+                  }
+              }
+          }
+      }
+    });
+
+
+    const ctx5 = document.getElementById('Chart5');
+    new Chart(ctx5, {
+      type: 'bar',
+      data: {
+        labels: {!! json_encode($agama->pluck('agama')) !!},
+        datasets: [{
+          label: 'Jumlah Penduduk',
+          data: {!! json_encode($agama->pluck('jumlah_penganut')) !!},
+          borderWidth: 1,
+          datalabels: {
+              anchor:'end',
+              align:'top',
+              offset: 5
+          },
+        }]
+      },
+      plugins: [ChartDataLabels],
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          datalabels: {
+              formatter: function (value) {
+                  return value.toLocaleString(); 
+                  }
+              }
+          }
+      }
+    });
+
+
+    const ctx6 = document.getElementById('Chart6');
+    new Chart(ctx6, {
+      type: 'bar',
+      data: {
+        labels: {!! json_encode($pendidikan->pluck('tingkat_pendidikan')) !!},
+        datasets: [{
+          label: 'Jumlah Penduduk',
+          data: {!! json_encode($pendidikan->pluck('jumlah_peserta_didik')) !!},
+          borderWidth: 1,
+          datalabels: {
+              anchor:'end',
+              align:'top',
+              offset: 5
+          },
+        }]
+      },
+      plugins: [ChartDataLabels],
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          datalabels: {
+              formatter: function (value) {
+                  return value.toLocaleString(); 
+                  }
+              }
+          }
+      }
+    });
 
 </script>
+</body>
 </html>

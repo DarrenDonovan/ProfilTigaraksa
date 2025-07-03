@@ -9,21 +9,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper" style="padding-bottom: 15px">
     <div class="title"><span>Login Form</span></div>
     <form action="login" method="POST">
     @csrf
       <div class="row">
         <i class="fas fa-user"></i>
-        <input type="email" placeholder="Email" name="email" required />
+        <input type="email" placeholder="Email*" name="email" required />
       </div>
       <div class="row">
         <i class="fas fa-lock"></i>
-        <input type="password" placeholder="Password" name="password" required />
+        <input type="password" placeholder="Password*" name="password" required />
       </div>
-      <div class="pass"><a href="#">Forgot password?</a></div>
       <div class="row button">
-        <input type="submit" value="login" />
+        <input type="submit" value="login"/>
       </div>
     </form>
     @if ($errors->any())

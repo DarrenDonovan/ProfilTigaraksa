@@ -39,16 +39,87 @@
     <link href="{{ url('css/leaflet.css') }}" rel="stylesheet" />
 
     <style>  
+      .navbar {
+        position: fixed !important; /* Pastikan navbar tetap fixed */
+        top: -1px;
+        left: 0;
+        width: 100%;
+        /* border: 2px solid red;  */
+        height: fit-content;
+      }
+      .navbar-brand .m-0 {
+        font-size: 28px;
+      }
+      .subtext {
+        margin: 0px;
+      }
+      .kec {
+        /* border: 2px solid red; */
+        margin-left: 6px;
+      }
+      /* PROFILE DESA */
+      .small-text {
+        font-size: 0.7em; /* Ukuran lebih kecil */
+        font-weight: normal; /* Supaya gak terlalu tebal */
+      }
+
+      .containerProDes {
+        display: flex;
+        width: 80%;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        margin: 0 auto; /* Ini bikin container ke tengah */
+        align-items: center;
+        justify-content: center; /* Biar konten di dalamnya juga tengah */
+      }
+
+      .proDes {
+        width: 50%;
+        padding: 20px;
+      }
+
+      .gmbrDesa {
+        width: 50%;
+      }
+      .gmbrDesa img {
+        width: 100%;
+        height: 90%;
+        border: none;
+      }
+      .proDes h2 {
+        margin-top: 0;
+        color: #222;
+        font-size: 35px;
+      }
+      .proDes p {
+        font-size: 20px;
+      }
+      .proDes table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+      }
+      .proDes td {
+        padding: 8px 0;
+      }
+      .proDes {
+        font-weight: bold;
+        color: #333;
+      }
+
       /* CARD WISATA */
         .containerWisata {
-            max-width: 1400px;
+            max-width: 3000px;
             margin: auto;
             text-align: center;
+            padding: 50px;
         }
 
         .gridWisata {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
             gap: 20px;
         }
 
@@ -56,6 +127,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 10px;
+            width: 100%;
         }
 
         .cardW img {
@@ -83,17 +155,17 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
             text-align: left;
         }
-
         /* UMKM CSS */
         .containerUMKM {
-            max-width: 1400px;
+            max-width: 3000px;
             margin: auto;
             text-align: center;
+            padding: 50px;
         }
 
         .gridUMKM {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 20px;
         }
         
@@ -128,7 +200,6 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
             text-align: left;
         }
-
         .umkm-popup {
             position: fixed;
             top: 50%;
@@ -139,46 +210,722 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
             text-align: center;
-
+            
             /* Efek transisi */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
         }
 
-        .umkm-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+          .umkm-overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.5);
+              
+              /* Efek transisi */
+              opacity: 0;
+              visibility: hidden;
+              transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+          }
 
-            /* Efek transisi */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
+          /* Saat popup aktif */
+          .umkm-popup.show {
+              opacity: 1;
+              visibility: visible;
+          }
 
-        /* Saat popup aktif */
-        .umkm-popup.show {
-            opacity: 1;
-            visibility: visible;
-        }
+          .umkm-overlay.show {
+              opacity: 1;
+              visibility: visible;
+          }
 
-        .umkm-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
+          .close-btn {
+               background: red;
+               color: white;
+               padding: 5px 10px;
+               border: none;
+               cursor: pointer;
+               border-radius: 5px;
+          }  
+          @media screen and (max-width: 1025px){
+                .navbar {
+                    padding-inline: 30px !important;
+                }
+                .navbar-brand .m-0 {
+                    font-size: 23px;
+                }
+                .navbar-brand .subtext {
+                    font-size: 18px;
+                    margin: 0px !important;
+                }
+                .navbar-brand .fa {
+                    font-size: 20px !important;
+                }
+                .p-3 h4{
+                    font-size: 16px;
+                }
+                .p-3 h1 {
+                    font-size: 25px;
+                }
+                
+                .text-white.display-3 {
+                  /* border: 2px solid red; */
+                  font-size: 35px;
+                }
+                .mx-auto h3 {
+                    font-size: 20px;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                  height: 675px;
+                  padding: 15px;
+                }
+                .mx-auto.text-center.mb-5.wisata, .mx-auto.text-center.mb-5.umkm{
+                  margin-bottom: 0px !important;
+                }
+            }
 
-        .close-btn {
-            background: red;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
+          @media (min-width: 310px) and (max-width: 469px) {
+            /* FOOTER */
+            .footer-item h4 {
+                    /* border: 2px solid red; */
+                    font-size: 16px; /* Mengecilkan ukuran heading */
+                }
+
+                .footer-item a {
+                    /* border: 2px solid red; */
+                    font-size: 14px; /* Mengecilkan ukuran teks */
+                }
+
+                .footer-item i {
+                    font-size: 14px; /* Mengecilkan ikon */
+                }
+
+                .footer .btn-square {
+                    /* border: 2px solid red; */
+                    width: 25px !important; /* Mengecilkan tombol sosial media */
+                    height: 25px;
+                    font-size: 14px;
+                    padding: 4px;
+                }
+                /* COPYRIGHT */
+                .container-fluid.copyright .container .col-md-6 {
+                    font-size: 12px;
+                }
+                .container-fluid.copyright .container .col-md-6 i, .text-white {
+                    font-size: 12px;
+                }
+            }
+            @media (max-width: 321px){
+                /* NAVBAR */
+                .mx-auto h5 {
+                    font-size: 13px;
+                }
+                .mx-auto h1 {
+                    font-size: 19px;
+                }
+                .navbar-brand .fa { 
+                    font-size: 20px !important; 
+                    margin-right: 5px !important;
+                }
+                .navbar-brand h1 {
+                    font-size: 15px !important;
+                    color: #ffff !important;
+                }
+                .navbar-brand h1 .subtext {
+                    font-size: 13px !important;
+                    margin: 0px !important;
+                    color: #ffff !important;
+                }
+                .navbar-toggler  {
+                    font-size: 15px;
+                    padding: 0.3rem 0.6rem !important; 
+                    color: #ffff !important;
+                    border-color: #ffff !important;
+                }
+                .collapse {
+                    font-size: 20px;
+                }
+                .proDes h2 {
+                  margin-top: 0;
+                  color: #222;
+                  font-size: 18px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes p {
+                  font-size: 12px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  /* border: 2px solid blue; */
+                  font-size: 12px;
+                }
+                .proDes td {
+                  padding: 8px 0;
+                }
+                .proDes {
+                  font-weight: bold;
+                  color: #333;
+                }
+                
+                /* HERO */
+                .container-fluid.bg-breadcrumb {
+                    height: 60% !important;
+                }
+
+               /* WISATA */
+                .mx-auto.text-center.mb-5.wisata {
+                  margin-bottom: 0px !important;
+                }
+               .containerWisata {
+                  padding: 2px;
+                  /* border: 2px solid red !important; */
+                  width: 100%;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  height: 700px;
+                  padding-inline: 17px;
+                }
+                .cardW .info {
+                  font-size: 15px;
+                }
+
+                /* UMKM */
+                .mx-auto h5 {
+                    font-size: 15px;
+                }
+                .mx-auto.text-center.mb-5.umkm {
+                    margin-bottom: 0px !important;
+                }
+                .containerUMKM {
+                  padding-block: 15px !important;
+                  padding-inline: 17px !important;
+                }
+                .gridUMKM {
+                  /* border: 2px solid blue; */
+                  /* padding: 5px; */
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                  height: 450px;
+                  gap: 20px;
+                }
+                .cardU .info {
+                  font-size: 15px;
+                }
+            }
+            @media (min-width: 322px) and (max-width: 380px) {
+                /* NAVBAR */
+                .mx-auto h5 {
+                    font-size: 15px;
+                }
+                .mx-auto h1 {
+                    font-size: 19px;
+                }
+                .navbar-brand .fa { 
+                    font-size: 20px !important; 
+                    margin-right: 5px !important;
+                }
+                .navbar-brand h1 {
+                    font-size: 20px !important;
+                    color: #ffff !important;
+                }
+                .navbar-brand h1 .subtext {
+                    font-size: 15px !important;
+                    margin: 0px !important;
+                    color: #ffff !important;
+                }
+                .navbar-toggler  {
+                    font-size: 15px;
+                    padding: 0.3rem 0.6rem !important; 
+                    color: #ffff !important;
+                    border-color: #ffff !important;
+                }
+                .collapse {
+                    font-size: 20px;
+                }
+
+                /* PROFILE DESA */
+                .proDes h2 {
+                  margin-top: 0;
+                  color: #222;
+                  font-size: 18px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes p {
+                  font-size: 12px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  /* border: 2px solid blue; */
+                  font-size: 12px;
+                }
+                .proDes td {
+                  padding: 8px 0;
+                }
+                .proDes {
+                  font-weight: bold;
+                  color: #333;
+                }
+              
+                /* WISATA */
+                .mx-auto.text-center.mb-5.wisata {
+                    margin-bottom: 0px !important;
+                }
+               .containerWisata {
+                  width: 100%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  padding: 15px;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  height: 700px;
+                  /* padding: 10px; */
+                }
+                .cardW .info {
+                  font-size: 15px;
+                }
+
+                /* UMKM */
+                .mx-auto.text-center.mb-5.umkm {
+                    margin-bottom: 0px !important;
+                }
+                .containerUMKM {
+                  padding: 15px;
+                }
+                .gridUMKM {
+                  /* border: 2px solid blue; */
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                  height: 450px;
+                  gap: 20px;
+                }
+                .cardu .info {
+                  font-size: 15px;
+                }
+                /* FOOTER */
+                .footer {
+                    padding: 20px 10px; /* Mengurangi padding agar lebih pas */
+                }
+
+                .footer-item h4 {
+                    font-size: 16px; /* Mengecilkan ukuran heading */
+                }
+                .footer-item a {
+                    font-size: 14px; /* Mengecilkan ukuran teks */
+                }
+
+                .footer-item i {
+                    font-size: 14px; /* Mengecilkan ikon */
+                }
+
+                .footer .btn-square {
+                    width: 28px; /* Mengecilkan tombol sosial media */
+                    height: 28px;
+                    font-size: 12px;
+                    padding: 4px;
+                }
+                /* COPYRIGHT */
+                .container-fluid.copyright .container .col-md-6 {
+                    font-size: 12px;
+                }
+                .container-fluid.copyright .container .col-md-6 i, .text-white {
+                    font-size: 12px;
+                }
+              }
+
+            @media (min-width: 381px) and (max-width: 426px) {
+                .mx-auto h5 {
+                    font-size: 15px;
+                }
+                .mx-auto h1 {
+                    font-size: 19px;
+                }
+                .navbar-brand .subtext {
+                    font-size: 15px;
+                    margin: 0px !important;
+                }
+                .navbar-brand .fa {
+                    font-size: 20px !important;
+                }
+                .navbar-brand h1 {
+                    font-size: 20px !important;
+                }
+                .nav.nav-pills {
+                    flex-wrap: nowrap;
+                    overflow-x: scroll;
+                    max-width: 100%;
+                    justify-content: flex-start !important;
+                }
+                .col-12.col-sm-6 {
+                    width: 300px;
+                    margin-left: 40px;
+                }
+
+                /* PROFILE DESA */
+                .proDes h2 {
+                  font-size: 18px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes p {
+                  font-size: 12px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  /* border: 2px solid blue; */
+                  font-size: 12px;
+                }
+                
+                /* WISATA */
+                .mx-auto.text-center.mb-5.wisata {
+                    margin-bottom: 0px !important;
+                }
+               .containerWisata {
+                  padding-block: 15px !important;
+                  /* border: 2px solid red !important; */
+                  width: 100%;
+                  padding-inline: 15px;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  height: 800px;
+                }
+                .cardW .info {
+                  font-size: 15px;
+                }
+
+                /* UMKM */
+                .mx-auto.text-center.mb-5.umkm {
+                    margin-bottom: 0px !important;
+                }
+                .containerUMKM {
+                  padding-block: 20px !important;
+                  padding-inline: 15px !important;
+                }
+                .gridUMKM {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                  height: 450px;
+                  gap: 20px;
+                }
+                .cardU .info {
+                  font-size: 15px;
+                }
+            }
+            @media (max-width: 576px) {
+                .bg-breadcrumb h3 {
+                    font-size: 2rem !important;
+                }
+            }
+            @media (min-width: 427px) and (max-width: 769px){
+                /* NAVBAR */
+                .mx-auto h5 {
+                    font-size: 18px;
+                }
+                .mx-auto h1 {
+                    font-size: 23px;
+                }
+                .navbar-brand .m-0 {
+                    font-size: 25px;
+                }
+                .navbar-brand .subtext {
+                    font-size: 18px;
+                    margin: 0px !important;
+                }
+                .navbar-brand .fa {
+                    font-size: 20px !important;
+                }
+
+                /* PROFILE DESA */
+                .proDes h2 {
+                  margin-top: 0;
+                  font-size: 20px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes p {
+                  font-size: 16px;
+                  /* border: 2px solid blue; */
+                }
+                .proDes table {
+                  width: 100%;
+                  border-collapse: collapse;
+                  /* border: 2px solid blue; */
+                  font-size: 14px;
+                }
+              
+                /* WISATA */
+                .mx-auto.text-center.mb-5.wisata {
+                  margin-bottom: 0px !important;
+                }
+               .containerWisata {
+                  /* border: 2px solid red !important; */
+                  width: 100%;
+                  padding: 15px !important;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                  height: 675px;
+                }
+                .cardW .info {
+                  font-size: 15px;
+                }
+
+                /* UMKM */
+                .mx-auto.text-center.mb-5.umkm {
+                  margin-bottom: 0px !important;
+                }
+                .containerUMKM {
+                  padding: 10px;
+                }
+                .gridUMKM {
+                  /* border: 2px solid blue; */
+                  padding: 15px;
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  height: 450px;
+                  gap: 20px;
+                }
+                .cardu .info {
+                  font-size: 15px;
+                }
+            }
+            @media (max-width: 992px) {
+                .navbar-toggler.scrolled {
+                    color: #13357b !important;
+                    border-color: #13357b !important;
+                }
+
+                .navbar-brand h1.scrolled {
+                    color: #13357b !important;
+                    border-color: #13357b !important;
+                }
+
+                .navbar-brand h1 .subtext.scrolled {
+                    color: #13357b !important;
+                    border-color: #13357b !important;
+                    
+                }
+                .navbar-nav {
+                    background-color: #ffff;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+                .navbar-brand h1 {
+                    color: #ffff !important;
+                }
+                .navbar-toggler  {
+                    color: #ffff !important;
+                    border-color: #ffff !important;
+                }
+            }
+            @media (min-width: 1026px) and (max-width: 1441px) {
+              .text-white.display-3 .small-text.d-block {
+                font-size: 25px;
+              }
+              .text-white.display-3 {
+                font-size: 45px;
+              }
+              .mx-auto.text-center {
+                margin-bottom: 10px !important;
+              }
+              .mx-auto h5 {
+                font-size: 17px;
+              }
+              .mx-auto h1 {
+                font-size: 30px;
+              }
+              .containerProDes {
+                padding-top: 10px;
+              }
+              /* WISATA */
+              .containerWisata {
+                  /* border: 2px solid red !important; */
+                  width: 100%;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+                  height: 700px;
+                  padding: 15px;
+                }
+                .cardW img {
+                  height: 250px;
+                }
+                .cardW .info {
+                  font-size: 20px;
+                }
+
+                /* UMKM */
+                .gridUMKM {
+                  /* border: 2px solid blue; */
+                  padding: 15px;
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+                  height: 450px;
+                  gap: 20px;
+                }
+                .cardU .info {
+                  font-size: 20px;
+                }
+            }
+            @media (min-width: 2000px) {
+                
+                .mx-auto h5 {
+                    font-size: 35px !important;
+                }
+                .mx-auto h1 {
+                    font-size: 50px;
+                }
+                /* NAVBAR */
+                .navbar {
+                    height: 180px;
+                }
+                .navbar.navbar-expand-lg.navbar-light {
+                    height: 180px !important;
+                }
+                .navbar-brand .m-0{
+                    font-size: 50px;
+                }
+                .navbar-brand .subtext{ 
+                    font-size: 30px;
+                   /* border: 2px solid blue; */
+
+                }
+                .navbar-brand .fa {
+                    font-size: 50px !important;
+                    padding-right: 15px;
+                }
+                .navbar-nav {
+                   /* border: 2px solid blue; */
+                   height: 180px;
+                }
+
+                .navbar-nav .nav-item {
+                    font-size: 30px !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .navbar-nav .nav-item.dropdown .nav-link{
+                    font-size: 30px !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .dropdown-menu {
+                    font-size: 24px;
+                }
+                .container-fluid.py-5 select {
+                    width: 250px;
+                    height: 30px;
+                }
+                #categoryFilter {
+                    font-size: 1.5rem;
+                }
+                #categoryFilter option {
+                    font-size: 15px !important; /* ukuran font di dalam pilihan dropdown */
+                }
+                #map {
+                    height: 700px !important;
+                }
+                /* PROFILE DESA */
+                .containerProDes {
+                  width: 60%;
+                }
+                .proDes {
+                  padding-left: 50px;
+                }
+                .proDes h2 {
+                  font-size: 60px;
+                }
+                .proDes p {
+                  font-size: 35px;
+                }
+                .proDes td {
+                  font-size: 30px;
+                }
+                .gmbrDesa {
+                  width: 50% !important;
+                }
+
+                /* WISATA */
+               .containerWisata {
+                  overflow: hidden;
+                  width: 2500px;
+                  padding: 80px !important;
+                }
+                .gridWisata {
+                  grid-template-columns: repeat(auto-fit, minmax(850px, 1fr));
+                  height: 900px;
+                  /* padding: 15px; */
+                }
+                .cardW .info {
+                  margin-left: 4px;
+                  font-size: 30px;
+                }
+                .cardW img {
+                  height: 300px;
+                }
+
+                /* UMKM */
+                .containerUMKM {
+                  /* border: 2px solid red; */
+                  padding: 80px;
+                  margin: 25px;
+                }
+                .gridUMKM {
+                  /* border: 2px solid blue; */
+                  /* padding: 15px; */
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+                  height: 600px;
+                  gap: 20px;
+                }
+                .cardU img {
+                  height: 300px;
+                }
+                .cardU .info {
+                  font-size: 30px;
+                }
+
+                /* FOOTER */
+                .footer {
+                    /* border: 2px solid blue; */
+                    padding: 20px 615px; /* Mengurangi padding agar lebih pas */
+                }
+                .footer-item {
+                    width: 500px;
+                    gap: 20px;
+                }
+                .footer-item h4 {
+                    font-size: 35px; /* Mengecilkan ukuran heading */
+                }
+                .footer-item a {
+                    font-size: 30px; /* Mengecilkan ukuran teks */
+                    text-wrap: nowrap;
+
+                }
+                .footer-item i {
+                    font-size: 35px; /* Mengecilkan ikon */
+                }
+                .footer .btn-square {
+                    width: 60px; /* Mengecilkan tombol sosial media */
+                    height: 60px;
+                    font-size: 40px;
+                    padding: 4px;
+                }
+            } 
+
     </style>
   </head>
 
@@ -191,26 +938,14 @@
         </div>
         <!-- Spinner End -->
 
-        <!-- Topbar Start -->
-        <div class="container-fluid bg-primary px-5 d-none d-lg-block">
-            <div class="row gx-0">
-                <div class="col-lg-8 text-center text-lg-start mb-2 mb-lg-0">
-                </div>
-                <div class="col-lg-4 text-center text-lg-end">
-                    <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <a href="{{url('login')}}"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Topbar End -->
-
          <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="{{ url('/') }}" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Kecamatan Tigaraksa<span class="subtext">Kabupaten Tangerang</span></h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                    <h1 class="m-0 d-flex align-items-center">
+                      <i class="fa fa-map-marker-alt me-2"></i>
+                      <div class="kec" style="text-align: left;"> Kecamatan Tigaraksa<br> <span class="subtext">Kabupaten Tangerang</span></div>
+                    </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -453,7 +1188,7 @@
   <div class="containerUMKM" style="margin-bottom: 50px;"> 
     <div class="gridUMKM">
         @foreach ($jenis_umkm as $itemJenisUmkm)
-        <div class="cardU" onclick="showUmkmPopup('{{ $itemJenisUmkm->jenis_umkm }}', '{{ $itemJenisUmkm->keterangan }}')">
+        <div class="cardU" data-bs-toggle="modal" data-bs-target="#umkmModal-{{ $itemJenisUmkm->id_jenis_umkm }}">
             <img src="{{ asset('storage/' . $itemJenisUmkm->gambar_jenis_umkm) }}" alt="">
             <div class="info">{{ $itemJenisUmkm->jenis_umkm }}</div>
         </div>
@@ -461,14 +1196,43 @@
     </div>
 </div>
 
-<!-- POPUP -->
-<div class="umkm-overlay" id="umkm-overlay" onclick="closeUmkmPopup()"></div>
-<div class="umkm-popup" id="umkm-popup">
-    <h2 id="umkm-popup-title"></h2>
-    <p id="umkm-popup-content"></p>
-    <!-- MAP -->
-    <button class="close-btn" onclick="closeUmkmPopup()">Tutup</button>
+<@foreach ($jenis_umkm as $itemJenisUmkm)
+<div class="modal fade" id="umkmModal-{{ $itemJenisUmkm->id_jenis_umkm }}" tabindex="-1" aria-labelledby="umkmModalLabel-{{ $itemJenisUmkm->id_jenis_umkm }}" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable" style="margin-top: 73px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="umkmModalLabel-{{ $itemJenisUmkm->id_jenis_umkm }}">
+            {{ $itemJenisUmkm->jenis_umkm }}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        @foreach ($umkm->where('id_jenis_umkm', $itemJenisUmkm->id_jenis_umkm) as $itemUmkm)
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ asset('storage/' . $itemUmkm->gambar_umkm) }}" class="img-fluid rounded-start" alt="{{ $itemUmkm->nama_umkm }}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $itemUmkm->nama_umkm }}</h5>
+                        <p class="card-text">{!! $itemUmkm->keterangan !!}</p>
+                        <a href="{{ url('profildesa/' . $itemUmkm->id_wilayah . '/detailumkm/' . $itemUmkm->id_umkm) }}" class="btn btn-primary rounded-pill mt-3 align-self-start">Info Selengkapnya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
 </div>
+@endforeach
+
 
 <!-- Kegiatan Start -->
         <!-- Kegiatan Terbaru -->
@@ -485,14 +1249,18 @@
                         <div class="row g-5 align-items-center">
                             <div class="col-md-5">
                                 <div class="h-100" >
+                                  @if($kegiatanterbaru && $kegiatanterbaru->gambar_kegiatan)
                                     <img src="{{asset('storage/' . $kegiatanterbaru->gambar_kegiatan)}}" class="img-fluid" style="width: 400px; height: auto; margin-left: 40px;" alt="">
+                                  @else
+                                  <p>Belum ada Gambar</p>
+                                  @endif
                                 </div>
                             </div>
                             @if ($kegiatanterbaru)
                             <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
                                 <h5 class="section-about-title pe-3">Kegiatan Terbaru</h5>
                                 <h1 class="mb-4" class="text-primary">{{ $kegiatanterbaru->nama_kegiatan }}</h1>
-                                <p class="mb-4">{{ $kegiatanterbaru->keterangan }}</p>                        
+                                <p class="mb-4">{!! $kegiatanterbaru->keterangan !!}</p>                        
                             </div>
                             @endif
                         </div>
@@ -501,7 +1269,7 @@
 
                 <!-- Daftar Kegiatan -->
                 <div class="tab-class text-center">
-                    <ul class="nav nav-pills d-inline-flex justify-content-center mb-2">
+                    <ul class="nav nav-pills d-flex flex-wrap justify-content-center gap-2 mb-5 d-lg-flex d-none" id="nav-pills">
                         <li class="nav-item">
                             <a class="d-flex mx-3 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-all">
                                 <span class="text-dark" style="width: 150px;">Semua</span>
@@ -515,6 +1283,18 @@
                         </li>
                         @endforeach
                     </ul>
+                    <!-- Dropdown untuk layar kecil -->
+                    <div class="dropdown d-lg-none d-block">
+                        <button class="btn btn-primary dropdown-toggle w-80" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pilih Kategori
+                        </button>
+                        <ul class="dropdown-menu w-90 text-center" aria-labelledby="dropdownMenuButton">
+                            @foreach ($jenis_kegiatan as $itemJenis)
+                            <li><a class="dropdown-item2" href="#tab-{{ $itemJenis->id_jenis_kegiatan }}">{{ $itemJenis->nama_jenis_kegiatan }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- Konten Kegiatan -->
                     <div class="tab-content">
                         <div id="tab-all" class="tab-pane fade show p-0 active">
                             <div class="row g-4">
@@ -524,7 +1304,9 @@
                                         <div class="destination-img" style="width: 100%; object-fit:cover;">
                                             <img class="img-fluid rounded w-100" src="{{ asset('storage/' . $keg->gambar_kegiatan) }}" data-bs-toggle="modal"  style="width: 432px; height: 250px; object-fit:cover;">
                                             <div class="destination-overlay p-4 text-start">
-                                                <a class="btn btn-primary text-white rounded-pill border py-2 px-3" style="pointer-events: none;">6 Photos</a>                                                       
+                                                @foreach($jumlah_dokum->where('id_kegiatan', $keg->id_kegiatan) as $jumlahDokum)
+                                                <a class="btn btn-primary text-white rounded-pill border py-2 px-3" style="pointer-events: none;">{{ $jumlahDokum->jumlah_gambar }} Photos</a> 
+                                                @endforeach                                                      
                                                 <h4 class="text-white mb-2 mt-3">{{ $keg->nama_kegiatan }}</h4>
                                                 <a href="#galleryModal{{ $keg->id_kegiatan }}" class="btn-hover text-white"  data-bs-toggle="modal" data-bs-target="#galleryModal{{ $keg->id_kegiatan }}">Lihat Semua Foto <i class="fa fa-arrow-right ms-2"></i>
                                             </a>
@@ -540,16 +1322,24 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="row g-5">
-                                                        <div class="col-md-5">
+                                                    <div class="row g-2">
+                                                        <div class="col-md-4">
                                                             <div class="h-100" >
-                                                                <img src="{{asset('storage/' . $keg->gambar_kegiatan)}}" class="img-fluid" style="width: 400px; height: auto; margin-left: 20px;" alt="">
+                                                                <img src="{{asset('storage/' . $keg->gambar_kegiatan)}}" class="img-fluid rounded w-100" alt="">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
                                                             <h1 class="mb-4" class="text-primary">{{ $keg->nama_kegiatan }}</h1>
-                                                            <p class="mb-4">{{ $keg->keterangan }}</p>                        
+                                                            <p class="mb-4">{!! $keg->keterangan !!}</p>                        
                                                         </div>
+                                                    </div>
+                                                    <h2 class="mt-5">Dokumentasi Kegiatan</h2>
+                                                    <div class="row g-2 mt-3 mb-4">
+                                                        @foreach($dokum_kegiatan->where('id_kegiatan', $keg->id_kegiatan) as $itemDokum)
+                                                        <div class="col-md-4">
+                                                                <img class="img-fluid rounded w-100" src="{{ asset('storage/' . $itemDokum->gambar) }}" alt="Foto Kegiatan" style="height: 200px; width: 90%; object-fit: cover;">
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
@@ -565,43 +1355,55 @@
                         @foreach ($jenis_kegiatan as $jenisKegiatan)
                         <div id="tab-{{ $jenisKegiatan->id_jenis_kegiatan }}" class="tab-pane fade p-0">
                             <div class="row g-4">
-                                @foreach ($kegiatan as $item)
-                                    @if ($item->id_jenis_kegiatan == $jenisKegiatan->id_jenis_kegiatan)
-                                    <div class="col-lg-4 col-md-6"> 
-                                        <div class="destination-img" style="width: 100%; object-fit:cover;">
-                                            <img class="img-fluid rounded w-100" src="{{ asset('storage/' . $item->gambar_kegiatan) }}" style="object-fit: cover; width: 100%; height: 250px;">
-                                            <div class="destination-overlay p-4 text-start">
-                                                <a class="btn btn-primary text-white rounded-pill border py-2 px-3" style="pointer-events: none;">6 Photos</a>                                                       
-                                                <h4 class="text-white mb-2 mt-3">{{ $item->nama_kegiatan }}</h4>
-                                                <a href="#galleryModal{{ $item->id_kegiatan }}-{{ $jenisKegiatan->id_jenis_kegiatan }}" class="btn-hover text-white" data-bs-toggle="modal" data-bs-target="#galleryModal{{ $item->id_kegiatan }}-{{ $jenisKegiatan->id_jenis_kegiatan }}">Lihat Semua Foto <i class="fa fa-arrow-right ms-2"></i></a>
+                                <div class="row g-4">
+                                    @foreach ($kegiatan as $item)
+                                        @if ($item->id_jenis_kegiatan == $jenisKegiatan->id_jenis_kegiatan)
+                                        <div class="col-lg-4 col-md-6"> 
+                                            <div class="destination-img" style="width: 100%; object-fit:cover;">
+                                                <img class="img-fluid rounded w-100" src="{{ asset('storage/' . $item->gambar_kegiatan) }}" style="object-fit: cover; width: 100%; height: 250px;">
+                                                <div class="destination-overlay p-4 text-start">
+                                                    @foreach($jumlah_dokum->where('id_kegiatan', $item->id_kegiatan) as $jumlahDokum)
+                                                    <a class="btn btn-primary text-white rounded-pill border py-2 px-3" style="pointer-events: none;">{{ $jumlahDokum->jumlah_gambar }} Photos</a>
+                                                    @endforeach                                                       
+                                                    <h4 class="text-white mb-2 mt-3">{{ $item->nama_kegiatan }}</h4>
+                                                    <a href="#galleryModal{{ $item->id_kegiatan }}-{{ $jenisKegiatan->id_jenis_kegiatan }}" class="btn-hover text-white" data-bs-toggle="modal" data-bs-target="#galleryModal{{ $item->id_kegiatan }}-{{ $jenisKegiatan->id_jenis_kegiatan }}">Lihat Semua Foto <i class="fa fa-arrow-right ms-2"></i></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="modal fade" id="galleryModal{{ $item->id_kegiatan }}-{{ $jenisKegiatan->id_jenis_kegiatan }}" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="galleryModalLabel">Galeri {{ $item->nama_kegiatan }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row g-5">
-                                                        <div class="col-md-5">
+                                        <div class="modal fade" id="galleryModal{{ $item->id_kegiatan }}-{{ $jenisKegiatan->id_jenis_kegiatan }}" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="galleryModalLabel">Galeri {{ $item->nama_kegiatan }}</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <div class="row g-2">
+                                                        <div class="col-md-4">
                                                             <div class="h-100" >
-                                                                <img src="{{asset('storage/' . $keg->gambar_kegiatan)}}" class="img-fluid" style="width: 400px; height: auto; margin-left: 20px;" alt="">
+                                                                <img src="{{asset('storage/' . $item->gambar_kegiatan)}}" class="img-fluid rounded w-100" alt="">
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
-                                                            <h1 class="mb-4" class="text-primary">{{ $keg->nama_kegiatan }}</h1>
-                                                            <p class="mb-4">{{ $keg->keterangan }}</p>                        
+                                                            <h1 class="mb-4" class="text-primary">{{ $item->nama_kegiatan }}</h1>
+                                                            <p class="mb-4">{!! $item->keterangan !!}</p>                        
                                                         </div>
                                                     </div>
+                                                    <h2 class="mt-5">Dokumentasi Kegiatan</h2>
+                                                    <div class="row g-2 mt-3 mb-4">
+                                                        @foreach($dokum_kegiatan->where('id_kegiatan', $item->id_kegiatan) as $itemDokum)
+                                                        <div class="col-md-4">
+                                                                <img class="img-fluid rounded w-100" src="{{ asset('storage/' . $itemDokum->gambar) }}" alt="Foto Kegiatan" style="height: 200px; width: 90%; object-fit: cover;">
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    @endif
-                                @endforeach
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                         @endforeach
@@ -610,6 +1412,7 @@
             </div>
         </div>
         <!-- Kegiatan End -->
+
 
         <!-- BERITA -->
         <div class="container mb-5">

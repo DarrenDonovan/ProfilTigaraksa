@@ -31,7 +31,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -47,7 +48,7 @@
    		<div class="modal-dialog">
     		<div class="modal-content">
     			<div class="modal-header">
-					<h5 class="modal-title" id="modalTitle">Remove Admin</h5>
+					<h5 class="modal-title" id="modalTitle">Remove Admin*</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     			</div>
     			<div class="modal-body">
@@ -100,13 +101,18 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
+						<a href="{{ route('admin.wisata') }}">
+							<p>Wisata</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.wisata') }}">
-							<p>Wisata</p>
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.penginapan') }}">
+							<p>Penginapan</p>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -125,20 +131,32 @@
 		</div>
 
 			<div class="main-panel">
+				<input class="form-control mt-3 mb-2 ml-4" id="searchInput" type="text" placeholder="Search" aria-label="Search" style="width: 96%">
 					<div class="container-fluid">
 						@if (Session::has('message'))
 							<p class="alert alert-success mt-2">{{ Session::get('message') }}</p>
 						@endif
+
+						@if(Session::has('error'))
+						    <div class="alert alert-danger mt-2">
+						        {{ Session::get('error') }}
+						    </div>
+						@endif
 		  				<!-- Daftar Wisata -->
 					<div class="d-flex justify-content-between align-items-center">
 						<h4 class="page-title mt-2">Data Kependudukan</h4>
-						<a href="{{ route('admin.tambahPenduduk') }}" class="btn btn-primary">Tambah Penduduk</a>	
+						<div class="d-flex justify-content-end align-items-center">
+							<a href="#" class="btn btn-primary mr-3" data-bs-toggle="modal" data-bs-target="#modalImportExcel">Import Data Excel</a>
+							<a href="#" class="btn btn-primary mr-3" data-bs-toggle="modal" data-bs-target="#modalEditPekerjaan">Edit Pekerjaan</a>
+							<a href="#" class="btn btn-primary mr-3" data-bs-toggle="modal" data-bs-target="#modalTambahPekerjaan">Tambah Pekerjaan</a>
+							<a href="{{ route('admin.tambahPenduduk') }}" class="btn btn-primary">Tambah Penduduk</a>	
+						</div>
 					</div>				
 						<div class="row">
 							<div class="col">
 								<div class="card">
 									<div class="card-body" style="overflow-x:auto; white-space:nowrap;">
-										<table class="table table-striped" style="overflow-x:auto">
+										<table class="table table-striped" id="pendudukTable" style="overflow-x:auto">
 											<thead>
 												<tr>
                                                     <th scope="col">Action</th>
@@ -162,7 +180,7 @@
 											<tbody>
     				                        @foreach ($penduduk as $itemPenduduk)
                                                 <tr>
-                                                    <td><a href="{{ route('admin.editPenduduk', $itemPenduduk->id_penduduk) }}">Edit</a></td>
+                                                    <td><a href="{{ route('admin.editPenduduk', $itemPenduduk->id_penduduk) }}">Edit</a> | <a href="" data-bs-toggle="modal" data-bs-target="#modal_confirmation_{{ $itemPenduduk->id_penduduk }}">Hapus</a></td>
                                                     <td>
                                                     @if($itemPenduduk->gambar_biodata)
                                                         <img src="{{ asset('storage/' . $itemPenduduk->gambar_biodata) }}" width="60" height="80" alt=""> 
@@ -185,9 +203,30 @@
 													<td>{{ $itemPenduduk->name }}</td>
 													<td>{{ $itemPenduduk->updated_at }}</td>
                                                 </tr>
+
+												<div class="modal fade" id="modal_confirmation_{{ $itemPenduduk->id_penduduk }}" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   													<div class="modal-dialog">
+    													<div class="modal-content">
+    														<div class="modal-header">
+																<h5 class="modal-title" id="modalTitle">Confirmation</h5>
+    														</div>
+    														<div class="modal-body">
+																<h5>Apakah Anda Yakin Ingin Menghapus Konten Ini?</h5>
+																<br>
+																<div class="d-flex justify-content-end">
+																	<a href="#" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Batalkan</a>
+																	<a href="{{ route('admin.deleteDataPenduduk', $itemPenduduk->id_penduduk) }}" class="btn btn-danger ml-3">Hapus</a>
+																</div>
+												            </div>
+												        </div>
+												    </div>
+												</div>
                                             @endforeach
 											</tbody>
                                         </table>
+										<div class="mb-4">
+										{{ $penduduk->links() }}
+										</div>
 									</div>
 								</div>
 							</div>
@@ -197,24 +236,146 @@
 			</div>
 		</div>
 	</div> 
-	
-</body>
-<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
+	<div class="modal fade" id="modalTambahPekerjaan" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle">Tambah Pekerjaan</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    			</div>
+    			<div class="modal-body">
+					<form action="{{ route('admin.tambahPekerjaan') }}" method="post" enctype="multipart/form-data">
+						@csrf
+						<div class="form-group">
+							<label for="pekerjaan">Pekerjaan*</label>
+							<input type="text" class="form-control" name="pekerjaan" id="pekerjaan" required>
+						</div>
+    					<button type="submit" class="btn btn-primary form-control">Save changes</button>
+					</form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="modal fade" id="modalImportExcel" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle">Import Data Excel</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    			</div>
+    			<div class="modal-body">
+					<a href="{{ asset('downloads/template-pengisian.xlsx') }}">Download Template Excel</a>
+					<br>
+					<form action="{{ route('admin.import') }}" method="post" enctype="multipart/form-data">
+						@csrf
+						<div class="mb-3">
+        				    <label for="file" class="form-label">Pilih file Excel (.xlsx)</label>
+        				    <input type="file" name="file" id="file" class="form-control" required accept=".xlsx">
+        				</div>
+        				<button type="submit" class="btn btn-primary">Import</button>
+					</form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<div class="modal fade" id="modalEditPekerjaan" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle">Edit Pekerjaan</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    			</div>
+    			<div class="modal-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Pekerjaan</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($pekerjaan as $itemPekerjaan)
+							<tr>
+								<td>{{ $itemPekerjaan->id_pekerjaan }}</td>
+								<td>{{ $itemPekerjaan->pekerjaan }}</td>
+								<td>
+								<div class="action-buttons">
+									<a href="#" class="btn btn-sm btn-warning btn-edit">Edit</a>
+									<form action="{{ route('admin.deletePekerjaan', $itemPekerjaan->id_pekerjaan) }}" method="POST" class="d-inline">
+										@csrf
+										<button class="btn btn-sm btn-danger" type="submit">Delete</button>
+									</form>
+								</div>
+
+								<form action="{{ route('admin.updatePekerjaan', $itemPekerjaan->id_pekerjaan) }}" method="POST" class="form-edit d-none mt-2">
+									@csrf
+									<input type="text" name="pekerjaan" class="form-control d-inline" value="{{ $itemPekerjaan->pekerjaan }}" required>
+									<button type="submit" class="btn btn-sm btn-primary">Save</button>
+									<button type="button" class="btn btn-sm btn-secondary btn-cancel">Cancel</button>
+								</form>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+	<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+	<script src="{{url('js/admin/ready.min.js')}}"></script>
+	<script src="{{url('js/admin/demo.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+	<script>
+	document.getElementById("searchInput").addEventListener("keyup", function() {
+	    const filter = this.value.toLowerCase();
+	    const rows = document.querySelectorAll("#pendudukTable tbody tr");
+
+	    rows.forEach(row => {
+	        const rowText = row.textContent.toLowerCase();
+	        row.style.display = rowText.includes(filter) ? "" : "none";
+	    });
+	});
+
+	document.querySelectorAll('.btn-edit').forEach(function(button) {
+		button.addEventListener('click', function(e) {
+			e.preventDefault();
+			const row = button.closest('tr');
+
+			row.querySelector('.action-buttons').classList.add('d-none');
+			row.querySelector('.form-edit').classList.remove('d-none');
+		});
+	});
+
+	document.querySelectorAll('.btn-cancel').forEach(function(button) {
+		button.addEventListener('click', function(e) {
+			e.preventDefault();
+			const row = button.closest('tr');
+
+			row.querySelector('.form-edit').classList.add('d-none');
+			row.querySelector('.action-buttons').classList.remove('d-none');
+		});
+	});
+	</script>
+
+	
+	</body>
 </html>

@@ -31,7 +31,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -54,7 +55,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -99,14 +100,19 @@
 							<p>Berita</p>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
-						</a>
-					</li>
 					<li class="nav-item active">
 						<a href="{{ route('admin.wisata') }}">
 							<p>Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.penginapan') }}">
+							<p>Penginapan</p>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -125,9 +131,15 @@
 		</div>
 
 			<div class="main-panel">
+				<input class="form-control mt-3 mb-2 ml-4" id="searchInput" type="text" placeholder="Search" aria-label="Search" style="width: 96%">
 					<div class="container-fluid">
 						@if (Session::has('message'))
 							<p class="alert alert-success mt-2">{{ Session::get('message') }}</p>
+						@endif
+						@if(Session::has('error'))
+						    <div class="alert alert-danger mt-2">
+						        {{ Session::get('error') }}
+						    </div>
 						@endif
 		  				<!-- Daftar Wisata -->
 					<div class="d-flex justify-content-between align-items-center">
@@ -138,7 +150,7 @@
 							<div class="col">
 								<div class="card">
 									<div class="card-body">
-										<table class="table table-striped mt-3">
+										<table class="table table-striped mt-3" id="wisataTable">
 											<thead>
 												<tr>
 													<th scope="col">Nama Tempat</th>
@@ -154,7 +166,8 @@
         										<tr>
             										<td>{{ $itemWisata->nama_tempat }}</td>
 													<td>{{ $itemWisata->nama_wilayah }}</td>
-            										<td>{{ $itemWisata->keterangan }}</td>
+            										<td>{!! Str::limit($itemWisata->keterangan, 40, '...') !!} <a href="#" data-bs-toggle="modal" data-bs-target="#modalView_Wisata{{$itemWisata->id_wisata}}">View more..</a></td>
+													</td>
             										<td>
                 									@if ($itemWisata->gambar_wisata)
                 									    <img src="{{ asset('storage/' . $itemWisata->gambar_wisata) }}" width="100" height="80" alt="">
@@ -163,8 +176,46 @@
                 									@endif
 													</td>
 													<td>By {{ $itemWisata->name }} at {{ $itemWisata->updated_at }}</td>
-													<td><a href="{{ route('admin.editWisata', $itemWisata->id_wisata) }}">Edit</a> | <a href="{{route('admin.deleteWisata', $itemWisata->id_wisata)}}">Hapus</a></td>
+													<td><a href="{{ route('admin.editWisata', $itemWisata->id_wisata) }}">Edit</a> | <a href="" data-bs-toggle="modal" data-bs-target="#modal_confirmation_{{ $itemWisata->id_wisata }}">Hapus</a></td>
 												</tr> 
+
+												<!-- Modal View Berita -->
+		  										<div class="modal fade" id="modalView_Wisata{{$itemWisata->id_wisata}}" tabindex="-1" aria-labelledby="modalTitle{{$itemWisata->id_wisata}}" aria-hidden="true">
+   													<div class="modal-dialog">
+        												<div class="modal-content">
+            												<div class="modal-header">
+																<h5 class="modal-title" id="modalTitle">Detail Wisata</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            												</div>
+            												<div class="modal-body">
+															<div>
+                                							    <p class="mb-3">Nama Tempat Wisata: {{ $itemWisata->nama_tempat }}</p>
+																<p class="mb-3">Letak Wilayah: {{ $itemWisata->nama_wilayah }}</p>
+																<img src="{{ asset('storage' . $itemWisata->gambar_wisata) }}" alt="">
+                                							    <p class="my-3">{!! $itemWisata->keterangan !!}</p>
+                                							</div>
+															</div>
+												        </div>
+												    </div>
+												</div>
+
+												<div class="modal fade" id="modal_confirmation_{{ $itemWisata->id_wisata }}" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   													<div class="modal-dialog">
+    													<div class="modal-content">
+    														<div class="modal-header">
+																<h5 class="modal-title" id="modalTitle">Confirmation</h5>
+    														</div>
+    														<div class="modal-body">
+																<h5>Apakah Anda Yakin Ingin Menghapus Konten Ini?</h5>
+																<br>
+																<div class="d-flex justify-content-end">
+																	<a href="#" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Batalkan</a>
+																	<a href="{{route('admin.deleteWisata', $itemWisata->id_wisata)}}" class="btn btn-danger ml-3">Hapus</a>
+																</div>
+												            </div>
+												        </div>
+												    </div>
+												</div>
 												@endforeach
 											</tbody>
 										</table>
@@ -181,23 +232,34 @@
 		</div>
 	</div> 
 	
-</body>
-<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+	<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+	<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+	<script src="{{url('js/admin/ready.min.js')}}"></script>
+	<script src="{{url('js/admin/demo.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
+	<script>
+	document.getElementById("searchInput").addEventListener("keyup", function() {
+	    const filter = this.value.toLowerCase();
+	    const rows = document.querySelectorAll("#wisataTable tbody tr");
+
+	    rows.forEach(row => {
+	        const rowText = row.textContent.toLowerCase();
+	        row.style.display = rowText.includes(filter) ? "" : "none";
+	    });
+	});
+	</script>
+	
+	</body>
 </html>

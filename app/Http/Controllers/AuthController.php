@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthController extends Controller
                 'user_id' => Auth::id(),
                 'email' => $credentials['email'],
                 'action' => 'login',
-                'time' => now(),
+                'time' => Carbon::now('Asia/Jakarta'),
             ]);
  
             return redirect()->intended('admin/dashboard');
@@ -43,7 +44,7 @@ class AuthController extends Controller
                 'user_id' => Auth::id(),
                 'email' => Auth::user()->email,
                 'action' => 'logout',
-                'time' => now(),
+                'time' => Carbon::now('Asia/Jakarta'),
             ]);
         }
 

@@ -25,6 +25,7 @@
         <!-- Template Stylesheet -->
 		<link href="{{url('css/style.css')}}" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>	
+		<link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@4.2.0/dist/geosearch.css" />	
 
 	</head>
 <body>
@@ -32,7 +33,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -55,7 +57,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -101,13 +103,18 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
+						<a href="{{ route('admin.wisata') }}">
+							<p>Wisata</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.wisata') }}">
-							<p>Wisata</p>
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.penginapan') }}">
+							<p>Penginapan</p>
 						</a>
 					</li>
 					<li class="nav-item active">
@@ -130,6 +137,14 @@
 					@if (Session::has('message'))
 						<p class="alert alert-success mt-2">{{ Session::get('message') }}</p>
 					@endif
+					@if(Session::has('error'))
+						    <div class="alert alert-danger mt-2">
+						        {{ Session::get('error') }}
+						    </div>
+						@endif
+					<a href="{{ route('admin.umkm') }}">
+						<p style="font-size: 18px; text-decoration: underline; margin-top:10px">Back</p>
+					</a>
 		  			<!-- Daftar UMKM -->
 					<div class="d-flex justify-content-between align-items-center">
 						<h4 class="page-title mt-2">Form Tambah UMKM</h4>
@@ -140,27 +155,27 @@
 							<div class="col">
 								<div class="card">
 									<div class="card-body">
-                                        <h4 class="page-title mt-1">Pilih Lokasi Berdasarkan Peta</h4>
+                                        <h4 class="page-title mt-1">Pilih Lokasi Berdasarkan Peta*</h4>
                                         <div id="map" style="height:400px"></div>
                                         <form action=" {{ route('admin.createUmkm') }}" method="post" enctype="multipart/form-data">
 									    	@csrf
                                             <div class="form-group row">
                                                 <div class="col col-md-6">
-                                                    <label for="latitude">Latitude</label>
+                                                    <label for="latitude">Latitude*</label>
                                                     <input type="text" class="form-control" name="latitude" id="latitude" required>
                                                 </div>
                                                 <div class="col col-md-6">
-                                                    <label for="longitude">Longitude</label>
+                                                    <label for="longitude">Longitude*</label>
                                                     <input type="text" class="form-control" name="longitude" id="longitude" required>
                                                 </div>
                                             </div>
 									    	<div class="form-group row">
                                                 <div class="col col-md-4">
-									    		    <label for="nama_umkm">Nama UMKM</label>
+									    		    <label for="nama_umkm">Nama UMKM*</label>
 									    		    <input type="text" class="form-control" name="nama_umkm" id="nama_umkm" required>
                                                 </div>
                                                 <div class="col col-md-4">
-									    		    <label for="nama_wilayah">Nama Wilayah</label>
+									    		    <label for="nama_wilayah">Nama Wilayah*</label>
                                                     @if (Auth::check() && Auth::user()->role === 'superadmin')
 									    		        <select name="nama_wilayah" class="form-control" required>
 									    		            <option value="">-- Pilih Wilayah --</option>
@@ -169,13 +184,13 @@
 									    		            @endforeach
 									    		        </select>
                                                     @elseif (Auth::check() && Auth::user()->role === 'admin')
-                                                        <select name="nama_wilayah" class="form-control" disabled>
+                                                        <select name="nama_wilayah" class="form-control">
 									    		            <option value="{{ $wilayahUser->id_wilayah }}">{{ $wilayahUser->nama_wilayah }}</option>
 									    		        </select>
                                                     @endif
                                                 </div>
 									    	    <div class="col col-md-4">
-									    	    	<label for="jenis_umkm">Jenis UMKM</label>
+									    	    	<label for="jenis_umkm">Jenis UMKM*</label>
 									    	    	<select name="jenis_umkm" class="form-control" required>
 									    	    		<option value="">-- Pilih Jenis UMKM --</option>
 									    	    		@foreach ($jenis_umkm as $itemJenisUMKM)
@@ -184,14 +199,22 @@
 									    	    	</select>
 									    	    </div>
                                             </div>
+											<div class="form-group">
+												<label for="alamat">Alamat*</label>
+												<input type="text" name="alamat" id="alamat" class="form-control" required>
+											</div>
 									    	<div class="form-group">
-									    		<label for="keterangan">Keterangan</label>
+									    		<label for="keterangan">Keterangan*</label>
 									    		<textarea name="keterangan" class="form-control" id="keterangan" cols="50" rows="4" required></textarea>					
 									    	</div>
 									    	<div class="form-group">
-									    		<label for="gambar_umkm">Gambar UMKM</label>
-									    		<input type="file" class="form-control-file" name="gambar_umkm" id="gambar_umkm" accept="image/*">
+									    		<label for="gambar_umkm">Gambar Thumbnail UMKM*</label>
+									    		<input type="file" class="form-control-file" name="gambar_umkm" id="gambar_umkm" accept="image/*" required>
                 					    	</div>
+											<div class="form-group">
+												<label for="dokumentasi_umkm">Gambar Detail Lainnya*</label>
+												<input type="file" class="form-control-file" name="dokumentasi[]" accept="image/*" required multiple>
+											</div>
 									    	<button type="submit" class="btn btn-primary form-control">Tambahkan</button>
 									    </form>
 									</div>
@@ -204,51 +227,82 @@
 		</div>
 	</div> 
 	
-</body>
-<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+	<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+	<script src="{{url('js/admin/ready.min.js')}}"></script>
+	<script src="{{url('js/admin/demo.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	
+	<script>
+		// Pastikan script hanya berjalan jika elemen dengan ID "map" ada
+		let currentmarker;
+		var map = L.map("map").setView([
+			{!! json_encode($wilayahUser->latitude ?? -6.2691134) !!},
+			{!! json_encode($wilayahUser->longitude ?? 106.484353) !!}
+		], 13);
+		
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '© OpenStreetMap contributors'
+		}).addTo(map);
+		
+		var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+		var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+		
+		var provider = new OpenStreetMapProvider();
+		var searchControl = new GeoSearchControl({
+			provider: provider,
+			style: 'bar',
+			showMarker: false,
+			searchLabel: 'Cari Lokasi...',
+			autoClose: true
+		});
+		
+		map.addControl(searchControl);
+		
+		map.on('geosearch/showlocation', function(e) {
+			const { x, y } = e.location;
+			
+			if (currentmarker) {
+				map.removeLayer(currentmarker);
+			}
+			
+			currentmarker = L.marker([y, x]).addTo(map);
+			document.getElementById('latitude').value = y;
+			document.getElementById('longitude').value = x;
+		});
+		
+		map.on('click', function(e) {
+			var lat = e.latlng.lat;
+			var lng = e.latlng.lng;
+			document.getElementById('latitude').value = lat;
+			document.getElementById('longitude').value = lng;
+			
+			if (currentmarker) {
+				map.removeLayer(currentmarker);
+			}
+			
+			currentmarker = L.marker([lat, lng]).addTo(map);
+		});
 
-<script>
-// Pastikan script hanya berjalan jika elemen dengan ID "map" ada
-let currentmarker;
-var map = L.map("map").setView([
-	{!! json_encode($wilayahUser->latitude) !!},
-	{!! json_encode($wilayahUser->longitude) !!}
-], 15);
+		CKEDITOR.replace('keterangan');
+		
+		</script>
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
+	
 
-  map.on('click', function(e) {
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
-    document.getElementById('latitude').value = lat;
-	document.getElementById('longitude').value = lng;
-
-	if (currentmarker) {
-    map.removeLayer(currentmarker);
-  }
-
-  currentmarker = L.marker([lat, lng]).addTo(map);
-  });
-
-  </script>
-
+	</body>
 </html>

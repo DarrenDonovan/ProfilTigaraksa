@@ -43,36 +43,831 @@
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
         <style>
-          /* Navbar agar tetap di atas */
-          .navbar {
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              z-index: 1000;
-              background-color: #002c77;
-              padding: 15px 20px;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          }
-  
-          /* Supaya konten tidak ketutupan navbar */
-          .main {
-              padding-top: 100px; /* Sesuaikan dengan tinggi navbar */
-          }
-  
-          /* Hero section atau container utama */
-          .container-fluid {
-              margin-top: 20px;
-          }
-  
-          /* Styling Artikel */
-          .article {
-              background: white;
-              padding: 20px;
-              border-radius: 10px;
-              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          }
-      </style>
+    /* Prevent horizontal scroll */
+    html,
+    body {
+      overflow-x: hidden;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* =======================
+             NAVBAR STYLING
+          ======================= */
+    .navbar {
+      position: fixed !important;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      background-color: #13357b;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      flex-wrap: nowrap;
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar-brand i {
+      font-size: 28px;
+      color: white;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-brand .brand-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.2;
+    }
+
+
+    .navbar-brand .subtext {
+      font-size: 16px;
+      margin: 0;
+      color: #f8f9fa;
+      opacity: 0.9;
+    }
+
+    .navbar-toggler {
+      border: 1px solid #fff;
+      background-color: #13357b;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-left: auto;
+      z-index: 1050;
+    }
+
+    .navbar-toggler .fa-bars,
+    .navbar-toggler-icon {
+      color: white;
+      font-size: 20px;
+    }
+
+    .navbar-collapse {
+      justify-content: flex-end;
+    }
+
+    .navbar-nav {
+      align-items: center;
+    }
+
+    .nav-item {
+      height: 100%;
+    }
+
+    .nav-link {
+      color: white;
+      padding: 16px 15px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      font-weight: 600;
+    }
+
+    .dropdown-menu {
+      background-color: white;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-item {
+      color: #000;
+      padding: 10px 15px;
+    }
+
+    .dropdown-item:hover {
+      background-color: #e6e6e6;
+    }
+
+    .navbar-brand.scrolled i,
+    .navbar-brand.scrolled .kec,
+    .navbar-brand.scrolled .subtext {
+      color: #13357b !important;
+    }
+
+    /* =======================
+             MAIN LAYOUT
+          ======================= */
+    .main {
+      padding-top: 80px !important;
+    }
+
+    .container-fluid {
+      margin-top: 10px;
+      padding: 0 15px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .article {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Default */
+    .recent-thumb {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+    }
+
+    /* =======================
+             RESPONSIVE STYLES
+          ======================= */
+    @media (min-width: 2000px) {
+      .container-fluid.containerUtama {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-inline: 60px;
+      }
+
+      .container-fluid.containerUtama .row {
+        display: flex;
+        gap: 40px;
+        flex-wrap: nowrap;
+        /* Pastikan kolom tidak membungkus */
+      }
+
+      .container-fluid.containerUtama .col-lg-8 {
+        flex: 0 0 70%;
+        max-width: 70%;
+      }
+
+      .container-fluid.containerUtama .col-lg-4 {
+        flex: 0 0 30%;
+        max-width: 30%;
+      }
+
+      .sidebar {
+        padding-left: 24px;
+        padding-right: 12px;
+      }
+
+      .article {
+        padding: 30px;
+      }
+
+      .navbar {
+        height: 180px;
+      }
+
+      .navbar-brand .fa {
+        padding-right: 15px;
+        font-size: clamp(40px, 2vw + 20px, 60px) !important;
+      }
+
+      .navbar.navbar-expand-lg.navbar-light {
+        height: 180px !important;
+      }
+
+      .navbar-brand .m-0 {
+        font-size: clamp(40px, 2vw + 15px, 60px);
+      }
+
+      .navbar-brand .subtext {
+        font-size: clamp(20px, 1vw + 15px, 35px);
+      }
+
+      .navbar-nav {
+        height: 180px;
+      }
+
+      .navbar-nav .nav-item,
+      .navbar-nav .nav-item.dropdown .nav-link {
+        font-size: clamp(25px, 1vw + 18px, 35px) !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .dropdown-menu {
+        font-size: clamp(18px, 1vw + 12px, 28px);
+      }
+
+      .main {
+        font-size: clamp(1.5rem, 2vw + 1rem, 40px);
+      }
+
+      h2.title {
+        font-size: clamp(40px, 2vw + 10px, 60px) !important;
+        line-height: 1.4;
+      }
+
+      .content p,
+      .content h3,
+      .content blockquote p {
+        font-size: clamp(30px, 1.5vw + 10px, 40px);
+      }
+
+      .content h3 {
+        margin-top: 40px;
+      }
+
+      .content blockquote p {
+        font-style: italic;
+        color: #555;
+      }
+
+      .meta-top ul li,
+      .meta-bottom,
+      .meta-list a {
+        font-size: clamp(25px, 1.2vw + 12px, 35px);
+      }
+
+      .recent-thumb {
+        width: 120px;
+        height: 120px;
+      }
+
+      .recent-posts-widget .widget-title {
+        font-size: clamp(40px, 1vw + 8px, 38px);
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .recent-posts-widget .post-item h4.h6 {
+        font-size: clamp(28px, 0.7vw + 6px, 28px);
+        margin-bottom: 2px !important;
+      }
+
+      .recent-posts-widget .post-item time {
+        font-size: clamp(25px, 0.6vw + 4px, 28px);
+      }
+
+      /* Judul "Tags" */
+      .tags-widget .widget-title {
+        font-size: clamp(40px, 1vw + 8px, 38px);
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      /* Tombol tag */
+      .tags-widget .btn {
+        font-size: clamp(25px, 0.6vw + 6px, 25px);
+        padding: 6px 14px;
+        border-radius: 10px;
+      }
+
+      .footer {
+        padding: 80px 0;
+      }
+
+      .footer .container-fluid {
+        padding: 0 30px;
+      }
+
+      .footer-item {
+        width: auto;
+        gap: 20px;
+      }
+
+      .footer-item h4 {
+        font-size: clamp(30px, 1.5vw + 15px, 40px);
+      }
+
+      .footer-item a {
+        font-size: clamp(25px, 1vw + 12px, 35px);
+        white-space: nowrap;
+      }
+
+      .footer-item i {
+        font-size: clamp(30px, 1.5vw + 15px, 40px);
+      }
+
+      .footer .btn-square {
+        width: 60px;
+        height: 60px;
+        font-size: clamp(30px, 1.5vw + 15px, 40px);
+      }
+    }
+
+    @media (max-width: 1441px) {
+      .navbar {
+        padding-inline: 30px !important;
+      }
+
+      .navbar-brand .m-0 {
+        font-size: 25px;
+      }
+
+      .navbar-brand .subtext {
+        font-size: 20px;
+        margin: 0 !important;
+      }
+
+      .navbar-brand .fa {
+        font-size: 30px !important;
+      }
+
+      /* Ukuran font konten lebih kecil */
+      .content p {
+        font-size: 0.9rem;
+      }
+
+      .content h2.title {
+        font-size: 1.4rem;
+      }
+
+      .content h3 {
+        font-size: 1.1rem;
+      }
+
+      /* Padding kiri kanan */
+      .container-fluid.containerUtama {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .article {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+
+
+    @media (max-width: 1025px) {
+      .navbar {
+        padding-inline: 30px !important;
+      }
+
+      .navbar-brand .m-0 {
+        font-size: 23px;
+      }
+
+      .navbar-brand .subtext {
+        font-size: 20px;
+        margin: 0px !important;
+      }
+
+      .navbar-brand .fa {
+        font-size: 35px !important;
+        margin-right: 15px !important;
+      }
+
+      .mx-auto.text-center.mb-5 h3 {
+        font-size: 20px;
+      }
+
+      .col-lg-8,
+      .col-lg-4 {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .navbar.navbar-expand-lg {
+        max-height: 95px;
+      }
+
+      .navbar {
+        flex-wrap: wrap;
+      }
+
+      .kec {
+        color: #fff;
+      }
+
+      .navbar-collapse {
+        width: 100%;
+        background-color: #fff;
+        padding: 10px 0;
+        margin-top: 10px;
+        border-radius: 6px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .nav-link {
+        width: 100%;
+        color: #002c77 !important;
+        padding: 12px 20px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+
+      .nav-link:hover {
+        background-color: #f2f2f2;
+      }
+
+      .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        padding: 10px 20px;
+        background-color: #f8f9fa;
+        box-shadow: none;
+      }
+
+      .dropdown-item {
+        width: 100%;
+        padding: 8px 10px;
+        color: #000 !important;
+      }
+
+      .dropdown-item:hover {
+        background-color: #e6e6e6;
+      }
+
+      .dropdown-toggle::after {
+        float: right;
+        margin-top: 8px;
+      }
+    }
+
+    @media (max-width: 769px) {
+      .navbar-brand .fa {
+        font-size: 35px !important;
+        /*logo*/
+        margin-right: 15px !important;
+        /* border: 2px solid red; */
+      }
+
+      .navbar-brand h1 {
+        font-size: 23px !important;
+        color: #ffff !important;
+      }
+
+      .navbar-brand h1 .subtext {
+        font-size: 18px !important;
+        color: #ffff !important;
+        /* border: 2px solid blue; */
+      }
+
+      .nav.nav-pills {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        max-width: 100%;
+        justify-content: flex-start !important;
+      }
+
+      .main {
+        padding-top: 60px !important;
+      }
+
+      .hero-section h1 {
+        font-size: 24px;
+      }
+
+      .hero-section .subtext {
+        font-size: 14px;
+      }
+
+      .p-3 h1 {
+        font-size: 22px !important;
+        margin: 0 20px;
+      }
+
+      .p-3 h4 {
+        font-size: 16px;
+        margin-top: 30px;
+      }
+
+      .container-fluid {
+        padding: 5px;
+      }
+
+      .navbar-brand .title {
+        font-size: 18px;
+      }
+
+      .navbar-brand .subtext {
+        font-size: 13px;
+      }
+
+      .sidebar {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .recent-posts-widget .post-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .recent-posts-widget .post-item>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .recent-posts-widget .post-item h4.h6 {
+        margin: 0 0 4px 0;
+        line-height: 1.3;
+      }
+
+      .recent-posts-widget .post-item time {
+        font-size: 13px;
+        margin: 0;
+      }
+
+      .recent-thumb {
+        width: 55px;
+        height: 55px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .main {
+        padding-top: 60px !important;
+      }
+
+      .container,
+      .container-fluid {
+        padding: 0 10px;
+      }
+
+      .navbar-brand .title {
+        font-size: 16px;
+      }
+
+      .navbar-brand .subtext {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 469px) {
+      .footer {
+        padding: 20px 10px;
+      }
+
+      .footer-item h4,
+      .footer-item a,
+      .footer-item i {
+        font-size: 14px;
+      }
+
+      .footer .btn-square {
+        width: 25px;
+        height: 25px;
+        font-size: 14px;
+        padding: 4px;
+      }
+
+      .container-fluid.copyright .col-md-6,
+      .text-white {
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 426px) {
+      .navbar-brand .fa {
+        font-size: 30px !important;
+        /*logo*/
+        margin-right: 15px !important;
+        /* border: 2px solid red; */
+      }
+
+      .navbar-brand h1 {
+        font-size: 20px !important;
+        color: #ffff !important;
+      }
+
+      .navbar-brand h1 .subtext {
+        font-size: 15px !important;
+        color: #ffff !important;
+        /* border: 2px solid blue; */
+      }
+
+      .nav.nav-pills {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        max-width: 100%;
+        justify-content: flex-start !important;
+      }
+
+      .container-fluid .row {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        margin-top: 20px;
+      }
+
+      .recent-posts-widget {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .recent-posts-widget .post-item {
+        display: flex;
+        align-items: flex-start;
+        /* sudah ada */
+        gap: 10px;
+      }
+
+      .recent-posts-widget .post-item>div {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* agar judul dan tanggal naik ke atas */
+      }
+
+      .recent-posts-widget .post-item h4.h6 {
+        margin: 0 0 2px 0;
+        line-height: 1.3;
+      }
+
+      .recent-posts-widget .post-item time {
+        font-size: 11px;
+        margin: 0;
+      }
+
+      .recent-thumb {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      /* Footer font lebih besar */
+      .footer-item h4,
+      .footer-item a,
+      .footer-item i {
+        font-size: 18px !important;
+      }
+
+      .footer .btn-square {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 18px !important;
+        padding: 5px !important;
+      }
+    }
+
+    @media (max-width: 376px) {
+      .navbar-brand .fa {
+        font-size: 20px !important;
+        margin-right: 10px !important;
+      }
+
+      .navbar-brand h1 {
+        font-size: 20px !important;
+        color: #ffff !important;
+      }
+
+      .navbar-brand h1 .subtext {
+        font-size: 15px !important;
+        color: #ffff !important;
+      }
+
+      .navbar-toggler {
+        font-size: 15px;
+        padding: 0.3rem 0.6rem !important;
+        color: #ffff !important;
+        border-color: #ffff !important;
+      }
+
+      .collapse {
+        font-size: 20px;
+      }
+
+      .search-input {
+        font-size: 14px;
+      }
+
+      .main {
+        padding-top: 65px !important;
+      }
+
+      .footer-item h4,
+      .footer-item a,
+      .footer-item i {
+        font-size: 18px;
+      }
+
+      .footer .btn-square {
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 18px !important;
+        padding: 5px !important;
+      }
+
+      .meta-top ul li,
+      .meta-bottom,
+      .meta-list a {
+        font-size: 12px;
+      }
+
+      .container,
+      .container-fluid {
+        padding: 0 8px;
+      }
+    }
+
+    @media (max-width: 321px) {
+      .navbar.navbar-expand-lg {
+        padding: 16px 20px !important;
+      }
+
+      .navbar-brand .fa {
+        font-size: 20px !important;
+        margin-right: 10px !important;
+      }
+
+      .navbar-brand h1 {
+        font-size: 15px !important;
+        color: #ffff !important;
+      }
+
+      .navbar-brand h1 .subtext {
+        font-size: 13px !important;
+        color: #ffff !important;
+      }
+
+      .navbar-toggler {
+        font-size: 13px;
+        padding: 0.3rem 0.6rem !important;
+        color: #ffff !important;
+        border-color: #ffff !important;
+      }
+
+      .collapse {
+        font-size: 20px;
+      }
+
+      .nav-link,
+      .dropdown-item {
+        font-size: 13px;
+        padding: 10px 14px;
+      }
+
+      .main {
+        padding-top: 60px !important;
+      }
+
+      .p-3 h1 {
+        font-size: 18px !important;
+      }
+
+      .p-3 h4 {
+        font-size: 14px;
+      }
+
+      /* Footer font lebih besar */
+      .footer-item h4,
+      .footer-item a,
+      .footer-item i {
+        font-size: 16px !important;
+      }
+
+      .footer .btn-square {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 16px !important;
+        padding: 4px !important;
+      }
+
+      .text-white {
+        font-size: 12px;
+      }
+    }
+  </style>
 
     </head>
 
@@ -86,25 +881,14 @@
     </div>
     <!-- Spinner End -->
 
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-primary px-5 d-none d-lg-block">
-        <div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
-            <div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
-                    <a href="{{url('login')}}"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
-                </div>
-            </div>
-        </div>
-    </div>
-  
-  <!-- Topbar End -->
-
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="{{ url('/') }}" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Kecamatan Tigaraksa<span class="subtext">Kabupaten Tangerang</span></h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                    <h1 class="m-0 d-flex align-items-center">
+                      <i class="fa fa-map-marker-alt me-2"></i>
+                      <div class="kec" style="text-align: left;"> Kecamatan Tigaraksa<br> <span class="subtext">Kabupaten Tangerang</span></div>
+                    </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -130,16 +914,16 @@
   <main class="main">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 col-12">
 
           <!-- Blog Details Section -->
           <section id="blog-details" class="blog-details section">
             <div class="container">
               <article class="article">
-              <h2 class="title">{{ $berita->judul_berita }}</h2>
                 <div class="post-img">
                   <img src="{{ asset('storage/' . $berita->gambar_berita) }}" alt="" class="img-fluid mb-2" style="width: 725px">
                 </div>
+              <h2 class="title">{{ $berita->judul_berita }}</h2> 
                 <div class="meta-top">
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i>  {{ $berita->penulis_berita }}</li>
@@ -173,24 +957,6 @@
                 </div>
                 @endforeach
             </div><!--/Recent Posts Widget -->
-
-            <!-- Tags Widget -->
-            <div class="tags-widget widget-item card p-3 border rounded mt-3">
-                <h3 class="widget-title">Tags</h3>
-                <ul class="list-inline">
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">App</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">IT</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Business</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Mac</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Design</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Office</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Creative</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Studio</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Smart</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Tips</a></li>
-                <li class="list-inline-item m-1"><a href="#" class="btn btn-sm btn-outline-primary">Marketing</a></li>
-                </ul>
-            </div><!--/Tags Widget -->
 
           </div>
 

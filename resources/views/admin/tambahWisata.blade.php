@@ -25,13 +25,15 @@
         <!-- Template Stylesheet -->
 		<link href="{{url('css/style.css')}}" rel="stylesheet">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>	
-	</head>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@4.2.0/dist/geosearch.css" />	
+</head>
 <body>
    <!-- Topbar Start -->
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -54,7 +56,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -99,14 +101,19 @@
 							<p>Berita</p>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
-						</a>
-					</li>
 					<li class="nav-item active">
 						<a href="{{ route('admin.wisata') }}">
 							<p>Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.penginapan') }}">
+							<p>Penginapan</p>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -129,6 +136,11 @@
 						@if (Session::has('message'))
 							<p class="alert alert-success mt-2">{{ Session::get('message') }}</p>
 						@endif
+						@if(Session::has('error'))
+						    <div class="alert alert-danger mt-2">
+						        {{ Session::get('error') }}
+						    </div>
+						@endif
 		  				<!-- Daftar Wisata -->
                         <a href="{{ route('admin.wisata') }}">
 							<p style="font-size: 18px; text-decoration: underline; margin-top:10px">Back</p>
@@ -140,28 +152,28 @@
 							<div class="col">
 								<div class="card">
 									<div class="card-body">
-										<h4 class="page-title mt-1">Pilih Lokasi Berdasarkan Peta</h4>
+										<h4 class="page-title mt-1">Pilih Lokasi Berdasarkan Peta*</h4>
 										<div id="map" style="height:400px"></div>
                                         <form action=" {{ route('admin.createWisata') }}" method="post" enctype="multipart/form-data">
 									    @csrf
 											<div class="form-group row">
 												<div class="col col-md-6">
-									        		<label for="latitude">Latitude</label>
+									        		<label for="latitude">Latitude*</label>
 									        		<input type="text" class="form-control" name="latitude" id="latitude" required>
 												</div>
 												<div class="col col-md-6">
-									        		<label for="longitude">Longitude</label>
+									        		<label for="longitude">Longitude*</label>
 									        		<input type="text" class="form-control" name="longitude" id="longitude" required>
 												</div>
 									        </div>
 									        <div class="form-group row">
 												<div class="col col-md-6">
-									        		<label for="nama_tempat">Nama Tempat Wisata</label>
+									        		<label for="nama_tempat">Nama Tempat Wisata*</label>
 									        		<input type="text" class="form-control" name="nama_tempat" id="nama_tempat" required>
 												</div>
 											@if(Auth::check() && Auth::user()->role === 'superadmin')
 									        	<div class="col col-md-6">
-									        		<label for="nama_wilayah">Nama Wilayah</label>
+									        		<label for="nama_wilayah">Nama Wilayah*</label>
 									        		<select name="nama_wilayah" class="form-control" required>
 									        		    <option value="">-- Pilih Wilayah --</option>
 									        		    @foreach ($wilayahNoKec as $item)
@@ -171,21 +183,56 @@
 									        	</div>
 											@elseif(Auth::check() && Auth::user()->role === 'admin')
 												<div class="col col-md-6">
-									        		<label for="nama_wilayah">Nama Wilayah</label>
-									        		<select name="nama_wilayah" class="form-control" disabled>
+									        		<label for="nama_wilayah">Nama Wilayah*</label>
+									        		<select name="nama_wilayah" class="form-control">
 									        		    <option value="{{ $wilayahUser->id_wilayah }}">{{ $wilayahUser->nama_wilayah }}</option>
 									        		</select>
 									        	</div>
 											@endif
 											</div>
 									        <div class="form-group">
-									        	<label for="keterangan">Keterangan</label>
+									        	<label for="keterangan">Keterangan*</label>
 									        	<textarea name="keterangan" class="form-control" id="keterangan" cols="50" rows="4" required></textarea>					
 									        </div>
 									        <div class="form-group">
-									        	<label for="gambar_wisata">Gambar Wisata</label>
-									        	<input type="file" class="form-control-file" name="gambar_wisata" id="gambar_wisata" accept="image/*">
+									        	<label for="gambar_wisata">Gambar Wisata*</label>
+									        	<input type="file" class="form-control-file" name="gambar_wisata" id="gambar_wisata" accept="image/*" required>
                 					        </div>
+											<div class="form-group row">
+											    <div class="col-md-4">
+											        <label for="gambar_depan">Gambar Depan*</label>
+											        <img id="preview_gambar_depan" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+											        <input type="file" name="gambar_depan" id="gambar_depan" class="form-control-file" accept="image/*" onchange="previewImage(event, 'preview_gambar_depan')" required>
+											    </div>
+											    <div class="col-md-4">
+											        <label for="gambar_kanan">Gambar Kanan*</label>
+											        <img id="preview_gambar_kanan" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+											        <input type="file" name="gambar_kanan" id="gambar_kanan" class="form-control-file" accept="image/*" onchange="previewImage(event, 'preview_gambar_kanan')" required>
+											    </div>
+											    <div class="col-md-4">
+											        <label for="gambar_belakang">Gambar Belakang*</label>
+											        <img id="preview_gambar_belakang" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+											        <input type="file" name="gambar_belakang" id="gambar_belakang" class="form-control-file" accept="image/*" onchange="previewImage(event, 'preview_gambar_belakang')" required>
+											    </div>
+											</div>
+											
+											<div class="form-group row">
+											    <div class="col-md-4">
+											        <label for="gambar_kiri">Gambar Kiri*</label>
+											        <img id="preview_gambar_kiri" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+											        <input type="file" name="gambar_kiri" id="gambar_kiri" class="form-control-file" accept="image/*" onchange="previewImage(event, 'preview_gambar_kiri')" required>
+											    </div>
+											    <div class="col-md-4">
+											        <label for="gambar_atas">Gambar Atas*</label>
+											        <img id="preview_gambar_atas" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+											        <input type="file" name="gambar_atas" id="gambar_atas" class="form-control-file" accept="image/*" onchange="previewImage(event, 'preview_gambar_atas')" required>
+											    </div>
+											    <div class="col-md-4">
+											        <label for="gambar_bawah">Gambar Bawah*</label>
+											        <img id="preview_gambar_bawah" style="display:none; max-width: 100%; margin-bottom: 10px;" />
+											        <input type="file" name="gambar_bawah" id="gambar_bawah" class="form-control-file" accept="image/*" onchange="previewImage(event, 'preview_gambar_bawah')" required>
+											    </div>
+											</div>
 									        <button type="submit" class="btn btn-primary form-control">Tambahkan</button>
 								        </form>
 									</div>
@@ -198,50 +245,88 @@
 		</div>
 	</div> 
 	
+	<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+	<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+	<script src="{{url('js/admin/ready.min.js')}}"></script>
+	<script src="{{url('js/admin/demo.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	
+	<script>
+		let currentmarker;
+		var map = L.map("map").setView([
+			{!! json_encode($wilayahUser->latitude ?? -6.2691134) !!},
+			{!! json_encode($wilayahUser->longitude ?? 106.484353) !!}
+		], 13);
+		
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '© OpenStreetMap contributors'
+		}).addTo(map);
+		
+		var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+  var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+  
+  var provider = new OpenStreetMapProvider();
+  var searchControl = new GeoSearchControl({
+	  provider: provider,
+	  style: 'bar',
+	  showMarker: false,
+	  searchLabel: 'Cari Lokasi...',
+	  autoClose: true
+	});
+	
+	map.addControl(searchControl);
+	
+	map.on('geosearch/showlocation', function(e) {
+		const { x, y } = e.location;
+		
+		if (currentmarker) {
+			map.removeLayer(currentmarker);
+		}
+		
+		currentmarker = L.marker([y, x]).addTo(map);
+		document.getElementById('latitude').value = y;
+		document.getElementById('longitude').value = x;
+	});
+	
+	map.on('click', function(e) {
+		var lat = e.latlng.lat;
+		var lng = e.latlng.lng;
+		document.getElementById('latitude').value = lat;
+		document.getElementById('longitude').value = lng;
+		
+		if (currentmarker) {
+			map.removeLayer(currentmarker);
+		}
+		
+		currentmarker = L.marker([lat, lng]).addTo(map);
+	});
+
+	function previewImage(event, previewId) {
+	    const reader = new FileReader();
+	    reader.onload = function(){
+	        const output = document.getElementById(previewId);
+	        output.src = reader.result;
+	        output.style.display = 'block';
+	    }
+	    reader.readAsDataURL(event.target.files[0]);
+	}
+
+		CKEDITOR.replace('keterangan');
+	
+	</script>
 </body>
-<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
-<script src="{{url('js/admin/core/popper.min.js')}}"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-<script src="{{url('js/admin/ready.min.js')}}"></script>
-<script src="{{url('js/admin/demo.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-// Pastikan script hanya berjalan jika elemen dengan ID "map" ada
-let currentmarker;
-var map = L.map("map").setView([
-	{!! json_encode($wilayahUser->latitude) !!},
-	{!! json_encode($wilayahUser->longitude) !!}
-], 15);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
-
-  map.on('click', function(e) {
-    var lat = e.latlng.lat;
-    var lng = e.latlng.lng;
-    document.getElementById('latitude').value = lat;
-	document.getElementById('longitude').value = lng;
-
-	if (currentmarker) {
-    map.removeLayer(currentmarker);
-  }
-
-  currentmarker = L.marker([lat, lng]).addTo(map);
-  });
-
-  </script>
 </html>

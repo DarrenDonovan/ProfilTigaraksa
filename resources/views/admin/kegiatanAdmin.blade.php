@@ -32,7 +32,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -55,7 +56,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -101,13 +102,18 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
+						<a href="{{ route('admin.wisata') }}">
+							<p>Wisata</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.wisata') }}">
-							<p>Wisata</p>
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.penginapan') }}">
+							<p>Penginapan</p>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -129,6 +135,12 @@
 					<div class="container-fluid">
 						@if (Session::has('message'))
 							<p class="alert alert-success mt-2">{{ Session::get('message') }}</p>
+						@endif
+
+						@if(Session::has('error'))
+						    <div class="alert alert-danger mt-2">
+						        {{ Session::get('error') }}
+						    </div>
 						@endif
 						
 						<!-- Kegiatan Terbaru -->
@@ -157,7 +169,7 @@
 													<td>{{ $kegiatanterbaru->nama_jenis_kegiatan }}</td>
 													<td>{{ $kegiatanterbaru->nama_wilayah }}</td>
 													<td>{{ $kegiatanterbaru->tanggal_kegiatan }}</td>
-            										<td>{{ $kegiatanterbaru->keterangan }}</td>
+            										<td>{!! Str::limit($kegiatanterbaru->keterangan, 40, '...') !!} <a href="#" data-bs-toggle="modal" data-bs-target="#modalView_Kegiatan{{$kegiatanterbaru->id_kegiatan}}">View more..</a></td>
             										<td>
                 									@if ($kegiatanterbaru->gambar_kegiatan)
                 									    <img src="{{ asset('storage/' . $kegiatanterbaru->gambar_kegiatan) }}" width="100" alt="">
@@ -166,78 +178,29 @@
                 									@endif
 													</td>
 													<td>By {{ $kegiatanterbaru->name }} at {{ $kegiatanterbaru->updated_at }}</td>
-													<td><a href="#" data-bs-toggle="modal" data-bs-target="#modalKegiatan_terbaru1">Edit</a></td>
+													<td><a href="{{ route('admin.editKegiatan', $kegiatanterbaru->id_kegiatan) }}">Edit</a></td>
 												</tr>
 												@endif
 											</tbody>
 										</table>
 									</div>
 								</div>
-							
-								<!-- Modal Kegiatan Terbaru -->
-								<div class="modal fade" id="modalKegiatan_terbaru1" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
-   									<div class="modal-dialog">
-        								<div class="modal-content">
-            								<div class="modal-header">
-												<h5 class="modal-title" id="modalTitle">Edit Kegiatan Terbaru</h5>
-												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            								</div>
-            								<div class="modal-body">
-												<form action="{{ route('admin.updateKegiatan', $kegiatanterbaru->id_kegiatan)}}" method="post" enctype="multipart/form-data">
-													@csrf
-													<div class="form-group">
-														<label for="nama_kegiatan">Nama Kegiatan</label>
-														<input type="text" class="form-control" name="nama_kegiatan" id="nama_kegiatan" value="{{ $kegiatanterbaru->nama_kegiatan }}" required>
-													</div>
-													<div class="form-group">
-														<label for="jenis_kegiatan">Jenis Kegiatan</label>
-														<select name="jenis_kegiatan" class="form-control" required>
-														    <option value="">-- Pilih Jenis Kegiatan --</option>
-														    @foreach ($jenis_kegiatan as $item)
-														        <option value="{{ $item->id_jenis_kegiatan }}" 
-																{{ $item->id_jenis_kegiatan == $kegiatanterbaru->id_jenis_kegiatan ? 'selected' :'' }}>
-																{{ $item->nama_jenis_kegiatan }}
-																</option>
-														    @endforeach
-														</select>
-													</div>
-													<div class="form-group">
-														<label for="nama_wilayah">Nama Wilayah</label>
-														<select name="nama_wilayah" class="form-control" required>
-														    <option value="">-- Pilih Wilayah --</option>
-														    @foreach ($wilayah as $itemWilayah)
-														        <option value="{{ $itemWilayah->id_wilayah }}" 
-																{{ $itemWilayah->id_wilayah == $kegiatanterbaru->id_wilayah ? 'selected' :'' }}>
-																{{ $itemWilayah->nama_wilayah }}
-																</option>
-														    @endforeach
-														</select>
-													</div>
-													<div class="form-group">
-														<label for="keterangan">Keterangan</label>
-														<textarea name="keterangan" class="form-control" id="keterangan" cols="50" rows="4" required>{{ $kegiatanterbaru->keterangan }}</textarea>					
-													</div>
-													<div class="form-group">
-														<label for="gambar_kegiatan">Gambar Kegiatan</label>
-														<input type="file" class="form-control-file" name="gambar_kegiatan" id="gambar_kegiatan" accept="image/*">
-                									</div>
-													<button type="submit" class="btn btn-primary form-control">Save changes</button>
-												</form>
-								            </div>
-								        </div>
-								    </div>
-								</div>
 
+					<input class="form-control mt-3 mb-3" id="searchInput" type="text" placeholder="Search" aria-label="Search" style="width: 100%">			
 					<!-- Daftar Kegiatan -->
 					<div class="d-flex justify-content-between align-items-center">
 						<h4 class="page-title mt-1">Daftar Kegiatan</h4>
-						<button type="button" class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#modalTambah_kegiatan1">Tambah Kegiatan</button>	
-					</div>				
+						<div class="d-flex justify-content-end align-items-center">
+							<a href="#" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalEditJenisKegiatan">Edit Jenis Kegiatan</a>
+							<a href="#" class="btn btn-primary mb-2 ml-2" data-bs-toggle="modal" data-bs-target="#modalTambahJenisKegiatan">Tambah Jenis Kegiatan</a>	
+							<a href="{{ route('admin.tambahKegiatan') }}" class="btn btn-primary mb-2 ml-2">Tambah Kegiatan</a>	
+						</div>				
+					</div>						
 						<div class="row">
 							<div class="col">
 								<div class="card">
 									<div class="card-body">
-										<table class="table table-striped mt-3">
+										<table class="table table-striped mt-3" id="kegiatanTable">
 											<thead>
 												<tr>
 													<th scope="col">Nama Kegiatan</th>
@@ -257,7 +220,7 @@
 													<td>{{ $items->nama_jenis_kegiatan }}</td>
 													<td>{{ $items->nama_wilayah }}</td>
 													<td>{{ $items->tanggal_kegiatan }}</td>
-            										<td>{{ $items->keterangan }}</td>
+            										<td>{!! Str::limit($items->keterangan, 40, '...') !!} <a href="#" data-bs-toggle="modal" data-bs-target="#modalView_Kegiatan{{$items->id_kegiatan}}">View more..</a></td>
             										<td>
                 									@if ($items->gambar_kegiatan)
                 									    <img src="{{ asset('storage/' . $items->gambar_kegiatan) }}" width="100" alt="">
@@ -266,58 +229,42 @@
                 									@endif
 													</td>
 													<td>By {{ $items->name }} at {{ $items->updated_at }}</td>
-													<td><a href="#" data-bs-toggle="modal" data-bs-target="#myModal1{{$items->id_kegiatan}}">Edit</a> | <a href="{{route('admin.deleteKegiatan', $items->id_kegiatan)}}">Hapus</a></td>
+													<td><a href="{{ route('admin.editKegiatan', $items->id_kegiatan) }}">Edit</a> | <a href="" data-bs-toggle="modal" data-bs-target="#modal_confirmation_{{ $items->id_kegiatan }}">Hapus</a></td>
 												</tr>
 
-												<!-- Modal Edit Kegiatan -->
-												<div class="modal fade" id="myModal1{{$items->id_kegiatan}}" tabindex="-1" aria-labelledby="modalTitle{{$items->id_kegiatan}}" aria-hidden="true">
+												<!-- Modal View Berita -->
+		  										<div class="modal fade" id="modalView_Kegiatan{{$items->id_kegiatan}}" tabindex="-1" aria-labelledby="modalTitle{{$items->id_kegiatan}}" aria-hidden="true">
    													<div class="modal-dialog">
         												<div class="modal-content">
             												<div class="modal-header">
-																<h5 class="modal-title" id="modalTitle">Edit Kegiatan Terbaru</h5>
+																<h5 class="modal-title" id="modalTitle">Detail Kegiatan</h5>
 																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             												</div>
             												<div class="modal-body">
-																<form action="{{ route('admin.updateKegiatan', $items->id_kegiatan)}}" method="post" enctype="multipart/form-data">
-																	@csrf
-																	<div class="form-group">
-																		<label for="nama_kegiatan">Nama Kegiatan</label>
-																		<input type="text" class="form-control" name="nama_kegiatan" id="nama_kegiatan" value="{{ $items->nama_kegiatan }}" required>
-																	</div>
-																	<div class="form-group">
-																		<label for="jenis_kegiatan">Jenis Kegiatan</label>
-																		<select name="jenis_kegiatan" class="form-control" required>
-														    				<option value="">-- Pilih Jenis Kegiatan --</option>
-														    				@foreach ($jenis_kegiatan as $jenis)
-														    				    <option value="{{ $jenis->id_jenis_kegiatan }}" 
-																				{{ $jenis->id_jenis_kegiatan == $items->id_jenis_kegiatan ? 'selected' : '' }}>
-																				{{ $jenis->nama_jenis_kegiatan }}
-																				</option>
-														    				@endforeach
-																		</select>
-																	</div>
-																	<div class="form-group">
-																		<label for="nama_wilayah">Nama Wilayah</label>
-																		<select name="nama_wilayah" class="form-control" required>
-														    				<option value="">-- Pilih Wilayah --</option>
-														    				@foreach ($wilayah as $itemWilayah)
-														    				    <option value="{{ $itemWilayah->id_wilayah }}" 
-																				{{ $itemWilayah->id_wilayah == $items->id_wilayah ? 'selected' : '' }}>
-																				{{ $itemWilayah->nama_wilayah }}
-																				</option>
-														    				@endforeach
-																		</select>
-																	</div>
-																	<div class="form-group">
-																		<label for="keterangan">Keterangan</label>
-																		<textarea name="keterangan" class="form-control" id="keterangan" cols="50" rows="4" required>{{ $items->keterangan }}</textarea>
-																	</div>
-																	<div class="form-group">					
-																		<label for="gambar_kegiatan">Gambar Kegiatan</label>
-																		<input type="file" name="gambar_kegiatan" id="gambar_kegiatan" class="form-control-file">
-																	</div>
-                													<button type="submit" class="btn btn-primary form-control">Save changes</button>
-																</form>
+															<div>
+                                							    <p class="mb-3">Nama Kegiatan: {{ $items->nama_kegiatan }}</p>
+																<p class="mb-3">Tanggal: {{ $items->tanggal_kegiatan }}</p>
+																<img src="{{ asset('storage' . $items->gambar_kegiatan) }}" alt="">                                							    
+																<p class="my-3">Keterangan: {!! $items->keterangan !!}</p>
+                                							</div>
+															</div>
+												        </div>
+												    </div>
+												</div>
+
+												<div class="modal fade" id="modal_confirmation_{{ $items->id_kegiatan }}" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   													<div class="modal-dialog">
+    													<div class="modal-content">
+    														<div class="modal-header">
+																<h5 class="modal-title" id="modalTitle">Confirmation</h5>
+    														</div>
+    														<div class="modal-body">
+																<h5>Apakah Anda Yakin Ingin Menghapus Konten Ini?</h5>
+																<br>
+																<div class="d-flex justify-content-end">
+																	<a href="#" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Batalkan</a>
+																	<a href="{{route('admin.deleteKegiatan', $items->id_kegiatan) }}" class="btn btn-danger ml-3">Hapus</a>
+																</div>
 												            </div>
 												        </div>
 												    </div>
@@ -332,77 +279,127 @@
 								</div>
 							</div>
 						</div>
-
-						<!-- Modal Tambah Kegiatan -->
-						<div class="modal fade" id="modalTambah_kegiatan1" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
-   							<div class="modal-dialog">
-        						<div class="modal-content">
-            						<div class="modal-header">
-										<h5 class="modal-title" id="modalTitle">Tambah Kegiatan Terbaru</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            						</div>
-            						<div class="modal-body">
-										<form action=" {{ route('admin.createKegiatan') }}" method="post" enctype="multipart/form-data">
-											@csrf
-											<div class="form-group">
-												<label for="nama_kegiatan">Nama Kegiatan</label>
-												<input type="text" class="form-control" name="nama_kegiatan" id="nama_kegiatan" required>
-											</div>
-											<div class="form-group">
-												<label for="jenis_kegiatan">Jenis Kegiatan</label>
-												<select name="jenis_kegiatan" class="form-control" required>
-												    <option value="">-- Pilih Jenis Kegiatan --</option>
-												    @foreach ($jenis_kegiatan as $item)
-												        <option value="{{ $item->id_jenis_kegiatan }}">{{ $item->nama_jenis_kegiatan }}</option>
-												    @endforeach
-												</select>
-											</div>
-											<div class="form-group">
-												<label for="nama_wilayah">Nama Wilayah</label>
-												<select name="nama_wilayah" class="form-control" required>
-												    <option value="">-- Pilih Wilayah --</option>
-												    @foreach ($wilayah as $item)
-												        <option value="{{ $item->id_wilayah }}">{{ $item->nama_wilayah }}</option>
-												    @endforeach
-												</select>
-											</div>
-											<div class="form-group">
-												<label for="keterangan">Keterangan</label>
-												<textarea name="keterangan" class="form-control" id="keterangan" cols="50" rows="4" required></textarea>					
-											</div>
-											<div class="form-group">
-												<label for="gambar_kegiatan">Gambar Kegiatan</label>
-												<input type="file" class="form-control-file" name="gambar_kegiatan" id="gambar_kegiatan">
-                							</div>
-											<button type="submit" class="btn btn-primary form-control">Tambahkan</button>
-										</form>
-						            </div>
-						        </div>
-						    </div>
-                        </div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div> 
 
-</body>
-<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+	<div class="modal fade" id="modalTambahJenisKegiatan" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle">Tambah Jenis Kegiatan</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    			</div>
+    			<div class="modal-body">
+					<form action="{{ route('admin.tambahJenisKegiatan') }}" method="post" enctype="multipart/form-data">
+						@csrf
+						<div class="form-group">
+							<label for="jenis_kegiatan">Jenis Kegiatan*</label>
+							<input type="text" class="form-control" name="jenis_kegiatan" id="jenis_kegiatan" required>
+						</div>
+    					<button type="submit" class="btn btn-primary form-control">Save changes</button>
+					</form>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
+	<div class="modal fade" id="modalEditJenisKegiatan" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle">Edit Jenis Kegiatan</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    			</div>
+    			<div class="modal-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Nama Jenis Kegiatan</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($jenis_kegiatan as $itemJenisKegiatan)
+							<tr>
+								<td>{{ $itemJenisKegiatan->id_jenis_kegiatan }}</td>
+								<td>{{ $itemJenisKegiatan->nama_jenis_kegiatan }}</td>
+								<td>
+								<div class="action-buttons">
+									<a href="#" class="btn btn-sm btn-warning btn-edit">Edit</a>
+									<form action="{{ route('admin.deleteJenisKegiatan', $itemJenisKegiatan->id_jenis_kegiatan) }}" method="POST" class="d-inline">
+										@csrf
+										<button class="btn btn-sm btn-danger" type="submit">Delete</button>
+									</form>
+								</div>
+
+								<form action="{{ route('admin.updateJenisKegiatan', $itemJenisKegiatan->id_jenis_kegiatan) }}" method="POST" class="form-edit d-none mt-2">
+									@csrf
+									<input type="text" name="nama_jenis_kegiatan" class="form-control d-inline" value="{{ $itemJenisKegiatan->nama_jenis_kegiatan }}" required>
+									<button type="submit" class="btn btn-sm btn-primary">Save</button>
+									<button type="button" class="btn btn-sm btn-secondary btn-cancel">Cancel</button>
+								</form>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+	<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+	<script src="{{url('js/admin/ready.min.js')}}"></script>
+	<script src="{{url('js/admin/demo.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+	<script>
+	document.getElementById("searchInput").addEventListener("keyup", function() {
+	    const filter = this.value.toLowerCase();
+	    const rows = document.querySelectorAll("#kegiatanTable tbody tr");
+
+	    rows.forEach(row => {
+	        const rowText = row.textContent.toLowerCase();
+	        row.style.display = rowText.includes(filter) ? "" : "none";
+	    });
+	});
+
+	document.querySelectorAll('.btn-edit').forEach(function(button) {
+		button.addEventListener('click', function(e) {
+			e.preventDefault();
+			const row = button.closest('tr');
+
+			row.querySelector('.action-buttons').classList.add('d-none');
+			row.querySelector('.form-edit').classList.remove('d-none');
+		});
+	});
+
+	document.querySelectorAll('.btn-cancel').forEach(function(button) {
+		button.addEventListener('click', function(e) {
+			e.preventDefault();
+			const row = button.closest('tr');
+
+			row.querySelector('.form-edit').classList.add('d-none');
+			row.querySelector('.action-buttons').classList.remove('d-none');
+		});
+	});
+	</script>
+	
+	</body>
 </html>

@@ -29,17 +29,17 @@ class UserController extends Controller
         
         $camat = DB::table('perangkat_kecamatan')
             ->select('perangkat_kecamatan.id_perangkat', 'perangkat_kecamatan.nama', 'perangkat_kecamatan.jabatan', 'perangkat_kecamatan.link_facebook', 'perangkat_kecamatan.link_instagram', 'perangkat_kecamatan.link_tiktok', 'perangkat_kecamatan.gambar_perangkat')
-            ->where('perangkat_kecamatan.jabatan', 'Camat')
-            ->first();
+            ->where('perangkat_kecamatan.jabatan', 'LIKE', 'Camat%')
+            ->get();
         
         $sekretaris = DB::table('perangkat_kecamatan')
             ->select('perangkat_kecamatan.id_perangkat', 'perangkat_kecamatan.nama', 'perangkat_kecamatan.jabatan', 'perangkat_kecamatan.link_facebook', 'perangkat_kecamatan.link_instagram', 'perangkat_kecamatan.link_tiktok', 'perangkat_kecamatan.gambar_perangkat')
-            ->where('perangkat_kecamatan.jabatan', 'Sekretaris Kecamatan')
-            ->first();
+            ->where('perangkat_kecamatan.jabatan', 'LIKE', 'Sekretaris%')
+            ->get();
 
         $kasi = DB::table('perangkat_kecamatan')
             ->select('perangkat_kecamatan.id_perangkat', 'perangkat_kecamatan.nama', 'perangkat_kecamatan.jabatan', 'perangkat_kecamatan.link_facebook', 'perangkat_kecamatan.link_instagram', 'perangkat_kecamatan.link_tiktok', 'perangkat_kecamatan.gambar_perangkat')
-            ->where('perangkat_kecamatan.jabatan', 'LIKE', 'Kasi%')
+            ->where('perangkat_kecamatan.jabatan', 'LIKE', '%Seksi%')
             ->get();
 
         $kepala_desa = DB::table('perangkat_kecamatan')
@@ -101,6 +101,10 @@ class UserController extends Controller
             ->select('berita.id_berita', 'berita.judul_berita', 'berita.konten_berita', 'berita.gambar_berita', 'berita.penulis_berita', 'berita.tanggal_berita', 'berita.id_wilayah', 'wilayah.nama_wilayah')
             ->where('berita.id_berita', '=', $id)
             ->first();
+
+        if(!$berita){
+            abort(404);
+        }
 
         $beritaterbaru = DB::table('berita')
             ->join('wilayah', 'berita.id_wilayah', '=', 'wilayah.id_wilayah')
@@ -194,7 +198,7 @@ class UserController extends Controller
             ->get();
 
         $lokasi_wilayah = DB::table('wilayah')
-            ->select(['nama_wilayah', 'latitude', 'longitude', 'jenis_wilayah'])
+            ->select(['id_wilayah', 'nama_wilayah', 'latitude', 'longitude', 'jenis_wilayah'])
             ->where('jenis_wilayah', '!=', 'Kecamatan')
             ->get();
 
@@ -202,10 +206,18 @@ class UserController extends Controller
     }
 
     public function profilDesa($id){
+        $wilayahItem = DB::table('wilayah')
+            ->where('id_wilayah', $id)
+            ->first();
+
+        if (!$wilayahItem) {
+            abort(404);
+        }
+
         $wilayah = DB::table('wilayah')
             ->select('wilayah.id_wilayah', 'wilayah.nama_wilayah', 'wilayah.jenis_wilayah', 'wilayah.luas_wilayah', 'wilayah.gambar_wilayah')
             ->get();
-
+    
         $wilayahNoKec = DB::table('wilayah')
             ->select('wilayah.id_wilayah', 'wilayah.nama_wilayah', 'wilayah.luas_wilayah', 'wilayah.gambar_wilayah')
             ->where('wilayah.jenis_wilayah', '!=', 'Kecamatan')
@@ -231,7 +243,7 @@ class UserController extends Controller
             ->get();
 
         $jenis_kegiatan = DB::table('jenis_kegiatan')
-            ->select('jenis_kegiatan.id_jenis_kegiatan', 'jenis_kegiatan.nama_jenis_kegiatan', 'jenis_kegiatan.gambar_jenis_kegiatan')
+            ->select('jenis_kegiatan.id_jenis_kegiatan', 'jenis_kegiatan.nama_jenis_kegiatan')
             ->get();
 
         $wisata = DB::table('wisata')
@@ -309,10 +321,25 @@ class UserController extends Controller
             ->limit(3)
             ->get();
 
+        $umkm = DB::table('umkm')
+            ->join('wilayah', 'umkm.id_wilayah', '=', 'wilayah.id_wilayah')
+            ->join('jenis_umkm', 'umkm.id_jenis_umkm', '=', 'jenis_umkm.id_jenis_umkm')
+            ->select('umkm.*', 'wilayah.nama_wilayah', 'jenis_umkm.jenis_umkm')
+            ->where('umkm.id_wilayah', $id)
+            ->get();
+
         $jenis_umkm = DB::table('jenis_umkm')
             ->get();
+
+        $dokum_kegiatan = DB::table('dokumentasi_kegiatan')
+            ->get();
+
+        $jumlah_dokum = DB::table('dokumentasi_kegiatan')
+            ->select('id_kegiatan', DB::raw('COUNT(gambar) as jumlah_gambar'))
+            ->groupBy('id_kegiatan')
+            ->get();
             
-        return view('public.profildesa', compact('wilayah', 'wilayaheach', 'wilayahNoKec', 'kelompok_umur_per_wilayah', 'jenis_kelamin_per_wilayah', 'pekerjaan', 'agama', 'pendidikan', 'rasio_jenis_kelamin', 'wisata', 'kegiatanterbaru', 'kegiatan', 'jenis_kegiatan', 'berita', 'jenis_umkm', 'jumlah_penduduk'));
+        return view('public.profildesa', compact('wilayah', 'wilayaheach', 'wilayahNoKec', 'kelompok_umur_per_wilayah', 'jenis_kelamin_per_wilayah', 'pekerjaan', 'agama', 'pendidikan', 'rasio_jenis_kelamin', 'wisata', 'kegiatanterbaru', 'kegiatan', 'jenis_kegiatan', 'berita', 'umkm', 'jenis_umkm', 'jumlah_penduduk', 'dokum_kegiatan', 'jumlah_dokum', 'wilayahItem'));
     }
 
     public function wisata($id_wilayah, $id_wisata){
@@ -322,17 +349,114 @@ class UserController extends Controller
             ->where('wilayah.id_wilayah', $id_wilayah)
             ->where('wisata.id_wisata', $id_wisata)
             ->first();
-        
-        return view('public.wisata', compact('wisata'));
+
+        if(!$wisata){
+            abort(404);
+        }
+
+        $wisata_vr = DB::table('wisata_vr')
+            ->join('wisata', 'wisata_vr.id_wisata', '=', 'wisata.id_wisata')
+            ->join('wilayah', 'wisata.id_wilayah', '=', 'wilayah.id_wilayah')
+            ->select('wilayah.nama_wilayah', 'wisata.id_wisata', 'wisata.id_wilayah', 'wisata_vr.gambar_depan', 'wisata_vr.gambar_kanan', 'wisata_vr.gambar_belakang', 'wisata_vr.gambar_kiri', 'wisata_vr.gambar_atas', 'wisata_vr.gambar_bawah', 'wisata.nama_tempat')
+            ->where('wilayah.id_wilayah', $id_wilayah)
+            ->where('wisata.id_wisata', $id_wisata)
+            ->first();
+
+         $paket_wisata = DB::table('paket_wisata')
+            ->join('wisata', 'paket_wisata.id_wisata', '=', 'wisata.id_wisata')
+            ->join('wilayah', 'wisata.id_wilayah', 'wilayah.id_wilayah')
+            ->select('wisata.id_wisata', 'wisata.id_wilayah', 'wilayah.nama_wilayah', 'wisata.nama_tempat', 'wisata.latitude', 'wisata.longitude', 'wisata.keterangan', 'wisata.nama_tempat', 'paket_wisata.nama_paket', 'paket_wisata.fasilitas_umum', 'paket_wisata.fasilitas_hiburan', 'paket_wisata.fasilitas_kenyamanan', 'paket_wisata.fasilitas_keamanan', 'paket_wisata.kuliner_belanja', 'paket_wisata.aksesibilitas', 'paket_wisata.gambar_paket', 'paket_wisata.id_paket')
+            ->where('wilayah.id_wilayah', $id_wilayah)
+            ->where('wisata.id_wisata', $id_wisata)
+            ->get();
+                    
+        return view('public.wisata', compact('wisata', 'wisata_vr', 'paket_wisata'));
     }
 
     public function rute($id){
         $wisata = DB::table('wisata')
             ->join('wilayah', 'wisata.id_wilayah', '=', 'wilayah.id_wilayah')
-            ->select('wisata.id_wisata', 'wisata.id_wilayah', 'wilayah.nama_wilayah', 'wisata.nama_tempat', 'wisata.latitude', 'wisata.longitude')
+            ->select('wisata.id_wisata', 'wisata.id_wilayah', 'wilayah.nama_wilayah', 'wisata.nama_tempat', 'wisata.latitude', 'wisata.longitude', 'wisata.keterangan', 'wisata.nama_tempat')
             ->where('wisata.id_wisata', $id)
             ->first();
+
+        if(!$wisata){
+            abort(404);
+        }
         
         return view('public.rute', compact('wisata'));
+    }
+
+    public function paketWisata($id_wilayah, $id_wisata, $id_paket){
+        $paket_wisata = DB::table('paket_wisata')
+            ->join('wisata', 'paket_wisata.id_wisata', '=', 'wisata.id_wisata')
+            ->join('wilayah', 'wisata.id_wilayah', 'wilayah.id_wilayah')
+            ->select('wisata.id_wisata', 'wisata.id_wilayah', 'wilayah.nama_wilayah', 'wisata.nama_tempat', 'wisata.latitude', 'wisata.longitude', 'wisata.keterangan', 'wisata.nama_tempat', 'paket_wisata.nama_paket', 'paket_wisata.tentang_paket', 'paket_wisata.fasilitas_umum', 'paket_wisata.fasilitas_hiburan', 'paket_wisata.fasilitas_kenyamanan', 'paket_wisata.fasilitas_keamanan', 'paket_wisata.kuliner_belanja', 'paket_wisata.aksesibilitas', 'paket_wisata.gambar_paket', 'paket_wisata.no_whatsapp')
+            ->where('wilayah.id_wilayah', $id_wilayah)
+            ->where('wisata.id_wisata', $id_wisata)
+            ->where('paket_wisata.id_paket', $id_paket)
+            ->first();
+        
+        $galeri_aktivitas = DB::table('galeri_aktivitas')
+            ->select('galeri_aktivitas.*')
+            ->where('galeri_aktivitas.id_paket', $id_paket)
+            ->get();
+
+        $pilihan_paket = DB::table('pilihan_paket')
+            ->select('pilihan_paket.*')
+            ->where('pilihan_paket.id_paket', $id_paket)
+            ->get();
+
+        $penginapan = DB::table('penginapan')
+            ->select('penginapan.*')
+            ->where('penginapan.id_paket', $id_paket)
+            ->get();
+
+        $dokum_paket = DB::table('dokumentasi_paket')
+            ->get();
+
+        return view('public.paketWisata', compact('paket_wisata', 'galeri_aktivitas', 'pilihan_paket', 'penginapan', 'dokum_paket'));
+    }
+
+    public function detailumkm($id_wilayah, $id_umkm){
+        $umkm = DB::table('umkm')
+            ->where('id_umkm', $id_umkm)
+            ->first();
+    
+        if (!$umkm) {
+            abort(404);
+        }
+
+        $wilayah = DB::table('wilayah')
+            ->select('wilayah.id_wilayah', 'wilayah.nama_wilayah')
+            ->get();
+
+        $wilayahNoKec = DB::table('wilayah')
+            ->select('wilayah.id_wilayah', 'wilayah.nama_wilayah', 'wilayah.luas_wilayah',  'wilayah.gambar_wilayah')
+            ->where('wilayah.jenis_wilayah', '!=', 'Kecamatan')
+            ->get();
+
+        $detailumkm = DB::table('umkm')
+            ->join('wilayah', 'umkm.id_wilayah', '=', 'wilayah.id_wilayah')
+            ->join('jenis_umkm', 'umkm.id_jenis_umkm', '=', 'jenis_umkm.id_jenis_umkm')
+            ->select('umkm.*', 'wilayah.nama_wilayah', 'jenis_umkm.jenis_umkm')
+            ->where('umkm.id_wilayah', $id_wilayah)
+            ->where('umkm.id_umkm', $id_umkm)
+            ->first();
+
+        $umkmlain = DB::table('umkm')
+            ->join('wilayah', 'umkm.id_wilayah', '=', 'wilayah.id_wilayah')
+            ->join('jenis_umkm', 'umkm.id_jenis_umkm', '=', 'jenis_umkm.id_jenis_umkm')
+            ->select('umkm.*', 'wilayah.nama_wilayah', 'jenis_umkm.jenis_umkm')
+            ->where('umkm.id_wilayah', $id_wilayah)
+            ->inRandomOrder()
+            ->limit(5)
+            ->get();
+
+        $dokumentasi_umkm = DB::table('dokumentasi_umkm')
+            ->where('id_umkm', $id_umkm)
+            ->get();
+
+        return view('public.detailumkm', compact('wilayah', 'wilayahNoKec', 'detailumkm', 'umkmlain', 'dokumentasi_umkm'));
     }
 }

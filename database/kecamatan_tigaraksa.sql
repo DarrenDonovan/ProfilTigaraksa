@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2025 at 04:49 AM
+-- Generation Time: Jun 09, 2025 at 09:11 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -66,8 +66,7 @@ INSERT INTO `agama` (`id_agama`, `agama`) VALUES
 (3, 'Islam'),
 (4, 'Buddha'),
 (5, 'Hindu'),
-(6, 'Kong Hu Cu'),
-(7, 'Kepercayaan Terhadap Tuhan YME/Lainnya');
+(6, 'Kong Hu Cu');
 
 -- --------------------------------------------------------
 
@@ -94,12 +93,108 @@ CREATE TABLE `berita` (
 --
 
 INSERT INTO `berita` (`id_berita`, `judul_berita`, `konten_berita`, `gambar_berita`, `penulis_berita`, `tanggal_berita`, `id_wilayah`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(1, 'Festival Budaya Tigaraksa 2024', 'Pemerintah Kecamatan Tigaraksa mengadakan festival budaya tahunan dengan berbagai pertunjukan seni dan kuliner khas daerah.', 'berita/festival_tigaraksa.jpg', 'Dinas Pariwisata Tigaraksa', '2024-03-01', 1, 1, '2025-03-24 03:20:23', 1, '2025-03-24 03:20:23'),
-(2, 'Pembangunan Infrastruktur di Desa Pasir Nangka', 'Proyek pembangunan jalan desa di Pasir Nangka mulai dikerjakan untuk meningkatkan aksesibilitas warga.', 'berita/jalan_pasir_nangka.jpg', 'Dinas PUPR Tigaraksa', '2024-02-20', 2, 1, '2025-03-24 03:20:23', 1, '2025-03-24 03:20:23'),
-(3, 'Lomba Kebersihan Antar Desa', 'Dalam rangka memperingati Hari Peduli Sampah Nasional, Kecamatan Tigaraksa menggelar lomba kebersihan antar desa.', 'berita/lomba_kebersihan.jpg', 'Pemuda Karang Taruna Tigaraksa', '2024-02-25', 3, 1, '2025-03-24 03:20:23', 1, '2025-03-24 03:20:23'),
-(4, 'Sosialisasi Pertanian Organik di Desa Tapos', 'Petani di Desa Tapos diberikan pelatihan tentang pertanian organik untuk meningkatkan hasil panen yang lebih sehat.', 'berita/pelatihan_pertanian.jpg', 'Dinas Pertanian Tigaraksa', '2024-02-15', 4, 1, '2025-03-24 03:20:23', 1, '2025-03-24 03:20:23'),
-(5, 'Pengobatan Gratis di Desa Sodong', 'Puskesmas Tigaraksa mengadakan program pengobatan gratis untuk warga Desa Sodong.', 'berita/pengobatan_gratis.jpg', 'Puskesmas Tigaraksa', '2024-03-03', 5, 1, '2025-03-24 03:20:23', 1, '2025-03-24 03:20:23'),
-(6, 'Peringatan Hari Kemerdekaan di Desa Cileless', '<p>Pemerintah Kecamatan Tigaraksa mengadakan festival budaya tahunan dengan berbagai pertunjukan seni dan kuliner khas daerah.</p>', 'berita/hari_kemerdekaan_cileles.jpg', 'Panitia HUT RI Tigaraksa', '2024-08-17', 9, 1, '2025-03-24 03:20:23', 1, '2025-03-24 01:26:34');
+(8, 'Kejari Kabupaten Tangerang SP3 Dugaan Korupsi Pengadaan Tanah RSUD Tigaraksa', '<p><strong>TANGERANG - Kejari Kabupaten Tangerang</strong> mengumumkan penghentian penyidikan perkara ( SP3 ) dugaan korupsi pengadaan tanah untuk pembangunan RSUD Tigaraksa Tahun Anggaran 2020-2022, Jumat (30/8/2024). SP3 dikeluarkan karena tim penyidik menyimpulkan tidak cukup bukti untuk membuktikan <strong>tindak pidana korupsi</strong>.&nbsp;</p>\r\n\r\n<p>Kasi Intelijen Kejari Kabupaten Tangerang Doni Saputra mengatakan, penghentian penyidikan perkara dilakukan berdasarkan banyak pertimbangan. Di antaranya berdasarkan pemeriksaan keterangan saksi, surat dan pemeriksaan keterangan ahli hukum pidana serta hasil audit ahli hukum keuangan negara tidak dapat dibuktikan adanya niat atau kesengajaan yang dilakukan dengan cara melawan hukum, atau menyalahgunakan kewenangan untuk memperkaya diri sendiri atau orang lain atau suatu korporasi yang dapat merugikan keuangan negara.</p>\r\n\r\n<p>&quot;Bahwa peristiwa hukum yang terjadi lebih dominan pada sengketa administratif, keperdataan dan/atau peristiwa hukum lain yang bukan merupakan tindak pidana korupsi, akibat tumpang tindih hak atas tanah, yaitu hak atas tanah eks PT PWS (pailit) yang menjadi hak Kementerian Keuangan dengan hak atas tanah milik TWS,&quot; kata Doni melalui keterangan tertulis yang diterima wartawan, Jumat (30/8/2024).&nbsp;</p>\r\n\r\n<p>Doni mengungkapkan proses jual-beli/pelepasan hak atas tanah antara Pemkab Tangerang dengan TWS telah dibatalkan secara sukarela oleh para pihak. Di mana TWS telah menyerahkan kembali seluruh uang yang diterimanya ke RKUD Kabupaten Tangerang.&nbsp;</p>\r\n\r\n<p>Selanjutnya atas penetapan hakim pengawas pada Pengadilan Niaga, Pemkab Tangerang telah membeli tanah tersebut secara langsung kepada Kementerian Keuangan melalui kurator yang ditunjuk. Dengan telah dibayarkannya hak Kementerian Keuangan, maka Pemkab Tangerang memiliki hak atas tanah yang di atasnya telah berdiri RSUD Tigaraksa tersebut. &rdquo;Dengan demikian kerugian keuangan negara menjadi tidak ada dan tidak nyata,&quot; ungkapnya.&nbsp;</p>\r\n\r\n<p>Menurut Doni, berdasarkan hal yang diuraikan di atas, tim penyidik setelah melakukan gelar perkara mengambil keputusan untuk menghentikan proses penyidikan dengan alasan tidak cukup bukti sesuai dengan Pasal 109 Ayat (2) KUHAP. &rdquo;Selanjutnya Kepala Kejaksaan Negeri Kabupaten Tangerang mengeluarkan Surat Perintah Penghentian Penyidikan (P-14) Nomor : Print - 2464/M.6.12/Fd.1/08/2024 tanggal 30 Agustus 2024 tentang Penghentian Penyidikan Perkara Dugaan Tindak Pidana Korupsi Pengadaan Tanah untuk Pembangunan Rumah Sakit Umum Daerah (RSUD) Tigaraksa Tahun Anggaran 2020-2022,&quot; tandasnya.&nbsp;</p>\r\n\r\n<p>Doni menegaskan, dalam mengambil kesimpulan tersebut tim penyidik telah bekerja secara objektif, teliti dan cermat berdasarkan bukti-bukti yang diperoleh serta dengan mempertimbangkan aspek tujuan penegakan hukum yang meliputi keadilan, kepastian hukum dan manfaat. &quot;Apresiasi dan terima kasih disampaikan kepada seluruh elemen masyarakat yang telah memberikan perhatian dan kerja sama selama proses penyidikan perkara ini berlangsung,&quot; tutupnya.</p>', 'berita/wKLNx5EwlxXzSl2HeWpv6AmAU2zm4Qsh5AdSz1A6.png', 'Puguh Hariyanto', '2024-08-30', 14, NULL, NULL, NULL, NULL),
+(9, 'UNESCO Kunjungi Mata Air di Tigaraksa Tangerang, Camat Cucu: Bisa Jadi Daerah Kreatif yang Diakui Dunia', '<p>TANGERANG, RADARBANTEN.CO.ID-Tim Panitia seleksi Nasional (Pansel) dari Unesco Creative Cities Network (UCCN) mengunjungi mata air Tapos Pojok, Desa Tapos, Kecamatan Tigaraksa, Kabupaten Tangerang, Sabtu 28 September 2024.</p>\r\n\r\n<p>Camat Tigaraksa, Cucu Abdurrosyid mengaku dirinya sangat bersyukur atas kedatangan tim Pansel UNESCO yang datang ke sumur pojok Tapos ini.</p>\r\n\r\n<p>&ldquo;Alhamdulillah mata air tapos pojok, adalah salah satu lokasi yang bisa dikunjungi oleh Tim Panitia Seleksi Nasional (Panselnas) UNESCO Creative Cities Network (UCCN) di tahun 2024 ini,&rdquo; ucap Cucu kepada RADARBANTEN, Sabtu 28 September 2024.</p>\r\n\r\n<p>Dikatakan Cucu, Sumur Tapos pojok ini merupakan sumur yang tidak pernah surut, meskipun kemarau berkepanjangan tiba, namun airnya selalu dan dapat digunakan oleh masyarakat setempat.</p>\r\n\r\n<p>Di lokasi sumur itu juga terdapat banyak tumbuhan pohon bambu yang bisa dimanfaatkan masyarakat sekitar.</p>\r\n\r\n<p>Cucu juga berharap semoga sumur Tapos Pojok ini bisa menjadi daerah kreatif yang diakui dunia melalui UNESCO.</p>\r\n\r\n<p>Dengan begitu, masyarakat setempat bisa mendapatkan manfaat untuk digunakan dalam sehari-hari.</p>\r\n\r\n<p>&ldquo;Semoga Kabupaten Tangerang menjadi daerah kreatif yang diakui dunia melalui UNESCO, dan keberadaan bambu bisa bermanfaat untuk masyarakat Kabupaten Tangerang, &rdquo; pungkasnya.</p>', 'berita/mFndrgJY18FwO0LTF2eXfAieQss3GQUeYoB9beme.png', 'Mulyadi', '2024-09-29', 10, NULL, NULL, NULL, NULL),
+(10, 'Pj Bupati Tangerang Tinjau Banjir di Kecamatan Tigaraksa', '<p>Tangerang,--Pj Bupati Tangerang Andi Ony meninjau banjir di Desa Cisereh Kecamatan Tigaraksa, Rabu (13/11/24).</p>\r\n\r\n<p>Di sela-sela kunjungannya, Pj Andi Ony mengungkapkan, banjir di wilayah Kecamatan Tigaraksa terjadi karena curah hujan yang tinggi disertai angin kencang yang menyebabkan meluapnya Sungai Cimanceuri dan Cipayaeun.</p>\r\n\r\n<p>&quot;Curah hujan tinggi disertai angin membuat tidak tertampungnya air Sungai Cimanceuri dan Cipayaeun dan menyebabkan banjir di wilayah Kecamatan Tigaraksa. Ada 8 desa terdampak dengan ketinggian air antara 50 cm sampai dengan 1 meter lebih,&quot; ungkap Pj Andi Ony.</p>\r\n\r\n<p>Menurut dia, ada sekitar 347 rumah warga dan 1.000 jiwa di 8 desa/kelurahan yang terdampak langsung akibat banjir yang melanda wilayah Kecamatan Tigaraksa.</p>\r\n\r\n<p>&quot;Pemerintah daerah, melalui kecamatan, BPBD, Dinas Kesehatan, OPD terkait dan Puskesmas telah memberikan bantuan sembako, beras, makanan cepat saji dan obat-obatan,&quot; tuturnya.</p>\r\n\r\n<p>Dia meminta pihak kecamatan, dinas kesehatan, BPBD, perangkat daerah terkait dan seluruh masyarakat untuk terus memonitor wilayahnya terhadap segala kemungkinan bencana alam dan penyakit akibat tingginya curah hujan yang disertai angin kencang. Semua pihak harus saling bersinergi dan berkolaborasi menyiapkan berbagai antisipasi serta penanggulangan dini terhadap bencana alam dan penyakit.</p>\r\n\r\n<p>&quot;Para camat, dinas kesehatan, BPBD, dinas terkait untuk cepat tukar informasi, saling bersinergi dan berkolaborasi. Siapkan antisipasi dan penanggulangan dini terhadap segala bencana alam yang terjadi, khususnya banjir, tanah longsor dan wabah penyakit,&quot; pintanya.</p>\r\n\r\n<p>Dia juga berpesan kepada seluruh masyarakat agar meningkatkan kewaspadaan dan kesiapsiagaan menghadapai musim hujan yang tinggi yang disertai angin kencang.</p>\r\n\r\n<p>Sementara itu, Camat Tigaraksa, Cucu Abdurrosyied mengatakan banjir di Kecamatan Tigaraksa terjadi curah hujan yang tinggi dan angin kencang pada hari Senin (11/11/24) menyebabkan 8 desa di wilayahnya mengalami banjir.</p>\r\n\r\n<p>&quot;Delapan desa yang mengalami banjir itu antara lain, Desa Margasari, Kelurahan Kaduagung, Matagara, Pasirnangka, Pematang, Cisereh, Pasirbolang dan Tigaraksa,&quot; ungkapnya.</p>\r\n\r\n<p>Menurut dia, pihaknya bersama dinas instansi terkait telah melakukan penanganan jangka pendek terhadap para warga yang terdampak banjir dan terus melakukan monitoring, khususnya di 8 wilayah terdampak.</p>', 'berita/I3unmxFQGjCPDoTwQMQzfsTnqd4zX1ylEbpIlxyr.jpg', 'Admin Web Terpadu', '2024-11-13', 2, NULL, NULL, NULL, NULL),
+(11, 'Menteri Desa Tertinggal Jadikan Desa Sodong Tangerang Pilot Project Eduwisata', '<p><strong>TANGERANGNEWS.com</strong> - Menteri Desa, Pembangunan Daerah Tertinggal (PDT) Yandri Susanto meresmikan Desa Sodong, di Kecamatan Tigaraksa, sebagai salah satu destinasi wisata unggulan desa di Kabupaten Tangerang.</p>\r\n\r\n<p>Selain itu juga sekaligus menjadikan Desa Sodong sebagai pilot project Eduwisata desa-desa di Indonesia.</p>\r\n\r\n<p>&quot;Saya mau ini menjadi proyek percontohan Eduwisata yang akan dibangun di Desa Sodong ini dinilai akan menjadi program desa-desa di Indonesia dengan memiliki potensi yang luar biasa,&quot; ungkap Yandri, Rabu 13 November 2024.</p>\r\n\r\n<p>Menurut dia, desa Eduwisata dapat menciptakan kemandirian pangan dan juga meningkatkan kesejahteraan bagi masyarakat di desa-desa.</p>\r\n\r\n<p>Khususnya di Desa Sodong yang memiliki lahan seluas 6 hektare, bisa dimanfaatkan masyarakat untuk menanam tanaman pangan ataupun beternak.</p>\r\n\r\n<p>&quot;Misalnya untuk tanaman cabai dan tomat serta kolam ikan. Jadi, di sini bisa untuk percontohan edukasi wisata yang akan menciptakan kemandirian pangan dan juga meningkatkan kesejahteraan bagi masyarakat,&quot; ujar Yandri.</p>\r\n\r\n<p>Menurutnya, Kementerian PDT siap membantu dan mendukung inovasi Eduwisata Desa Sodong.</p>\r\n\r\n<p>Yandri juga meminta kepada seluruh elemen masyarakat, pemerintah, dan swasta agar mendukung segala gerakan serta pengembangan desa tersebut.</p>\r\n\r\n<p>&quot;Ini harus ada kolaborasi, karena kalau mengandalkan APBN terbatas. Saya pribadi bisa ikut kontribusi, atau mungkin perusahaan lain melalui CSR bisa mendukung gerakan pengembangan desa,&quot; tandasnya.</p>\r\n\r\n<p>Ia menyebutkan desa memegang peranan yang sangat penting dalam pembangunan di tanah air karena lebih banyak penduduk yang tinggal di desa.</p>\r\n\r\n<p>Yandri juga mengungkapkan program Eduwisata desa sejalan dengan program Presiden Prabowo Subianto dan Wakil Presiden Gibran Rakabuming Raka yaitu program makan bergizi gratis (MBG).</p>\r\n\r\n<p>Oleh karena itu, segala upaya dalam mengembangkan potensi wilayah termasuk membangun agrowisata desa harus dapat diwujudkan sebagai pemasok bahan pangan yang dikonsumsi.</p>\r\n\r\n<p>&quot;Jadi, misalnya di satu kecamatan ini ada satu desa untuk lumbung padi, ada satu desa untuk perikanan, atau berapa untuk palawijanya seperti cabai, kacang, dan lain sebagainya. Ini tentu akan mendukung program MBG itu untuk memenuhi kebutuhan asupan gizi,&quot; kata dia.</p>\r\n\r\n<p>Pj Bupati Tangerang Andi Ony mengucapkan terima kasih dan sangat mengapresiasi kunjungan kerja Menteri PDT ke Kabupaten Tangerang, dalam rangka mendukung pengembangan potensi desa, khususnya agrowisata Desa Sodong.</p>\r\n\r\n<p>Dia berharap melalui kunjungan Menteri PDT tersebut, Agrowisata Desa Sodong dapat dijadikan model di daerah lain yang sejalan dengan program pengembangan desa mandiri dan berdaya saing.</p>\r\n\r\n<p>&ldquo;Kami berharap Agrowisata Desa Sodong tidak hanya menarik wisatawan, tetapi juga mampu memberikan manfaat ekonomi bagi masyarakat desa secara berkelanjutan,&rdquo; ujarnya.</p>', 'berita/y91seXghz9F7hy9RksL2lnM5JxSNTvSqzL7fvA57.jpg', 'Rangga Agung Zuliansyah', '2024-11-13', 9, NULL, NULL, NULL, NULL),
+(12, 'Kapolsek Tigaraksa Polresta Tangerang Gelar Jumat Curhat, Dengarkan Keluhan Masyarakat', '<p>Polsek Tigaraksa melaksanakan kegiatan Program Jum&rsquo;at Curhat di Aula Kantor Desa Kutruk, Kecamatan Jambe. Kegiatan ini dihadiri oleh pejabat utama Polsek Tigaraksa, Kapolsek AKP I Made Artana, serta Bapak Madholidin, Kepala Desa Kutruk, beserta perangkat desa dan masyarakat setempat. (24/01).</p>\r\n\r\n<p>Dalam sambutannya, AKP I Made Artana menjelaskan bahwa kegiatan Jum&rsquo;at Curhat bertujuan untuk menjalin komunikasi yang lebih baik antara pihak kepolisian dan masyarakat. &ldquo;Kami selaku pelayan dan pengayom masyarakat ingin menjemput bola di tengah-tengah masyarakat untuk mendengarkan langsung permasalahan yang ada, terutama terkait gangguan keamanan dan ketertiban masyarakat (Kamtibmas),&rdquo; ujarnya.</p>\r\n\r\n<p>Pembahasan dalam kegiatan ini difokuskan pada isu-isu yang mengganggu ketertiban di wilayah tersebut. &ldquo;Gangguan Kamtibmas umumnya didominasi oleh maraknya kasus pencurian kendaraan bermotor (curanmor) dan gangguan dari geng motor yang meresahkan masyarakat,&rdquo; tambah AKP I Made.</p>\r\n\r\n<p>Sebagai langkah pencegahan, Polsek Tigaraksa telah melakukan berbagai upaya, termasuk melaksanakan patroli mobile di jam-jam rawan dan di titik-titik yang dianggap rawan kejahatan. &ldquo;Kami berkomitmen untuk meminimalisir tindak kejahatan dengan meningkatkan kehadiran polisi di lapangan,&rdquo; jelasnya.</p>\r\n\r\n<p>Kegiatan Jum&rsquo;at Curhat ini diharapkan dapat menjadi wadah bagi masyarakat untuk menyampaikan keluhan dan masukan terkait keamanan di lingkungan mereka. Masyarakat Desa Kutruk menyambut baik inisiatif ini dan berharap dapat terus berkolaborasi dengan pihak kepolisian untuk menciptakan lingkungan yang aman dan nyaman.</p>\r\n\r\n<p>Dengan adanya program ini, diharapkan hubungan antara Polsek Tigaraksa dan masyarakat semakin erat, serta dapat bersama-sama menciptakan situasi yang kondusif di wilayah Kecamatan Jambe.</p>', 'berita/zTqr7ckqGaJbyB1ZMvSWGF0TfJxFWCY7YBuSUEMs.jpg', 'Admin Tribata News', '2025-01-25', 13, NULL, NULL, NULL, NULL),
+(13, 'Kecamatan Tigaraksa Sepakati 50 Usulan Program Prioritas Senilai Rp38,6 Miliar', '<p>Tangerang &ndash; Kecamatan Tigaraksa, Kabupaten Tangerang, telah menyepakati 50 program prioritas dengan total pagu anggaran Rp38,6 miliar dalam Musyawarah Perencanaan Pembangunan (Musrenbang) untuk Rencana Kerja Perangkat Daerah (RKPD) tahun 2026. Kesepakatan ini menandai penutupan rangkaian Musrenbang tingkat kecamatan se-Kabupaten Tangerang.</p>\r\n\r\n<p>Camat Tigaraksa, Cucu Abdurrosyied, menjelaskan, usulan program prioritas ini berasal dari aspirasi masyarakat di 12 desa dan 2 kelurahan di Kecamatan Tigaraksa. Usulan tersebut disusun berdasarkan tema yang telah ditetapkan, yaitu penguatan transformasi sosial, ekonomi, tata kelola pemerintahan, infrastruktur, dan ekologi.</p>\r\n\r\n<p><img alt=\"\" src=\"https://tangerangkab.go.id/storage/photos/10/67a36ab85f9cb.jpeg\" style=\"float:right; height:243px; margin:5px; width:365px\" />&ldquo;Dari 50 program yang diusulkan, kami mengelompokkannya ke dalam tiga kategori utama. Sebanyak 17 program berfokus pada pengembangan sumber daya manusia (SDM), 18 program di bidang ekonomi, serta 15 program lainnya mencakup sektor infrastruktur,&rdquo; ujarnya.</p>\r\n\r\n<p>Acara yang berlangsung di GSG Kecamatan Tigaraksa pada Rabu (5/2/2025) ini dihadiri berbagai pemangku kepentingan. Brigita P Manohara bertindak sebagai moderator, sementara peserta yang hadir mencakup anggota DPRD Provinsi Banten, anggota DPRD Kabupaten Tangerang, perwakilan Pemerintah Kabupaten Tangerang, unsur Forum Koordinasi Pimpinan Kecamatan (Forkopimcam), tokoh masyarakat, serta organisasi kepemudaan. Sebagai bentuk keseriusan dalam pembahasan rencana pembangunan, turut hadir narasumber ahli tata kota, Dr. Yayat Supriyatna.</p>\r\n\r\n<p>Selain itu, dalam diskusi Musrenbang, Kecamatan Tigaraksa juga mengusulkan pemberian nama Jalan Lingkar Selatan (JLS) dengan nama H. Ismet Iskandar sebagai bentuk penghargaan atas jasa-jasanya.</p>\r\n\r\n<p>&ldquo;Kami berharap dukungan dari seluruh pemangku kepentingan, baik dari Organisasi Perangkat Daerah (OPD) maupun anggota legislatif, agar seluruh program prioritas ini dapat terealisasi. Harapannya, usulan ini dapat mempercepat pemerataan pembangunan dan meningkatkan kesejahteraan masyarakat Kecamatan Tigaraksa,&rdquo; pungkasnya.</p>', 'berita/no1lW5wmuLK0mLpfMRhEPE4viv4ZTymXgpZVuavZ.jpg', 'Admin Web Terpadu', '2025-02-05', 13, NULL, NULL, NULL, NULL),
+(14, 'Bazar Sembako Murah di Kabupaten Tangerang Diserbu Warga', '<p>Untuk meredam kenaikan harga dan menjaga ketahanan pangan jelang Labaran Idulfitri 1446 Hijriah, Pemerintah Kabupaten (Pemkab) Tangerang menyalurkan ribuan paket sembako murah yang berisikan beras, minyak goreng dan tepung terigu. Setiap paket sembako dijual dengan harga Rp50 ribu.</p>\r\n\r\n<p>Ribuan warga Tigaraksa, Kabupaten Tangerang rela mengantre demi mendapatkan paket sembako murah yang disediakan pemerintah daerah setempat. Ribuan paket sembako murah bazar Ramadan Pemkab Tangerang dilaksanakan di Gedung Serba Guna Tigaraksa. Penyediaan kebutuhan pokok murah jelang Lebaran disambut antusias warga.</p>\r\n\r\n<p>Bupati Tangerang, Moch Maesyal Rasyid mengatakan, operasi pangan murah ini dilakukan sebagai upaya meredam kenaikan harga di pasaran, demi menjaga stabilitas inflasi dan stabilitas ekonomi.</p>\r\n\r\n<p>&quot;Sejak bulan Februari sebelum Ramadan sudah menjual sembako murah dan ini maksudnya adalah meringankan beban masyarakat, termasuk untuk memelihara ketahanan pangan kita,&quot; kata Bupati Tangerang, Moch Maesyal Rasyid.</p>', 'berita/NWBGupreJ8A22sTYcsPuJksTNUPkmxA8wVb9Zr7X.png', 'Nopita Dewi', '2025-03-20', 13, NULL, NULL, NULL, NULL),
+(15, 'Cegah Terjadinya Premanisme, Polsek Tigaraksa Gelar Patroli Rutin', '<p>TANGERANG, (BN) &ndash; Polsek Tigaraksa, Polresta Tangerang, Polda Banten, menggelar patroli rutin untuk menjaga keamanan da ketertiban masyarakat (Kamtibmas), Minggu (11/5/2025). Patroli ini digelar untuk mencegah gangguan yang berdampak terjadinya tindak pidana.</p>\r\n\r\n<p>Kapolsek Tigaraksa, AKP I Made Artana menerangkan, tujuan dilaksanakan patroli rutin di wilayah serta kawasan industry untuk mencegah tindak pidana premanisme yang sering terjadi. Hal ini dilaksanakan jajaran Polsek Tigaraksa, sesuai instruksi dan atensi pimpinan polri dan tindak kriminal lainnya.</p>\r\n\r\n<p>I Made Artana menghimbau, kepada masyarakat, yang ada di wilayah hukum Polsek Tigaraksa, Polresta Tangerang, bisa bersama-sama berperan aktif dalam memberikan informasi sekecil apapun kepada pihak kepolisian seperti terjadinya, pencurian kendaraan bermotor (curanmor), pencurian kekerasan (curas) pencurian pemberatan (curat) serta premanisme yang akhir-akhir, ini menjadi sorotan dimedia, medsos serta platform lainnya.</p>\r\n\r\n<p>&ldquo;Kegiatan patroli dilaksanakan rutin setiap hari dititik-titik yang dianggap adanya gangguan pidana keamanan dan ketertiban masyarakat (Kamtibmas),&rdquo; ujar I Made Artana.</p>\r\n\r\n<p>I Made Artana juga akan selalu respon serta gerak cepat bersama jajaran Polsek Tigaraksa, Polresta Tangerang, apabila ada aduan masyarakat menyangkut kemampuan dan ketertiban masyarakat (Kamtibmas) serta gangguan lainnya.</p>\r\n\r\n<p>&ldquo;Masyarakat jangan sungkan untuk melapor jika ada kejadian yang berpotensi gangguan kamtibmas,&rdquo; tutupnya.</p>', 'berita/u3kTIxZEardPsF8WT7ulfTIYQGGoAunElQQavNzw.jpg', 'Edi', '2025-05-11', 13, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokumentasi_kegiatan`
+--
+
+CREATE TABLE `dokumentasi_kegiatan` (
+  `id` int(11) NOT NULL,
+  `id_kegiatan` int(11) NOT NULL,
+  `gambar` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dokumentasi_kegiatan`
+--
+
+INSERT INTO `dokumentasi_kegiatan` (`id`, `id_kegiatan`, `gambar`) VALUES
+(1, 17, 'dokumentasi_kegiatan/h3oqGdhIMTLb5J16MXTvnZ2xRKbpMa7nPFnfQlhI.jpg'),
+(2, 17, 'dokumentasi_kegiatan/CPxBXeEjVQhwvFpOqVqp0udvVOaeO0YmDAEL8Z9Q.png'),
+(3, 17, 'dokumentasi_kegiatan/6XRrSWFRlpFssulCiNTqI6VkfePU8XKhtCclUC3x.jpg'),
+(4, 17, 'dokumentasi_kegiatan/gLmYhB64V8lRVtwiDikOJ493TQc98BUWjacVXyKI.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokumentasi_paket`
+--
+
+CREATE TABLE `dokumentasi_paket` (
+  `id` int(11) NOT NULL,
+  `id_paket` int(11) NOT NULL,
+  `gambar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dokumentasi_paket`
+--
+
+INSERT INTO `dokumentasi_paket` (`id`, `id_paket`, `gambar`) VALUES
+(5, 7, 'dokumentasi_paket/ti4165u5A4N8AIJ5mAfGJlaW2BUPXjL2dfQZ8cCk.jpg'),
+(6, 8, 'dokumentasi_paket/tCCFsULka7VNMvlW6Sh4z2yZofvBhlFVGeZwToH9.jpg'),
+(7, 8, 'dokumentasi_paket/qkUmwVqWSyrSGK9Ipy2mVhLH1GCbMG6H8M9wx7IY.png'),
+(8, 8, 'dokumentasi_paket/2LVSgtgGukfaq1dHpJUIoT99nkpl7glI9TcOyT5P.jpg'),
+(9, 8, 'dokumentasi_paket/ju96eZY20nYFQzRWDScsvruTt6sfebT7ysM1QZ9h.jpg'),
+(10, 8, 'dokumentasi_paket/81ggCGVw8brkVOyXnkK6beieOrnT10ZYINy1Leo6.jpg'),
+(11, 9, 'dokumentasi_paket/Yim5kXAajCk4jMsv0k4HoDyO9J42L1HMmBc9oDFQ.jpg'),
+(12, 9, 'dokumentasi_paket/4j2lU3pNlQarYmockDUxf1ChMUkmDLDrSfv2wwAg.png'),
+(13, 9, 'dokumentasi_paket/klIbHcwbS09FX5F49hm0rkwDtd8k1n0Bw3qBjhtu.jpg'),
+(14, 9, 'dokumentasi_paket/IwVIgqNoDR2dRjFjujzvZO1T8SrPbxIDxmdzeaG8.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokumentasi_umkm`
+--
+
+CREATE TABLE `dokumentasi_umkm` (
+  `id` int(11) NOT NULL,
+  `id_umkm` int(11) NOT NULL,
+  `gambar` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dokumentasi_umkm`
+--
+
+INSERT INTO `dokumentasi_umkm` (`id`, `id_umkm`, `gambar`) VALUES
+(3, 7, 'dokumentasi_umkm/1GdmPXGsDd286du1oBsz5In9R4R6yigae0WcR2LW.png'),
+(4, 7, 'dokumentasi_umkm/TWKfhOcYwpTjjWgGX7SIWXckCHWJdw4KgtoVCPhr.jpg'),
+(5, 7, 'dokumentasi_umkm/NdA6WXH0XqSFWBVsoWm25C21Ixozl7mkOuUJPXog.jpg'),
+(6, 7, 'dokumentasi_umkm/GlM4fPRjnPzGqXz2ldnIXc8B06r5DmjXgCx99Kc5.jpg'),
+(7, 6, 'dokumentasi_umkm/ie7VAyOuo3lT2jxVVVdzynEpA6IC0sFBO09BGBUs.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `galeri_aktivitas`
+--
+
+CREATE TABLE `galeri_aktivitas` (
+  `id` int(11) NOT NULL,
+  `id_paket` int(11) NOT NULL,
+  `nama_aktivitas` varchar(255) NOT NULL,
+  `gambar_aktivitas` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `galeri_aktivitas`
+--
+
+INSERT INTO `galeri_aktivitas` (`id`, `id_paket`, `nama_aktivitas`, `gambar_aktivitas`) VALUES
+(11, 9, 'Aktivitas 16', 'galeri_aktivitas/4vsVrH0o4Vw1VUwHJQIlbF6ygwPUvuhGSQOJQgML.png'),
+(12, 9, 'Aktivitas 20', 'galeri_aktivitas/6wJK1MHG7aGd381cY6rgwriDI6bHHl35vvGxTzoJ.jpg');
 
 -- --------------------------------------------------------
 
@@ -137,20 +232,20 @@ INSERT INTO `hubungan_keluarga` (`id_hubungan`, `hubungan_keluarga`) VALUES
 
 CREATE TABLE `jenis_kegiatan` (
   `id_jenis_kegiatan` int(11) NOT NULL,
-  `nama_jenis_kegiatan` varchar(50) NOT NULL,
-  `gambar_jenis_kegiatan` varchar(255) NOT NULL
+  `nama_jenis_kegiatan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jenis_kegiatan`
 --
 
-INSERT INTO `jenis_kegiatan` (`id_jenis_kegiatan`, `nama_jenis_kegiatan`, `gambar_jenis_kegiatan`) VALUES
-(1, 'Rapat Koordinasi', 'jenis_kegiatan/rapat-koordinasi.jpeg'),
-(2, 'Posyandu', 'jenis_kegiatan/posyandu.png'),
-(3, 'Ulang Tahun Desa', 'jenis_kegiatan/ultah-desa.jpg'),
-(4, 'Kesehatan', 'jenis_kegiatan/kesehatan.jpg'),
-(5, 'Lomba', 'jenis_kegiatan/lomba-desa.jpg');
+INSERT INTO `jenis_kegiatan` (`id_jenis_kegiatan`, `nama_jenis_kegiatan`) VALUES
+(1, 'Rapat Koordinasi'),
+(2, 'Posyandu'),
+(3, 'Ulang Tahun Desa'),
+(4, 'Kesehatan'),
+(5, 'Lomba'),
+(6, 'test');
 
 -- --------------------------------------------------------
 
@@ -170,7 +265,7 @@ CREATE TABLE `jenis_umkm` (
 --
 
 INSERT INTO `jenis_umkm` (`id_jenis_umkm`, `jenis_umkm`, `keterangan`, `gambar_jenis_umkm`) VALUES
-(1, 'Jajanan Pasar', 'Aneka jajanan pasar khas daerah dengan cita rasa tradisional', 'jenis_umkm/jajananPasar.jpg'),
+(1, 'Jajanan Pasars', 'Aneka jajanan pasar khas daerah dengan cita rasa tradisional', 'jenis_umkm/jajananPasar.jpg'),
 (2, 'Kerajinan Rotan', 'Kerajinan tangan khas daerah dari bahan alami', 'jenis_umkm/kerajinanRotan.jpg'),
 (3, 'Kue Tradisional', 'Aneka kue tradisional yang lezat dan khas', 'jenis_umkm/kueTradisional.jpg'),
 (4, 'Oleh-oleh Khas Daerah', 'Berbagai oleh-oleh khas daerah yang bisa dibawa pulang', 'jenis_umkm/olehOleh.jpg'),
@@ -214,7 +309,8 @@ INSERT INTO `kegiatan` (`id_kegiatan`, `nama_kegiatan`, `keterangan`, `gambar_ke
 (12, 'Pemeriksaan Kesehatan Cileles', 'Pemeriksaan kesehatan gratis untuk warga desa.', 'kegiatan/kesehatan3.jpg', 12, 4, '2025-03-07', NULL, NULL),
 (13, 'Lomba Mewarnai Anak Tigaraksa', 'Lomba mewarnai tingkat anak-anak dalam rangka memperingati Hari Anak.', 'kegiatan/lomba3.jpg', 13, 5, '2025-03-22', NULL, NULL),
 (14, 'Posyandu Bayi Kelurahan Kadu Agung', 'Pelayanan posyandu untuk bayi dan balita.', 'kegiatan/posyandu3.jpg', 14, 2, '2025-04-05', NULL, NULL),
-(15, 'Rapat Perencanaan Kelurahan Tigaraksa', 'Rapat membahas perencanaan program kelurahan.', 'kegiatan/rapat3.jpg', 15, 1, '2025-04-15', 1, '2025-03-21 01:37:27');
+(15, 'Rapat Perencanaan Kelurahan Tigaraksa', 'Rapat membahas perencanaan program kelurahan.', 'kegiatan/rapat3.jpg', 15, 1, '2025-04-15', 1, '2025-05-20 19:27:26'),
+(17, 'asdjasjdaaa', '<p>asmdasmd</p>', 'kegiatan/mkHMMv2VyjXWE7vKTfTpfrlrIGV1NB8GS9nTKsOw.jpg', 15, 6, NULL, 1, '2025-06-01 19:38:48');
 
 -- --------------------------------------------------------
 
@@ -369,6 +465,43 @@ CREATE TABLE `migrations` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `paket_wisata`
+--
+
+CREATE TABLE `paket_wisata` (
+  `id_paket` int(11) NOT NULL,
+  `id_wisata` int(11) NOT NULL,
+  `nama_paket` varchar(255) NOT NULL,
+  `tentang_paket` longtext NOT NULL,
+  `gambar_paket` varchar(255) DEFAULT NULL,
+  `fasilitas_umum` longtext DEFAULT NULL,
+  `fasilitas_hiburan` longtext DEFAULT NULL,
+  `fasilitas_kenyamanan` longtext DEFAULT NULL,
+  `fasilitas_keamanan` longtext DEFAULT NULL,
+  `kuliner_belanja` longtext DEFAULT NULL,
+  `aksesibilitas` longtext DEFAULT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `paket_wisata`
+--
+
+INSERT INTO `paket_wisata` (`id_paket`, `id_wisata`, `nama_paket`, `tentang_paket`, `gambar_paket`, `fasilitas_umum`, `fasilitas_hiburan`, `fasilitas_kenyamanan`, `fasilitas_keamanan`, `kuliner_belanja`, `aksesibilitas`, `updated_by`, `updated_at`) VALUES
+(1, 6, 'aaaaaaaaaaaaaabb', 'aaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaaaaaaa', '<p>aaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaaaaa</p>', 1, '2025-06-08 23:34:17'),
+(2, 6, 'bbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbbbbbb', 'bbbbbbbbbbbbbbb', 'bbbbbbbbbbb', 'bbbbbbbbbbbbbbbbbb', NULL, NULL),
+(3, 6, 'ccccccc1', 'ccccccccccc', 'ccccccc', 'cccccccccccc', 'cccccccccccccc', 'cccccccccccccc', 'ccccccccccccccccccccc', 'cccccccccccccccccccccccc', 'cccccccccccccccccccc', NULL, NULL),
+(4, 6, 'dddddddddddddd', 'dddddddddddd', 'ddddddddddddddddd', 'ddddddddddddddddd', 'dddddddddddddd', 'ddddddddddddddddd', 'ddddddddddddddddd', 'ddddddddddddddddddddd', 'dddddddddddddddd', NULL, NULL),
+(5, 2, 'aaaa', 'aaa', 'paket_wisata/rFBPiEzoDXpL7dYEA4vT7gKLCODIc4TSGZkS8bbq.jpg', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>s</p>', NULL, NULL),
+(6, 2, 'a', 'a', 'paket_wisata/AaYwSBQupFGsNLL7nm4g80l8uXz117p4ZdeuiuqP.jpg', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', NULL, NULL),
+(7, 2, 'a', 'a', 'paket_wisata/DWzrB2yoR3UOHiGM1or5sH6IjxPVVFnoBinHnks3.jpg', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', '<p>a</p>', 1, '2025-06-07 01:50:22'),
+(8, 5, 'adsad', 'asdasd', 'paket_wisata/5y4F8FchZRTt7LuOvHtlBeVuJacq98tAmUPn7eIR.jpg', '<p>a</p>', '<p>s</p>', '<p>s</p>', '<p>s</p>', '<p>s</p>', '<p>s</p>', NULL, NULL),
+(9, 1, 'aaaaaaaaaaaaaaaa', 'aaaaaaaaaaaaaaaaaaa', 'paket_wisata/Qk960Dj9D6VOGkGx5kSPWhuFSznUBFn8Z0mkYIW6.jpg', '<p>aaaaaaa</p>', '<p>aaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaa</p>', '<p>aaaaaaaaaaaaaaaaaaaa</p>', 1, '2025-06-09 00:10:34');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pekerjaan`
 --
 
@@ -457,7 +590,7 @@ INSERT INTO `penduduk` (`id_penduduk`, `NIK`, `nama_lengkap`, `gambar_biodata`, 
 (4, 6181234564561234, 'Dedeng Sari', 'gambar_biodata/dedeng-sari.jpg', 'Perempuan', 'Pamulang', '2000-04-11', 'Jalan Setapak No. 12', 'Suku Dayak', '0896999999999', 'deredengsariri@gmail.com', 3, 2, 7, 5, '2025-04-21 21:40:40', 1, '2025-04-22 05:33:23'),
 (8, 1231231312313211, 'Donovan Derens', 'gambar_biodata/9aWT0Qd7j5ZCkhbO7KMnCoxJQOKiSPqMdXQiQxHL.jpg', 'Laki-Laki', 'Manado', '2001-10-10', 'Jalan Apel No. 1B', 'Suku Dayak', '083112121231', 'dondondon@gmail.com', 14, 1, 7, 9, '2025-04-28 07:29:08', 2, '2025-04-28 00:29:08'),
 (9, 1231238458348539, 'Muhammad Evans', 'gambar_biodata/e6uxHbFboi3VnSaDNoSQl3LL8jOQDFzcAbyA4uKy.jpg', 'Laki-Laki', 'Sintang', '2006-05-31', 'Jalan Perintis Kemerdekaan No. 20', 'Suku Jawa', '08909090909090', 'panpanpan@gmail.com', 7, 4, 5, 11, '2025-04-27 21:44:36', NULL, '2025-04-28 04:44:36'),
-(10, 7498538453847534, 'Budi Anton', 'gambar_biodata/BPLVmMpLhWvtBVaALgfmI23qTYHp5PeF7MeWhIwD.jpg', 'Laki-Laki', 'Tangerang', '1992-11-18', 'Jalan Perkasa No. 50', 'Suku Batak', '089234234234', 'antontontonbudi@gmail.com', 1, 7, 4, 8, '2025-04-28 19:45:46', NULL, '2025-04-29 02:45:46'),
+(10, 7498538453847534, 'Budi Anton', 'gambar_biodata/BPLVmMpLhWvtBVaALgfmI23qTYHp5PeF7MeWhIwD.jpg', 'Laki-Laki', 'Tangerang', '1992-11-18', 'Jalan Perkasa No. 50', 'Suku Batak', '089234234234', 'antontontonbudi@gmail.com', 1, 1, 4, 8, '2025-05-15 07:49:55', NULL, '2025-05-15 07:49:55'),
 (11, NULL, 'Clara Utomo', 'gambar_biodata/x2kQc8OG7MrJCVjIpinqMBjsjjXaCf6SSwFAx7fj.jpg', 'Perempuan', 'Denpasar', '2010-03-29', 'Jalan Anggur No. 15', 'Suku Badui', '081237127362', 'clartomo@gmail.com', 4, 4, 7, 5, '2025-04-28 20:07:04', NULL, '2025-04-29 03:07:04'),
 (12, NULL, 'Dinda Felicia', 'gambar_biodata/kRi6IhOM9xJCH3jqALfXfy9eaSp9zczhXfCY1VRt.jpg', 'Perempuan', 'Samarinda', '2009-04-04', 'Jalan Pegangsaan Timur Gang Barat No. 2A', 'Tionghua', '0834875638746', 'dindindindinfel@gmail.com', 6, 3, 4, 6, '2025-04-28 20:42:14', NULL, '2025-04-29 03:42:14'),
 (13, 6723478234792873, 'Karina Mahmud Setiawan', 'gambar_biodata/wBxvxjXG61McvVJUZqew5ql2mhzDQ7UxecGIeonq.jpg', 'Perempuan', 'Lampung', '2004-02-06', 'Jalan Balonku Ada Lima No. 7', 'Tionghua', '081287847234', 'karinamahmud@gmail.com', 8, 1, 7, 6, '2025-04-28 21:03:14', NULL, '2025-04-29 04:03:14'),
@@ -465,6 +598,36 @@ INSERT INTO `penduduk` (`id_penduduk`, `NIK`, `nama_lengkap`, `gambar_biodata`, 
 (15, NULL, 'Mak A Khu Ma Shuk Tipi', 'gambar_biodata/YM34sMsaALRQ5drNTe6UTnFW7GPXjgLGdFrp2FeV.jpg', 'Laki-Laki', 'Singkawang', '2006-05-31', 'Jalan Mom Push Cow No. 50', 'Tionghua', '087162873468724', 'makakumasuktipi@gmail.com', 10, 6, 5, 7, '2025-04-28 21:13:50', NULL, '2025-04-29 04:13:50'),
 (16, 7893457834759238, 'Mak Mu Hi Jhau', 'gambar_biodata/tlZQgy0YyOXx0vERCrYdkfpyEBbRK42641I3YaSF.jpg', 'Perempuan', 'Sabang', '2003-06-06', 'Jalan Hitam Gelap Gulita No. 8B', 'Suku Aztec', '08328764234', 'ntahlah@gmail.com', 12, 5, 3, 4, '2025-04-28 21:32:11', NULL, '2025-04-29 04:32:11'),
 (17, 4893843589379587, 'Dit To Long In Dit', 'gambar_biodata/xDSWq7wIsxpRAT2gas1fXBZnhLPH4DySwWvqeYPO.jpg', 'Laki-Laki', 'Desa Durian Runtuh', '2001-11-01', 'Jalan Kesenjangan Sosial No. 1', 'Suku Ambalabu', '0887236428764', 'dittolongindit@gmail.com', 15, 6, 6, 8, '2025-04-28 21:39:23', NULL, '2025-04-29 04:39:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penginapan`
+--
+
+CREATE TABLE `penginapan` (
+  `id_penginapan` int(11) NOT NULL,
+  `id_paket` int(11) NOT NULL,
+  `nama_penginapan` varchar(255) NOT NULL,
+  `latitude` decimal(20,17) NOT NULL,
+  `longitude` decimal(20,17) NOT NULL,
+  `keterangan` longtext NOT NULL,
+  `estimasi_jarak` varchar(255) NOT NULL,
+  `harga_per_malam` varchar(255) NOT NULL,
+  `fasilitas` longtext NOT NULL,
+  `no_whatsapp` varchar(255) NOT NULL,
+  `gambar_penginapan` varchar(255) NOT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `penginapan`
+--
+
+INSERT INTO `penginapan` (`id_penginapan`, `id_paket`, `nama_penginapan`, `latitude`, `longitude`, `keterangan`, `estimasi_jarak`, `harga_per_malam`, `fasilitas`, `no_whatsapp`, `gambar_penginapan`, `updated_by`, `updated_at`) VALUES
+(1, 1, 'Villa Laut Indah', -6.27794303791506200, 106.47526014847028000, '<p>Penginapan dengan pemandangan laut, cocok untuk pasangan atau keluarga kecil.</p>', '1 km', 'Rp. 100.000/malam', '<p>aaaaaaaaaaaaaaaaaaa</p>', '6289699712234', '', 1, '2025-06-08 04:49:41'),
+(2, 1, 'Homestay Pantai Bahagia', 0.00000000000000000, 0.00000000000000000, 'Pilihan hemat dan nyaman untuk wisatawan solo atau pasangan muda.', '700 m', 'Rp. 300.000/malam', 'bbbbbbbbbbbbbb', '623712836123', '', NULL, '2025-06-08 09:07:53');
 
 -- --------------------------------------------------------
 
@@ -546,6 +709,32 @@ INSERT INTO `pernikahan_penduduk` (`id`, `id_penduduk`, `id_status`, `no_akta_ni
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pilihan_paket`
+--
+
+CREATE TABLE `pilihan_paket` (
+  `id` int(11) NOT NULL,
+  `id_paket` int(11) NOT NULL,
+  `nama_pilihan` varchar(255) NOT NULL,
+  `keterangan` longtext NOT NULL,
+  `durasi` varchar(255) NOT NULL,
+  `harga` varchar(255) NOT NULL,
+  `gambar_pilihan` varchar(255) NOT NULL,
+  `no_whatsapp` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pilihan_paket`
+--
+
+INSERT INTO `pilihan_paket` (`id`, `id_paket`, `nama_pilihan`, `keterangan`, `durasi`, `harga`, `gambar_pilihan`, `no_whatsapp`) VALUES
+(1, 1, 'Paket Hemat', 'Liburan singkat dengan fasilitas dasar. Ideal untuk kamu yang ingin refreshing sejenak tanpa ribet. ', '1 Hari', 'Rp. 200.000,-', '', ''),
+(2, 1, 'Paket Keluarga', 'Paket lengkap untuk keluarga kecil. Nyaman dan menyenangkan dengan fasilitas anak-anak. ', '3 Hari', 'Rp. 450.000,-', '', ''),
+(3, 1, 'Paket Petualang', 'Khusus pecinta petualangan alam. Siap untuk camping, snorkeling, dan pengalaman tak terlupakan! ', '7 Hari', 'Rp. 1.000.000,-', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `status_nikah`
 --
 
@@ -574,14 +763,25 @@ CREATE TABLE `umkm` (
   `id_umkm` int(11) NOT NULL,
   `nama_umkm` varchar(255) NOT NULL,
   `id_wilayah` int(11) NOT NULL,
+  `alamat` longtext NOT NULL,
   `keterangan` longtext NOT NULL,
   `gambar_umkm` varchar(255) NOT NULL,
   `id_jenis_umkm` int(11) NOT NULL,
   `latitude` decimal(20,17) NOT NULL,
   `longitude` decimal(20,17) NOT NULL,
-  `updated_by` bigint(20) UNSIGNED NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `umkm`
+--
+
+INSERT INTO `umkm` (`id_umkm`, `nama_umkm`, `id_wilayah`, `alamat`, `keterangan`, `gambar_umkm`, `id_jenis_umkm`, `latitude`, `longitude`, `updated_by`, `updated_at`) VALUES
+(1, 'Gorengan Mang Agus', 9, 'Jalan Setapak No. 15', '<p>testing&nbsp;</p>\r\n\r\n<p>gorengan mang agus Open Setiap hari jam 08.00 - 10.00</p>', 'umkm/pQSb90nWz3fKssa9q4e5VCqAwkjFhkiD0hr9VlUr.jpg', 6, -6.27824430896131500, 106.47554334013779000, 1, '2025-05-23 23:24:26'),
+(3, 'saaa', 9, 'aaaaaaaaa', '<p>aaaaaaaaaaaaa</p>', 'umkm/HxSbfeTnFyNgD4VLRxfWZkhNjBKfNtwTeYnxfV5P.jpg', 6, -6.27909746749532600, 106.47623275544775000, NULL, '2025-05-24 08:06:31'),
+(6, 'aaa', 7, 'aaaaaaaaaaaaaaaaab', '<p>aaaaaaaaaaaaaaaaaaaaaaaa</p>', 'umkm/oMUIe5nLQHpRLu3rFb1Ngy50ntJJwcFYLu1NYJ77.png', 3, -6.25742560000000000, 106.61825550000000000, 1, '2025-06-04 00:01:03'),
+(7, 'aaaaaaaaaa', 9, 'aaaaaaaaaaaaaa', '<p>aaaaaaaaaaaaaa</p>', 'umkm/nMENusM8aBWWim2sIQ3Su5qdqWuMhRQkeDcGQRuJ.jpg', 3, -6.26089645096690300, 106.47022619648514000, NULL, '2025-06-04 02:54:02');
 
 -- --------------------------------------------------------
 
@@ -743,7 +943,103 @@ INSERT INTO `user_log` (`id_log`, `user_id`, `email`, `action`, `time`) VALUES
 (111, 1, 'superadmin@admin.com', 'logout', '2025-04-28 23:26:33'),
 (112, 2, 'admin1@admin.com', 'login', '2025-04-28 23:26:38'),
 (113, 2, 'admin1@admin.com', 'logout', '2025-04-28 23:34:37'),
-(114, 1, 'superadmin@admin.com', 'login', '2025-04-29 19:27:13');
+(114, 1, 'superadmin@admin.com', 'login', '2025-04-29 19:27:13'),
+(115, 1, 'superadmin@admin.com', 'login', '2025-05-13 20:47:02'),
+(116, 1, 'superadmin@admin.com', 'logout', '2025-05-13 20:48:21'),
+(117, 2, 'admin1@admin.com', 'login', '2025-05-13 20:48:33'),
+(118, 2, 'admin1@admin.com', 'logout', '2025-05-13 20:57:16'),
+(119, 1, 'superadmin@admin.com', 'login', '2025-05-13 20:57:29'),
+(120, 2, 'admin1@admin.com', 'login', '2025-05-13 20:57:41'),
+(121, 2, 'admin1@admin.com', 'logout', '2025-05-13 22:06:31'),
+(122, 1, 'superadmin@admin.com', 'login', '2025-05-13 22:06:43'),
+(123, 1, 'superadmin@admin.com', 'login', '2025-05-14 19:30:37'),
+(124, 1, 'superadmin@admin.com', 'logout', '2025-05-14 19:30:56'),
+(125, 2, 'admin1@admin.com', 'login', '2025-05-14 19:31:07'),
+(126, 2, 'admin1@admin.com', 'logout', '2025-05-14 20:02:46'),
+(127, 1, 'superadmin@admin.com', 'login', '2025-05-14 23:33:48'),
+(128, 1, 'superadmin@admin.com', 'logout', '2025-05-15 00:47:47'),
+(129, 1, 'superadmin@admin.com', 'login', '2025-05-15 00:48:18'),
+(130, 1, 'superadmin@admin.com', 'logout', '2025-05-15 00:52:43'),
+(131, 2, 'admin1@admin.com', 'login', '2025-05-15 00:52:52'),
+(132, 2, 'admin1@admin.com', 'logout', '2025-05-15 01:07:49'),
+(133, 1, 'superadmin@admin.com', 'login', '2025-05-15 01:07:59'),
+(134, 1, 'superadmin@admin.com', 'login', '2025-05-15 19:26:10'),
+(135, 1, 'superadmin@admin.com', 'login', '2025-05-15 22:20:51'),
+(136, 1, 'superadmin@admin.com', 'login', '2025-05-17 23:51:19'),
+(137, 1, 'superadmin@admin.com', 'logout', '2025-05-18 00:09:07'),
+(138, 1, 'superadmin@admin.com', 'login', '2025-05-18 20:12:33'),
+(139, 1, 'superadmin@admin.com', 'login', '2025-05-19 01:21:10'),
+(140, 1, 'superadmin@admin.com', 'logout', '2025-05-19 01:21:14'),
+(141, 1, 'superadmin@admin.com', 'login', '2025-05-19 02:09:38'),
+(142, 1, 'superadmin@admin.com', 'logout', '2025-05-19 03:03:27'),
+(143, 1, 'superadmin@admin.com', 'login', '2025-05-19 19:58:10'),
+(144, 1, 'superadmin@admin.com', 'login', '2025-05-19 23:15:02'),
+(145, 1, 'superadmin@admin.com', 'logout', '2025-05-19 23:22:03'),
+(146, 1, 'superadmin@admin.com', 'login', '2025-05-20 00:06:03'),
+(147, 1, 'superadmin@admin.com', 'logout', '2025-05-20 02:09:06'),
+(148, 1, 'superadmin@admin.com', 'login', '2025-05-20 02:09:23'),
+(149, 1, 'superadmin@admin.com', 'login', '2025-05-20 18:39:22'),
+(150, 1, 'superadmin@admin.com', 'logout', '2025-05-20 19:13:37'),
+(151, 1, 'superadmin@admin.com', 'login', '2025-05-20 19:13:50'),
+(152, 1, 'superadmin@admin.com', 'login', '2025-05-20 19:14:30'),
+(153, 1, 'superadmin@admin.com', 'logout', '2025-05-20 19:59:13'),
+(154, 1, 'superadmin@admin.com', 'login', '2025-05-20 20:01:51'),
+(155, 1, 'superadmin@admin.com', 'logout', '2025-05-20 20:31:03'),
+(156, 1, 'superadmin@admin.com', 'login', '2025-05-20 23:15:13'),
+(157, 1, 'superadmin@admin.com', 'logout', '2025-05-20 23:51:11'),
+(158, 1, 'superadmin@admin.com', 'login', '2025-05-21 01:15:58'),
+(159, 1, 'superadmin@admin.com', 'login', '2025-05-22 00:00:28'),
+(160, 1, 'superadmin@admin.com', 'logout', '2025-05-22 00:09:19'),
+(161, 1, 'superadmin@admin.com', 'login', '2025-05-22 19:25:31'),
+(162, 1, 'superadmin@admin.com', 'login', '2025-05-23 02:12:18'),
+(163, 1, 'superadmin@admin.com', 'login', '2025-05-23 19:50:37'),
+(164, 1, 'superadmin@admin.com', 'login', '2025-05-23 23:16:53'),
+(165, 1, 'superadmin@admin.com', 'login', '2025-05-24 00:19:08'),
+(166, 1, 'superadmin@admin.com', 'login', '2025-05-27 23:28:09'),
+(167, 1, 'superadmin@admin.com', 'login', '2025-06-01 19:10:51'),
+(168, 1, 'superadmin@admin.com', 'logout', '2025-06-01 20:39:44'),
+(169, 1, 'superadmin@admin.com', 'login', '2025-06-01 21:01:06'),
+(170, 1, 'superadmin@admin.com', 'logout', '2025-06-01 21:11:36'),
+(171, 2, 'admin1@admin.com', 'login', '2025-06-01 21:11:44'),
+(172, 1, 'superadmin@admin.com', 'login', '2025-06-02 20:55:43'),
+(173, 1, 'superadmin@admin.com', 'login', '2025-06-03 19:27:34'),
+(174, 1, 'superadmin@admin.com', 'logout', '2025-06-03 20:36:31'),
+(175, 1, 'superadmin@admin.com', 'login', '2025-06-03 22:34:10'),
+(176, 1, 'superadmin@admin.com', 'login', '2025-06-03 23:19:33'),
+(177, 1, 'superadmin@admin.com', 'logout', '2025-06-03 23:43:39'),
+(178, 2, 'admin1@admin.com', 'login', '2025-06-03 23:43:48'),
+(179, 2, 'admin1@admin.com', 'logout', '2025-06-03 23:49:37'),
+(180, 1, 'superadmin@admin.com', 'login', '2025-06-03 23:49:46'),
+(181, 1, 'superadmin@admin.com', 'logout', '2025-06-03 23:50:39'),
+(182, 1, 'superadmin@admin.com', 'login', '2025-06-03 23:50:46'),
+(183, 1, 'superadmin@admin.com', 'logout', '2025-06-03 23:52:48'),
+(184, 2, 'admin1@admin.com', 'login', '2025-06-03 23:52:55'),
+(185, 2, 'admin1@admin.com', 'logout', '2025-06-03 23:59:00'),
+(186, 1, 'superadmin@admin.com', 'login', '2025-06-03 23:59:08'),
+(187, 1, 'superadmin@admin.com', 'logout', '2025-06-04 00:01:31'),
+(188, 1, 'superadmin@admin.com', 'login', '2025-06-04 00:07:04'),
+(189, 1, 'superadmin@admin.com', 'login', '2025-06-06 00:08:06'),
+(190, 1, 'superadmin@admin.com', 'login', '2025-06-06 22:32:29'),
+(191, 1, 'superadmin@admin.com', 'logout', '2025-06-06 23:18:51'),
+(192, 2, 'admin1@admin.com', 'login', '2025-06-06 23:18:59'),
+(193, 2, 'admin1@admin.com', 'logout', '2025-06-06 23:19:07'),
+(194, 1, 'superadmin@admin.com', 'login', '2025-06-06 23:19:16'),
+(195, 1, 'superadmin@admin.com', 'logout', '2025-06-06 23:57:26'),
+(196, 1, 'superadmin@admin.com', 'login', '2025-06-06 23:57:33'),
+(197, 1, 'superadmin@admin.com', 'logout', '2025-06-06 23:58:05'),
+(198, 2, 'admin1@admin.com', 'login', '2025-06-06 23:58:12'),
+(199, 2, 'admin1@admin.com', 'logout', '2025-06-06 23:58:30'),
+(200, 1, 'superadmin@admin.com', 'login', '2025-06-06 23:58:47'),
+(201, 1, 'superadmin@admin.com', 'logout', '2025-06-07 00:24:02'),
+(202, 1, 'superadmin@admin.com', 'login', '2025-06-07 01:46:17'),
+(203, 1, 'superadmin@admin.com', 'login', '2025-06-08 00:55:59'),
+(204, 1, 'superadmin@admin.com', 'logout', '2025-06-08 00:56:39'),
+(205, 1, 'superadmin@admin.com', 'login', '2025-06-08 01:22:58'),
+(206, 1, 'superadmin@admin.com', 'logout', '2025-06-08 01:35:18'),
+(207, 2, 'admin1@admin.com', 'login', '2025-06-08 01:35:29'),
+(208, 2, 'admin1@admin.com', 'logout', '2025-06-08 01:35:52'),
+(209, 1, 'superadmin@admin.com', 'login', '2025-06-08 01:36:01'),
+(210, 1, 'superadmin@admin.com', 'login', '2025-06-08 20:16:09');
 
 -- --------------------------------------------------------
 
@@ -756,8 +1052,8 @@ CREATE TABLE `wilayah` (
   `nama_wilayah` varchar(255) NOT NULL,
   `jenis_wilayah` varchar(50) NOT NULL,
   `luas_wilayah` int(11) NOT NULL,
-  `latitude` decimal(20,17) NOT NULL,
-  `longitude` decimal(20,17) NOT NULL,
+  `latitude` decimal(20,17) DEFAULT NULL,
+  `longitude` decimal(20,17) DEFAULT NULL,
   `batas_utara` varchar(255) NOT NULL,
   `batas_timur` varchar(255) NOT NULL,
   `batas_barat` varchar(255) NOT NULL,
@@ -784,7 +1080,7 @@ INSERT INTO `wilayah` (`id_wilayah`, `nama_wilayah`, `jenis_wilayah`, `luas_wila
 (10, 'Desa Tapos', 'Desa', 355, -6.29491710259832500, 106.47231257584326000, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL),
 (11, 'Desa Bantar Panjang', 'Desa', 578, -6.29560118492594800, 106.45126923990308000, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL),
 (12, 'Desa Cileles', 'Desa', 434, -6.32024263025774100, 106.43198249092904000, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL),
-(13, 'Kecamatan Tigaraksa', 'Kecamatan', 5279, 0.00000000000000000, 0.00000000000000000, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL),
+(13, 'Kecamatan Tigaraksa', 'Kecamatan', 5279, NULL, NULL, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL),
 (14, 'Kelurahan Kadu Agung', 'Kelurahan', 284, -6.26903958048301800, 106.49774425197550000, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL),
 (15, 'Kelurahan Tigaraksa', 'Kelurahan', 311, -6.26416190920571000, 106.43198249092904000, '', '', '', '', 'profilwilayah/petakecamatan.png', NULL, NULL);
 
@@ -818,6 +1114,30 @@ INSERT INTO `wisata` (`id_wisata`, `id_wilayah`, `nama_tempat`, `keterangan`, `g
 (5, 14, 'Monumen Tigaraksa\r\n\r\n', 'Monumen Tigaraksa adalah tugu yang dibangun untuk mengenang jasa tiga perwira dari Kesultanan Banten. Monumen ini berbentuk tiga orang yang berdiri, terbuat dari material stainless steel dan tembaga, memberikan kesan modern namun tetap sarat dengan nilai sejarah. Monumen ini menjadi simbol perjuangan tiga ksatria yang bernama Aria Yudanegara, Aria Wangsakerta, dan Aria Santika, yang bertugas menyusun baris pertahanan dan perlawanan terhadap penjajah pada masa Kesultanan Banten\r\n\r\n', 'wisata/MonumenTigaraksa.jpg', -6.26207196130332800, 106.48139347326357000, NULL, NULL),
 (6, 14, 'Alun Alun Tigaraksa \r\n', 'Alun-Alun Tigaraksa adalah area terbuka yang luas dan menjadi pusat kegiatan masyarakat sekitar. Letaknya tidak jauh dari kantor Pemda Kabupaten Tangerang. Alun-alun ini sering digunakan untuk berbagai kegiatan seperti olahraga, acara komunitas, dan rekreasi keluarga. Pengunjung dapat menikmati suasana yang nyaman dengan berbagai fasilitas seperti area bermain anak, jogging track, dan tempat duduk yang nyaman. Selain itu, alun-alun ini juga menjadi pusat kuliner dengan banyak pedagang yang menjual aneka makanan dan minuman.\r\n', 'wisata/AlunTigaraksa.jpg', -6.27435746141683200, 106.48275507326376000, NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wisata_vr`
+--
+
+CREATE TABLE `wisata_vr` (
+  `id` int(11) NOT NULL,
+  `id_wisata` int(11) NOT NULL,
+  `gambar_depan` varchar(255) NOT NULL,
+  `gambar_kanan` varchar(255) NOT NULL,
+  `gambar_belakang` varchar(255) NOT NULL,
+  `gambar_kiri` varchar(255) NOT NULL,
+  `gambar_atas` varchar(255) NOT NULL,
+  `gambar_bawah` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wisata_vr`
+--
+
+INSERT INTO `wisata_vr` (`id`, `id_wisata`, `gambar_depan`, `gambar_kanan`, `gambar_belakang`, `gambar_kiri`, `gambar_atas`, `gambar_bawah`) VALUES
+(1, 4, 'wisata_vr/cube0000.jpg', 'wisata_vr/cube0001.jpg', 'wisata_vr/cube0002.jpg', 'wisata_vr/cube0003.jpg', 'wisata_vr/cube0004.jpg', 'wisata_vr/cube0005.jpg');
+
 --
 -- Indexes for dumped tables
 --
@@ -844,6 +1164,34 @@ ALTER TABLE `berita`
   ADD KEY `FK_id_wilayah` (`id_wilayah`),
   ADD KEY `FK_berita_id_user_updated` (`updated_by`),
   ADD KEY `FK_berita_id_user_created` (`created_by`);
+
+--
+-- Indexes for table `dokumentasi_kegiatan`
+--
+ALTER TABLE `dokumentasi_kegiatan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_dokum_id_kegiatan` (`id_kegiatan`);
+
+--
+-- Indexes for table `dokumentasi_paket`
+--
+ALTER TABLE `dokumentasi_paket`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_paket_dokum` (`id_paket`);
+
+--
+-- Indexes for table `dokumentasi_umkm`
+--
+ALTER TABLE `dokumentasi_umkm`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_umkm_dokum` (`id_umkm`);
+
+--
+-- Indexes for table `galeri_aktivitas`
+--
+ALTER TABLE `galeri_aktivitas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_paket_galeri` (`id_paket`);
 
 --
 -- Indexes for table `hubungan_keluarga`
@@ -908,6 +1256,14 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `paket_wisata`
+--
+ALTER TABLE `paket_wisata`
+  ADD PRIMARY KEY (`id_paket`),
+  ADD KEY `FK_id_wisata_paket` (`id_wisata`),
+  ADD KEY `FK_updated_by_paket` (`updated_by`);
+
+--
 -- Indexes for table `pekerjaan`
 --
 ALTER TABLE `pekerjaan`
@@ -932,6 +1288,14 @@ ALTER TABLE `penduduk`
   ADD KEY `FK_penduduk_updated_by` (`updated_by`);
 
 --
+-- Indexes for table `penginapan`
+--
+ALTER TABLE `penginapan`
+  ADD PRIMARY KEY (`id_penginapan`),
+  ADD KEY `FK_id_paket_penginapan` (`id_paket`),
+  ADD KEY `FK_updated_by_penginapan` (`updated_by`);
+
+--
 -- Indexes for table `perangkat_kecamatan`
 --
 ALTER TABLE `perangkat_kecamatan`
@@ -946,6 +1310,13 @@ ALTER TABLE `pernikahan_penduduk`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_nikah_id_penduduk` (`id_penduduk`),
   ADD KEY `FK_nikah_id_status` (`id_status`);
+
+--
+-- Indexes for table `pilihan_paket`
+--
+ALTER TABLE `pilihan_paket`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_id_paket_pilihan` (`id_paket`);
 
 --
 -- Indexes for table `status_nikah`
@@ -991,6 +1362,13 @@ ALTER TABLE `wisata`
   ADD KEY `FK_wisata_updated` (`updated_by`);
 
 --
+-- Indexes for table `wisata_vr`
+--
+ALTER TABLE `wisata_vr`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_vr_id_wisata` (`id_wisata`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1010,7 +1388,31 @@ ALTER TABLE `agama`
 -- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `dokumentasi_kegiatan`
+--
+ALTER TABLE `dokumentasi_kegiatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `dokumentasi_paket`
+--
+ALTER TABLE `dokumentasi_paket`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `dokumentasi_umkm`
+--
+ALTER TABLE `dokumentasi_umkm`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `galeri_aktivitas`
+--
+ALTER TABLE `galeri_aktivitas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `hubungan_keluarga`
@@ -1022,19 +1424,19 @@ ALTER TABLE `hubungan_keluarga`
 -- AUTO_INCREMENT for table `jenis_kegiatan`
 --
 ALTER TABLE `jenis_kegiatan`
-  MODIFY `id_jenis_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_jenis_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jenis_umkm`
 --
 ALTER TABLE `jenis_umkm`
-  MODIFY `id_jenis_umkm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_jenis_umkm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
-  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_kegiatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `kelahiran_penduduk`
@@ -1067,6 +1469,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `paket_wisata`
+--
+ALTER TABLE `paket_wisata`
+  MODIFY `id_paket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `pekerjaan`
 --
 ALTER TABLE `pekerjaan`
@@ -1085,6 +1493,12 @@ ALTER TABLE `penduduk`
   MODIFY `id_penduduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT for table `penginapan`
+--
+ALTER TABLE `penginapan`
+  MODIFY `id_penginapan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `perangkat_kecamatan`
 --
 ALTER TABLE `perangkat_kecamatan`
@@ -1097,6 +1511,12 @@ ALTER TABLE `pernikahan_penduduk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `pilihan_paket`
+--
+ALTER TABLE `pilihan_paket`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `status_nikah`
 --
 ALTER TABLE `status_nikah`
@@ -1106,7 +1526,7 @@ ALTER TABLE `status_nikah`
 -- AUTO_INCREMENT for table `umkm`
 --
 ALTER TABLE `umkm`
-  MODIFY `id_umkm` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_umkm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -1118,7 +1538,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_log`
 --
 ALTER TABLE `user_log`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT for table `wilayah`
@@ -1131,6 +1551,12 @@ ALTER TABLE `wilayah`
 --
 ALTER TABLE `wisata`
   MODIFY `id_wisata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `wisata_vr`
+--
+ALTER TABLE `wisata_vr`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -1152,12 +1578,36 @@ ALTER TABLE `berita`
   ADD CONSTRAINT `FK_id_wilayah` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id_wilayah`);
 
 --
+-- Constraints for table `dokumentasi_kegiatan`
+--
+ALTER TABLE `dokumentasi_kegiatan`
+  ADD CONSTRAINT `FK_dokum_id_kegiatan` FOREIGN KEY (`id_kegiatan`) REFERENCES `kegiatan` (`id_kegiatan`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `dokumentasi_paket`
+--
+ALTER TABLE `dokumentasi_paket`
+  ADD CONSTRAINT `FK_id_paket_dokum` FOREIGN KEY (`id_paket`) REFERENCES `paket_wisata` (`id_paket`);
+
+--
+-- Constraints for table `dokumentasi_umkm`
+--
+ALTER TABLE `dokumentasi_umkm`
+  ADD CONSTRAINT `FK_id_umkm_dokum` FOREIGN KEY (`id_umkm`) REFERENCES `umkm` (`id_umkm`);
+
+--
+-- Constraints for table `galeri_aktivitas`
+--
+ALTER TABLE `galeri_aktivitas`
+  ADD CONSTRAINT `FK_id_paket_galeri` FOREIGN KEY (`id_paket`) REFERENCES `paket_wisata` (`id_paket`);
+
+--
 -- Constraints for table `kegiatan`
 --
 ALTER TABLE `kegiatan`
   ADD CONSTRAINT `fk_kegiatan_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `kegiatan_ibfk_1` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id_wilayah`) ON DELETE CASCADE,
-  ADD CONSTRAINT `kegiatan_ibfk_2` FOREIGN KEY (`id_jenis_kegiatan`) REFERENCES `jenis_kegiatan` (`id_jenis_kegiatan`) ON DELETE CASCADE;
+  ADD CONSTRAINT `kegiatan_ibfk_1` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id_wilayah`),
+  ADD CONSTRAINT `kegiatan_ibfk_2` FOREIGN KEY (`id_jenis_kegiatan`) REFERENCES `jenis_kegiatan` (`id_jenis_kegiatan`);
 
 --
 -- Constraints for table `kelahiran_penduduk`
@@ -1185,6 +1635,13 @@ ALTER TABLE `kewarganegaraan_penduduk`
   ADD CONSTRAINT `FK_kewarganegaraan_id_penduduk` FOREIGN KEY (`id_penduduk`) REFERENCES `penduduk` (`id_penduduk`);
 
 --
+-- Constraints for table `paket_wisata`
+--
+ALTER TABLE `paket_wisata`
+  ADD CONSTRAINT `FK_id_wisata_paket` FOREIGN KEY (`id_wisata`) REFERENCES `wisata` (`id_wisata`),
+  ADD CONSTRAINT `FK_updated_by_paket` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `penduduk`
 --
 ALTER TABLE `penduduk`
@@ -1193,6 +1650,13 @@ ALTER TABLE `penduduk`
   ADD CONSTRAINT `FK_penduduk_id_pendidikan` FOREIGN KEY (`id_pendidikan`) REFERENCES `pendidikan` (`id_pendidikan`),
   ADD CONSTRAINT `FK_penduduk_id_wilayah` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id_wilayah`),
   ADD CONSTRAINT `FK_penduduk_updated_by` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `penginapan`
+--
+ALTER TABLE `penginapan`
+  ADD CONSTRAINT `FK_id_paket_penginapan` FOREIGN KEY (`id_paket`) REFERENCES `paket_wisata` (`id_paket`),
+  ADD CONSTRAINT `FK_updated_by_penginapan` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `perangkat_kecamatan`
@@ -1207,6 +1671,12 @@ ALTER TABLE `perangkat_kecamatan`
 ALTER TABLE `pernikahan_penduduk`
   ADD CONSTRAINT `FK_nikah_id_penduduk` FOREIGN KEY (`id_penduduk`) REFERENCES `penduduk` (`id_penduduk`),
   ADD CONSTRAINT `FK_nikah_id_status` FOREIGN KEY (`id_status`) REFERENCES `status_nikah` (`id_status`);
+
+--
+-- Constraints for table `pilihan_paket`
+--
+ALTER TABLE `pilihan_paket`
+  ADD CONSTRAINT `FK_id_paket_pilihan` FOREIGN KEY (`id_paket`) REFERENCES `paket_wisata` (`id_paket`);
 
 --
 -- Constraints for table `umkm`
@@ -1234,6 +1704,12 @@ ALTER TABLE `wilayah`
 ALTER TABLE `wisata`
   ADD CONSTRAINT `FK_wisata_id_wilayah` FOREIGN KEY (`id_wilayah`) REFERENCES `wilayah` (`id_wilayah`),
   ADD CONSTRAINT `FK_wisata_updated` FOREIGN KEY (`updated_by`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `wisata_vr`
+--
+ALTER TABLE `wisata_vr`
+  ADD CONSTRAINT `FK_vr_id_wisata` FOREIGN KEY (`id_wisata`) REFERENCES `wisata` (`id_wisata`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

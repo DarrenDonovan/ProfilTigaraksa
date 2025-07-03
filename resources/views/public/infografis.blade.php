@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Infografis Desa Pete</title>
+        <title>Infografis Kecamatan Tigaraksa</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -29,6 +29,551 @@
 
         <!-- Template Stylesheet -->
         <link href="{{ url('css/style.css') }}" rel="stylesheet">
+
+    <style>
+            .navbar {
+                position: fixed !important; /* Pastikan navbar tetap fixed */
+                top: -1px;
+                left: 0;
+                width: 100%;
+                /* border: 2px solid red;  */
+                height: fit-content;
+            }
+            .navbar-brand .m-0 {
+                font-size: 28px;
+            }
+            .subtext {
+                margin: 0px;
+            }
+            .kec {
+                /* border: 2px solid red; */
+                margin-left: 6px;
+            }
+            .dropdown-menu {
+                max-height: 250px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                scroll-behavior: smooth;
+            }
+            .teks-mobile {
+                margin-top: 15px;
+            }
+            @media (min-width: 310px) and (max-width: 469px) {
+            /* FOOTER */
+            .footer-item h4 {
+                    /* border: 2px solid red; */
+                    font-size: 16px; /* Mengecilkan ukuran heading */
+                }
+
+                .footer-item a {
+                    /* border: 2px solid red; */
+                    font-size: 14px; /* Mengecilkan ukuran teks */
+                }
+
+                .footer-item i {
+                    font-size: 14px; /* Mengecilkan ikon */
+                }
+
+                .footer .btn-square {
+                    /* border: 2px solid red; */
+                    width: 25px !important; /* Mengecilkan tombol sosial media */
+                    height: 25px;
+                    font-size: 14px;
+                    padding: 4px;
+                }
+                /* COPYRIGHT */
+                .container-fluid.copyright .container .col-md-6 {
+                    font-size: 12px;
+                }
+                .container-fluid.copyright .container .col-md-6 i, .text-white {
+                    font-size: 12px;
+                }
+            }
+            @media (max-width: 321px){
+                /* NAVBAR */
+                .mx-auto h5 {
+                    font-size: 13px !important;
+                }
+                .mx-auto h1 {
+                    font-size: 18px !important;
+                }
+                .teks-mobile {
+                    font-size: 13px;
+                }
+                /* NAVBAR */
+                .navbar-brand .fa { 
+                    font-size: 17px !important; 
+                    margin-right: 5px !important;
+                }
+                .navbar-brand h1 {
+                    font-size: 15px !important;
+                    color: #ffff !important;
+                }
+                .navbar-brand h1 .subtext {
+                    font-size: 13px !important;
+                    color: #ffff !important;
+                }
+                .navbar-toggler  {
+                    font-size: 13px;
+                    padding: 0.3rem 0.6rem !important; 
+                    color: #ffff !important;
+                    border-color: #ffff !important;
+                }
+                .collapse {
+                    font-size: 20px;
+                }
+
+                /* HERO */
+                .container-fluid.bg-breadcrumb {
+                    height: 60% !important;
+                }
+                .descriptionGrap {
+                    display: none;
+                }
+                .row.g-4 {
+                    /* border: 2px solid blue; */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .col-12 {
+                    /* border: 2px solid black; */
+                    /* width: 90% !important; */
+                    height: 80px;
+                }
+                .col-12 .service-content-inner.d-flex.align-items-center {
+                    /* border: 2px solid red !important; */
+                    /* padding: 2px; */
+                    height: 100%;
+                }
+                .service-content h5{
+                    margin: 0px !important;
+                }
+                .service-content .mb-4 {
+                    font-size: 15px;
+                }
+                .service-icon .fa {
+                    font-size: 35px;
+                }
+
+
+            }
+            @media (min-width: 322px) and (max-width: 380px) {
+                /* NAVBAR */
+                .mx-auto h5 {
+                    font-size: 13px !important;
+                }
+                .mx-auto h1 {
+                    font-size: 19px !important;
+                }
+                .teks-mobile {
+                    font-size: 13px;
+                }
+                .navbar-brand .fa { 
+                    font-size: 20px !important; /*logo*/
+                    margin-right: 5px !important;
+                }
+                .navbar-brand h1 {
+                    font-size: 20px !important;
+                    color: #ffff !important;
+                }
+                .navbar-brand h1 .subtext {
+                    font-size: 15px !important;
+                    color: #ffff !important;
+                }
+                .navbar-toggler  {
+                    font-size: 15px;
+                    padding: 0.3rem 0.6rem !important; 
+                    color: #ffff !important;
+                    border-color: #ffff !important;
+                }
+                .collapse {
+                    font-size: 20px;
+                }
+
+                .descriptionGrap {
+                    display: none;
+                }
+                .row.g-4 {
+                    /* border: 2px solid blue; */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .col-12 {
+                    /* border: 2px solid black; */
+                    width: 90% !important;
+                    height: 80px;
+                }
+                .col-12 .service-content-inner.d-flex.align-items-center {
+                    /* border: 2px solid red !important; */
+                    padding: 2px;
+                    height: 100%;
+                }
+                .service-content h5{
+                    margin: 0px !important;
+                }
+                .service-content .mb-4 {
+                    font-size: 15px;
+                }
+                .service-icon .fa {
+                    font-size: 35px;
+                }
+                .mx-auto.text-center.mb-5 h5 {
+                    font-size: 13px;
+                }
+                .mx-auto h1 {
+                    font-size: 19px;
+                } 
+
+                /* FOOTER */
+                .footer {
+                    padding: 20px 10px; /* Mengurangi padding agar lebih pas */
+                }
+
+                .footer-item h4 {
+                    font-size: 16px; /* Mengecilkan ukuran heading */
+                }
+                .footer-item a {
+                    font-size: 14px; /* Mengecilkan ukuran teks */
+                }
+
+                .footer-item i {
+                    font-size: 14px; /* Mengecilkan ikon */
+                }
+
+                .footer .btn-square {
+                    width: 28px; /* Mengecilkan tombol sosial media */
+                    height: 28px;
+                    font-size: 12px;
+                    padding: 4px;
+                }
+                /* COPYRIGHT */
+                .container-fluid.copyright .container .col-md-6 {
+                    font-size: 12px;
+                }
+                .container-fluid.copyright .container .col-md-6 i, .text-white {
+                    font-size: 12px;
+                }
+            }
+
+            @media (min-width: 381px) and (max-width: 426px) {
+                .mx-auto.text-center.mb-5 h5 {
+                    font-size: 13px !important;
+                }
+                .mx-auto h1 {
+                    font-size: 19px !important;
+                }   
+                .teks-mobile {
+                    font-size: 13px;
+                }
+                .navbar-brand .fa { 
+                    font-size: 20px !important; /*logo*/
+                    margin-right: 5px !important;
+                }
+                .navbar-brand h1 {
+                    font-size: 20px !important;
+                    color: #ffff !important;
+                }
+                .navbar-brand h1 .subtext {
+                    font-size: 15px !important;
+                    color: #ffff !important;
+                    /* border: 2px solid blue; */
+                }
+                .nav.nav-pills {
+                    flex-wrap: nowrap;
+                    overflow-x: scroll;
+                    max-width: 100%;
+                    justify-content: flex-start !important;
+                }
+                .col-12.col-sm-6 {
+                    width: 300px;
+                    margin-left: 40px;
+                }
+                .descriptionGrap {
+                    display: none;
+                }
+                .row.g-4 {
+                    /* border: 2px solid blue; */
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .col-12 {
+                    /* border: 2px solid black; */
+                    width: 90% !important;
+                    height: 80px;
+                }
+                .col-12 .service-content-inner.d-flex.align-items-center {
+                    /* border: 2px solid red !important; */
+                    padding: 2px;
+                    height: 100%;
+                    margin: 0px;
+                }
+                .service-content {
+                    margin: 0px;
+                }
+                .service-content h5{
+                    margin: 0px !important;
+                }
+                .service-content .mb-4 {
+                    font-size: 15px;
+                }
+                .service-icon .fa {
+                    font-size: 35px;
+                }
+            }
+            @media (max-width: 576px) {
+                .bg-breadcrumb h3 {
+                    font-size: 2rem !important;
+                }
+            }
+            @media (min-width: 427px) and (max-width: 769px){
+                /* NAVBAR */
+                .mx-auto h5 {
+                    font-size: 18px;
+                }
+                .mx-auto h1 {
+                    font-size: 23px;
+                }
+                .navbar-brand .m-0 {
+                    font-size: 23px;
+                }
+                .navbar-brand .subtext {
+                    font-size: 18px;
+                    margin: 0px !important;
+                }
+                .navbar-brand .fa {
+                    font-size: 20px !important;
+                }
+                .container h3 {
+                    font-size: 35px !important;
+                }
+            }
+            @media (max-width: 992px) {
+                .navbar-toggler.scrolled {
+                    color: #13357b !important;
+                    border-color: #13357b !important;
+                }
+
+                .navbar-brand h1.scrolled {
+                    color: #13357b !important;
+                    border-color: #13357b !important;
+                }
+
+                .navbar-brand h1 .subtext.scrolled {
+                    color: #13357b !important;
+                    border-color: #13357b !important;
+                    
+                }
+                .navbar-nav {
+                    background-color: #ffff;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+                .navbar-brand h1 {
+                    color: #ffff !important;
+                }
+                .navbar-toggler  {
+                    color: #ffff !important;
+                    border-color: #ffff !important;
+                }
+            }
+            @media screen and (max-width: 1025px){
+                .navbar {
+                    padding-inline: 30px !important;
+                }
+                .navbar-brand .m-0 {
+                    font-size: 23px;
+                }
+                .navbar-brand .subtext {
+                    font-size: 18px;
+                    margin: 0px !important;
+                }
+                .navbar-brand .fa {
+                    font-size: 20px !important;
+                }
+                .text-white.display-3 {
+                    font-size: 35px;
+                }
+                .mx-auto h5 {
+                    font-size: 16px;
+                }
+                .mx-auto h1 {
+                    font-size: 25px;
+                }
+            }
+            @media (min-width: 770) and (max-width: 1024px) {
+                .navbar {
+                    padding-inline: 30px !important;
+                }
+                .navbar-brand .m-0 {
+                    font-size: 23px;
+                }
+                .navbar-brand .subtext {
+                    font-size: 18px;
+                    margin: 0px !important;
+                }
+                .navbar-brand .fa {
+                    font-size: 20px !important;
+                }
+                .navbar-nav {
+                   /* border: 2px solid blue; */
+                   height: 180px;
+                }
+
+                .navbar-nav .nav-item {
+                    font-size: 30px !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .navbar-nav .nav-item.dropdown .nav-link{
+                    font-size: 30px !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .dropdown-menu {
+                    font-size: 24px;
+                }
+                
+                /* FOOTER */
+                .footer {
+                    /* border: 2px solid blue; */
+                    padding: 20px 615px; /* Mengurangi padding agar lebih pas */
+                }
+                .footer-item {
+                    width: 500px;
+                    gap: 20px;
+                }
+                .footer-item h4 {
+                    font-size: 35px; /* Mengecilkan ukuran heading */
+                }
+                .footer-item a {
+                    font-size: 30px; /* Mengecilkan ukuran teks */
+                    text-wrap: nowrap;
+
+                }
+                .footer-item i {
+                    font-size: 35px; /* Mengecilkan ikon */
+                }
+                .footer .btn-square {
+                    width: 60px; /* Mengecilkan tombol sosial media */
+                    height: 60px;
+                    font-size: 40px;
+                    padding: 4px;
+                }
+            }
+            @media (min-width: 1026px) and (max-width: 1442px) {
+                .text-white.display-3 {
+                    font-size: 40px;
+                }
+                .mx-auto h5 {
+                    font-size: 20px !important;
+                }
+                .mx-auto h1 {
+                    font-size: 35px;
+                }
+            }
+            @media  (min-width: 2000px) {
+                .text-white.display-3 {
+                    font-size: 80px;
+                }
+                .mx-auto h5 {
+                    font-size: 35px !important;
+                }
+                .mx-auto h1 {
+                    font-size: 50px;
+                }
+                .teks-mobile {
+                    font-size: 25px;
+                }
+                /* NAVBAR */
+                .navbar {
+                    height: 180px;
+                }
+                .navbar.navbar-expand-lg.navbar-light {
+                    height: 180px !important;
+                }
+                .navbar-brand .m-0{
+                    font-size: 50px;
+                }
+                .navbar-brand .subtext{ 
+                    font-size: 30px;
+                   /* border: 2px solid blue; */
+
+                }
+                .navbar-brand .fa {
+                    font-size: 50px !important;
+                    padding-right: 15px;
+                }
+                .navbar-nav {
+                   /* border: 2px solid blue; */
+                   height: 180px;
+                }
+
+                .navbar-nav .nav-item {
+                    font-size: 30px !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .navbar-nav .nav-item.dropdown .nav-link{
+                    font-size: 30px !important;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .dropdown-menu {
+                    font-size: 24px;
+                }
+                .container-fluid.grafik {
+                    /* border: 2px solid red; */
+                    height: 1000px;
+                }
+                .service-content {
+                    height: 250px;
+                    padding: 30px;
+                }
+                .service-content h5 {
+                    font-size: 35px;
+                }
+                .service-content p {
+                    font-size: 25px;
+                }
+                /* FOOTER */
+                .footer {
+                    /* border: 2px solid blue; */
+                    padding: 20px 615px; /* Mengurangi padding agar lebih pas */
+                }
+                .footer-item {
+                    width: 500px;
+                    gap: 20px;
+                }
+                .footer-item h4 {
+                    font-size: 35px; /* Mengecilkan ukuran heading */
+                }
+                .footer-item a {
+                    font-size: 30px; /* Mengecilkan ukuran teks */
+                    text-wrap: nowrap;
+
+                }
+                .footer-item i {
+                    font-size: 35px; /* Mengecilkan ikon */
+                }
+                .footer .btn-square {
+                    width: 60px; /* Mengecilkan tombol sosial media */
+                    height: 60px;
+                    font-size: 40px;
+                    padding: 4px;
+                }
+            } 
+            
+            
+            
+    </style>
+
     </head>
 
     <body>
@@ -41,24 +586,14 @@
         </div>
         <!-- Spinner End -->
 
-       
-        <div class="container-fluid bg-primary px-5 d-none d-lg-block">
-            <div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
-                <div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                    <div class="d-inline-flex align-items-center" style="height: 45px;">
-                        <a href="{{url('login')}}"><small class="me-3 text-light"><i class="fa fa-sign-in-alt me-2"></i>Login</small></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Topbar End -->
-
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="{{ url('/') }}" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Kecamatan Tigaraksa<span class="subtext">Kabupaten Tangerang</span></h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                    <h1 class="m-0 d-flex align-items-center">
+                      <i class="fa fa-map-marker-alt me-2"></i>
+                      <div class="kec" style="text-align: left;"> Kecamatan Tigaraksa<br> <span class="subtext">Kabupaten Tangerang</span></div>
+                    </h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -92,20 +627,20 @@
 
         <!-- Services Start -->
         <div class="container-fluid bg-light service py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Demografi</h5>
-                    <h1 class="mb-0">Penduduk</h1>
-                </div>
-                <div class="row g-4">
+            <div class="mx-auto text-center mt-5 mb-5" style="max-width: 900px;">
+                <h5 class="section-title px-3">Demografi</h5>
+                <h1 class="mb-0">Penduduk</h1>
+            </div>
+            <div class="container-fluid grafik" style="display: flex; justify-content: center; align-items: center;">
+                <div class="row g-4" style="width: 80%;">
                     <div class="col-lg-6">
                         <div class="row g-4">
                             <div class="col-12">
-                                <a href="#jumlah-penduduk" class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-end">
-                                        <h5 class="mb-4">Jumlah Penduduk per Wilayah</h5>
-                                        <p class="mb-0">
-                                            Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
+                                <a href="#jumlah-penduduk" class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0" style="display: flex; justify-content: flex-end; align-items: flex-end;">
+                                    <div class="service-content text-end" >
+                                        <h5 class="mb-4">Jumlah Penduduk dan Kepala Keluarga</h5>
+                                        <p class="mb-0 descriptionGrap">
+                                            Deskripsi max 30 kata
                                         </p>
                                     </div>
                                     <div class="service-icon p-4">
@@ -115,22 +650,25 @@
                             </div>
                             
                             <div class="col-12">
-                                <a href="#berdasarkan-jenis_kelamin" class="service-content-inner d-flex align-items-center  bg-white border border-primary rounded p-4 pe-0">
-                                    <div class="service-content text-end">
+                                <a href="#berdasarkan-jenis_kelamin" class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0" style="display: flex; justify-content: flex-end; align-items: flex-end;">
+                                    <div class="service-content text-end" >
                                         <h5 class="mb-4">Berdasarkan Jenis Kelamin</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
+                                        <p class="mb-0 descriptionGrap">
+                                            Deskripsi max 30 kata
                                         </p>
                                     </div>
                                     <div class="service-icon p-4">
-                                        <i class="fa fa-user fa-4x text-primary"></i>
+                                        <i class="fa fa-hotel fa-4x text-primary"></i>
                                     </div>
                                 </a>
                             </div>
+
                             <div class="col-12">
-                                <a href="#berdasarkan-umur" class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0">
+                                <a href="#berdasarkan-umur" class="service-content-inner d-flex align-items-center bg-white border border-primary rounded p-4 pe-0" style="display: flex; justify-content: flex-end; align-items: flex-end;">
                                     <div class="service-content text-end">
                                         <h5 class="mb-4">Berdasarkan Kelompok Umur</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
+                                        <p class="mb-0 descriptionGrap">
+                                            Deskripsi max 30 kata
                                         </p>
                                     </div>
                                     <div class="service-icon p-4">
@@ -149,7 +687,8 @@
                                     </div>
                                     <div class="service-content">
                                         <h5 class="mb-4">Berdasarkan Pekerjaan</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
+                                        <p class="mb-0 descriptionGrap">
+                                            Deskripsi max 30 kata
                                         </p>
                                     </div>
                                 </a>
@@ -161,7 +700,8 @@
                                     </div>
                                     <div class="service-content">
                                         <h5 class="mb-4">Berdasarkan Agama</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
+                                        <p class="mb-0 descriptionGrap">
+                                            Deskripsi max 30 kata
                                         </p>
                                     </div>
                                 </a>
@@ -173,7 +713,8 @@
                                     </div>
                                     <div class="service-content">
                                         <h5 class="mb-4">Berdasarkan Pendidikan</h5>
-                                        <p class="mb-0">Dolor sit amet consectetur adipisicing elit. Non alias eum, suscipit expedita corrupti officiis debitis possimus nam laudantium beatae quidem dolore consequuntur voluptate rem reiciendis, omnis sequi harum earum.
+                                        <p class="mb-0 descriptionGrap">
+                                            Deskripsi max 30 kata
                                         </p>
                                     </div>
                                 </a>
@@ -186,8 +727,8 @@
         <!-- Services End -->
 
         <!-- Jumlah penduduk dan kepala keluarga -->
-        <div class="container-fluid testimonial" id="jumlah-penduduk">
-            <div class="container">
+        <div class="container-fluid testimonia py-5l" id="jumlah-penduduk">
+            <div class="container py-5">
                 <div class="container-fluid testimonial py-5">
                     <div class="container py-5">
                         <div class="mx-auto text-center mb-5" style="max-width: 900px;">
@@ -202,9 +743,9 @@
         </div>
         <!-- END -->
 
-         <!--  Berdasarkan Dusun-->
-        <div class="container-fluid testimonial" id="berdasarkan-dusun">
-            <div class="container">
+         <!--  Berdasarkan Jenis Kelamin-->
+        <div class="container-fluid testimonial py-5" id="berdasarkan-jenis_kelamin">
+            <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 500px;">
                     <h1 class="mb-0">Berdasarkan Jenis Kelamin</h1>
                     <div>
@@ -216,8 +757,8 @@
         <!-- END -->
 
         <!-- Berdasarkan kelompok umur  -->
-        <div class="container-fluid testimonial" id="berdasarkan-umur">
-            <div class="container">
+        <div class="container-fluid testimonialpy-5" id="berdasarkan-umur">
+            <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 600px;">
                     <h1 class="mb-0">Berdasarkan Kelompok Umur</h1>
                     <div>
@@ -229,8 +770,8 @@
         <!-- END -->
 
          <!-- Berdasarkan pekerjaan  -->
-         <div class="container-fluid testimonial" id="berdasarkan-pekerjaan">
-            <div class="container">
+         <div class="container-fluid testimonial py-5" id="berdasarkan-pekerjaan">
+            <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                     <h1 class="mb-0">Berdasarkan Pekerjaan</h1>
                     <div>
@@ -242,8 +783,8 @@
         <!-- END -->
 
         <!-- Berdasarkan agama  -->
-        <div class="container-fluid testimonial" id="berdasarkan-agama">
-            <div class="container">
+        <div class="container-fluid testimonial py-5" id="berdasarkan-agama">
+            <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                     <h1 class="mb-0">Berdasarkan Agama</h1>
                     <div>
@@ -255,8 +796,8 @@
         <!-- END -->
 
         <!-- Berdasarkan pendidikan  -->
-        <div class="container-fluid testimonial" id="berdasarkan-pendidikan">
-            <div class="container">
+        <div class="container-fluid testimonial py-5" id="berdasarkan-pendidikan">
+            <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                     <h1 class="mb-0">Berdasarkan Pendidikan</h1>
                     <div>

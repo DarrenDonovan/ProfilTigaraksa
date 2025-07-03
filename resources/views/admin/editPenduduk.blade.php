@@ -30,7 +30,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -53,7 +54,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -99,13 +100,18 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.infografis') }}">
-							<p>Infografis</p>
+						<a href="{{ route('admin.wisata') }}">
+							<p>Wisata</p>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a href="{{ route('admin.wisata') }}">
-							<p>Wisata</p>
+						<a href="{{ route('admin.paketWisata') }}">
+							<p>Paket Wisata</p>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.penginapan') }}">
+							<p>Penginapan</p>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -120,6 +126,11 @@
 					<div class="container-fluid">
 						@if (Session::has('message'))
 							<p class="alert alert-success mt-2">{{ Session::get('message') }}</p>
+						@endif
+						@if(Session::has('error'))
+						    <div class="alert alert-danger mt-2">
+						        {{ Session::get('error') }}
+						    </div>
 						@endif
 		  				<!-- Daftar Wisata -->
                         <a href="{{ route('admin.penduduk') }}">
@@ -146,19 +157,19 @@
 													<h5 class="ml-2 mt-3"><strong>Data Diri</strong></h5>
                                                     <div class="form-group row">
 														<div class="col col-md-4">
-                                                        	<label for="nik">Nomor Induk Kependudukan (16 Digit)</label>
-                                                        	<input type="text" class="form-control" name="nik" id="nik" maxlength="16" pattern="\d{16}" value="{{ $itemPenduduk->NIK }}">
+                                                        	<label for="nik">Nomor Induk Kependudukan (16 Digit)*</label>
+                                                        	<input type="text" class="form-control" name="nik" id="nik" maxlength="16" value="{{ $itemPenduduk->NIK }}">
 															<input type="checkbox" class="form-check-input ml-1" id="punyaNIK">
 															<label class="form-check-label" for="punyaNIK">Punya NIK?</label>
 														</div>
 														<div class="col-md-8">
-                                                        	<label for="nama_lengkap">Nama Lengkap</label>
+                                                        	<label for="nama_lengkap">Nama Lengkap*</label>
                                                         	<input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" value="{{ $itemPenduduk->nama_lengkap }}" required>
 														</div>
 													</div>
 													<div class="form-group row">
 														<div class="col col-md-4"> 
-                                                    	    <label for="jenis_kelamin">Jenis Kelamin</label>
+                                                    	    <label for="jenis_kelamin">Jenis Kelamin*</label>
                                                     	    <select name="jenis_kelamin" class="form-control" required>
 														    	<option value="">-- Pilih Jenis Kelamin --</option>
 																<option value="Laki-Laki" {{ $itemPenduduk->jenis_kelamin == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
@@ -166,21 +177,22 @@
 															</select>
                                                     	</div>
 														<div class="col col-md-4"> <!-- Tempat Lahir -->
-                                                    	    <label for="tempat_lahir">Tempat Lahir</label>
+                                                    	    <label for="tempat_lahir">Tempat Lahir*</label>
                                                     	    <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir" value="{{ $itemPenduduk->tempat_lahir }}" required>
                                                     	</div>
                                                     	<div class="col col-md-4"> <!-- Tanggal Lahir -->
-                                                    	    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                                    	    <label for="tanggal_lahir">Tanggal Lahir*</label>
                                                     	    <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir" value="{{ $itemPenduduk->tanggal_lahir }}" required>
                                                     	</div>
 													</div>
                                                    	<div class="form-group row">
                                                     	<div class="col col-md-8"> <!-- Alamat -->
-                                                    	    <label for="alamat">Alamat</label>
+                                                    	    <label for="alamat">Alamat*</label>
                                                     	    <input type="text" class="form-control" name="alamat" id="alamat" value="{{ $itemPenduduk->alamat }}" required>
                                                     	</div>
+														@if(Auth::check() && Auth::user()->role === 'superadmin')
                                                     	<div class="col col-md-4"> <!-- Wilayah -->
-                                                    	    <label for="wilayah">Wilayah</label>
+                                                    	    <label for="wilayah">Wilayah*</label>
                                                     	    <select class="form-control" name="wilayah" id="wilayah" required>
         														<option value="">-- Pilih Wilayah --</option>
         													    @foreach ($wilayah as $itemWilayah)
@@ -188,11 +200,19 @@
         													    @endforeach
         													</select>
                                                     	</div>
+														@elseif(Auth::check() && Auth::user()->role === 'admin')
+														<div class="col col-md-4"> <!-- Wilayah -->
+                                                    	    <label for="wilayah">Wilayah*</label>
+                                                    	    <select class="form-control" name="wilayah" id="wilayah" required>
+        														<option value="{{ $wilayaheach->id_wilayah }}">{{ $wilayaheach->nama_wilayah }}</option>
+        													</select>
+                                                    	</div>
+														@endif
 													</div>
 													<div class="form-group row">
                                                     	<div class="col col-md-4"> <!-- Agama -->
-                                                    	    <label for="agama">Agama</label>
-															<select class="form-control" name="agama" id="agama">
+                                                    	    <label for="agama">Agama*</label>
+															<select class="form-control" name="agama" id="agama" required>
 																<option value="">-- Pilih Agama --</option>
 																@foreach($agama as $itemAgama)
 																	<option value="{{ $itemAgama->id_agama }}" {{ $itemAgama->id_agama == $itemPenduduk->id_agama ? 'selected' : '' }}>{{ $itemAgama->agama }}</option>
@@ -200,8 +220,8 @@
 															</select>                                                    	
 														</div>
                                                     	<div class="col col-md-4">
-                                                    	    <label for="pekerjaan">Pekerjaan</label>
-															<select class="form-control" name="pekerjaan" id="pekerjaan">
+                                                    	    <label for="pekerjaan">Pekerjaan*</label>
+															<select class="form-control" name="pekerjaan" id="pekerjaan" required>
 																<option value="">-- Pilih Pekerjaan --</option>
 																@foreach($pekerjaan as $itemPekerjaan)
 																	<option value="{{ $itemPekerjaan->id_pekerjaan }}" {{ $itemPekerjaan->id_pekerjaan == $itemPenduduk->id_pekerjaan ? 'selected' : '' }}>{{ $itemPekerjaan->pekerjaan }}</option>
@@ -209,8 +229,8 @@
 															</select>
 	                                                    	</div>
 														<div class="col col-md-4">
-															<label for="pendidikan">Pendidikan</label>
-															<select class="form-control" name="pendidikan" id="pendidikan">
+															<label for="pendidikan">Pendidikan*</label>
+															<select class="form-control" name="pendidikan" id="pendidikan" required>
 																<option value="">-- Pilih Pendidikan Terakhir --</option>
 																@foreach($pendidikan as $itemPendidikan)
 																	<option value="{{ $itemPendidikan->id_pendidikan }}" {{ $itemPendidikan->id_pendidikan == $itemPenduduk->id_pendidikan ? 'selected' : '' }}>{{ $itemPendidikan->tingkat_pendidikan }}</option>
@@ -220,15 +240,15 @@
 													</div>
 													<div class="form-group row">
 														<div class="col col-md-4">
-															<label for="suku_etnis">Suku/Etnis</label>
+															<label for="suku_etnis">Suku/Etnis*</label>
 															<input type="text" class="form-control" name="suku_etnis" id="suku_etnis" value="{{ $itemPenduduk->suku_etnis }}" required>
 														</div>
 														<div class="col col-md-4">
-															<label for="no_telp">Nomor Telepon</label>
+															<label for="no_telp">Nomor Telepon*</label>
 															<input type="text" class="form-control" name="no_telp" id="no_telp" value="{{ $itemPenduduk->no_telepon }}" required>
 														</div>
 														<div class="col col-md-4">
-															<label for="email">E-mail</label>
+															<label for="email">E-mail*</label>
 															<input type="email" class="form-control" name="email" id="email" value="{{ $itemPenduduk->email }}" required>
 														</div>
 													</div>
@@ -236,7 +256,7 @@
 													<h5 class="ml-2 mt-5"><strong>Data Kelahiran</strong></h5>
 													<div class="form-group row">
 														<div class="col col-md-4">
-															<label for="no_akta_lahir">No. Akta Lahir</label>
+															<label for="no_akta_lahir">No. Akta Lahir*</label>
 															<input type="text" class="form-control" name="no_akta_lahir" id="no_akta_lahir" value="{{ $itemPenduduk->no_akta }}" required>
 														</div>
 														<div class="col col-md-4">
@@ -244,21 +264,21 @@
 															<input type="time" class="form-control" name="waktu_kelahiran" id="waktu_kelahiran" value="{{ $itemPenduduk->waktu_lahir }}">
 														</div>
 														<div class="col col-md-4">
-															<label for="tempat_dilahirkan">Tempat Dilahirkan</label>
+															<label for="tempat_dilahirkan">Tempat Dilahirkan*</label>
 															<input type="text" class="form-control" name="tempat_dilahirkan" id="tempat_dilahirkan" value="{{ $itemPenduduk->tempat_dilahirkan }}" required>
 														</div>
 													</div>
 													<div class="form-group row">
 														<div class="col col-md-3">
-															<label for="anak_ke">Anak Ke</label>
+															<label for="anak_ke">Anak Ke-*</label>
 															<input type="number" class="form-control" name="anak_ke" id="anak_ke" value="{{ $itemPenduduk->anak_ke }}" required>
 														</div>
 														<div class="col col-md-3">
-															<label for="berat_lahir">Berat Lahir (gram)</label>
+															<label for="berat_lahir">Berat Lahir (gram)*</label>
 															<input type="number" class="form-control" name="berat_lahir" id="berat_lahir" value="{{ $itemPenduduk->berat_lahir }}" required>
 														</div>
 														<div class="col col-md-3">
-															<label for="tinggi_lahir">Tinggi Lahir (cm)</label>
+															<label for="tinggi_lahir">Tinggi Lahir (cm)*</label>
 															<input type="number" class="form-control" name="tinggi_lahir" id="tinggi_lahir" value="{{ $itemPenduduk->tinggi_lahir }}" required>
 														</div>
 													</div>
@@ -266,11 +286,11 @@
 													<h5 class="ml-2 mt-5"><strong>Data Keluarga</strong></h5>
 													<div class="form-group row">
 														<div class="col col-md-6">
-															<label for="no_kk">No. KK (16 Digit)</label>
-															<input type="text" class="form-control" name="no_kk" id="no_kk" maxlength="16" pattern="\d{16}" value="{{ $itemPenduduk->no_kk }}" required>
+															<label for="no_kk">No. KK (16 Digit)*</label>
+															<input type="text" class="form-control" name="no_kk" id="no_kk" maxlength="16" value="{{ $itemPenduduk->no_kk }}" required>
 														</div>
 														<div class="col col-md-6">
-															<label for="hub_keluarga">Hubungan Dalam Keluarga</label>
+															<label for="hub_keluarga">Hubungan Dalam Keluarga*</label>
 															<select name="hub_keluarga" class="form-control" required>
 														    	<option value="">-- Pilih Hubungan Dalam Keluarga --</option>
 																@foreach ($hubungan_keluarga as $itemHubungan)
@@ -281,21 +301,21 @@
 													</div>
 													<div class="form-group row">
 														<div class="col col-md-4">
-															<label for="nik_ayah">NIK Ayah (16 Digit)</label>
-															<input type="text" class="form-control" name="nik_ayah" id="nik_ayah" maxlength="16" pattern="\d{16}" value="{{ $itemPenduduk->nik_ayah }}" required>
+															<label for="nik_ayah">NIK Ayah (16 Digit*)</label>
+															<input type="text" class="form-control" name="nik_ayah" id="nik_ayah" maxlength="16" value="{{ $itemPenduduk->nik_ayah }}" required>
 														</div>
 														<div class="col col-md-8">
-															<label for="nama_ayah">Nama Ayah</label>
+															<label for="nama_ayah">Nama Ayah*</label>
 															<input type="text" class="form-control" name="nama_ayah" id="nama_ayah" value="{{ $itemPenduduk->nama_ayah }}" required>
 														</div>
 													</div>
 													<div class="form-group row">
 														<div class="col col-md-4">
-															<label for="nik_ibu">NIK Ibu (16 Digit)</label>
-															<input type="text" class="form-control" name="nik_ibu" id="nik_ibu" maxlength="16" pattern="\d{16}" value="{{ $itemPenduduk->nik_ibu }}" required>
+															<label for="nik_ibu">NIK Ibu (16 Digit)*</label>
+															<input type="text" class="form-control" name="nik_ibu" id="nik_ibu" maxlength="16" value="{{ $itemPenduduk->nik_ibu }}" required>
 														</div>
 														<div class="col col-md-8">
-															<label for="nama_ibu">Nama Ibu</label>
+															<label for="nama_ibu">Nama Ibu*</label>
 															<input type="text" class="form-control" name="nama_ibu" id="nama_ibu" value="{{ $itemPenduduk->nama_ibu }}" required>
 														</div>
 													</div>
@@ -303,7 +323,7 @@
 													<h5 class="ml-2 mt-5"><strong>Data Kewarganegaraan</strong></h5>
 													<div class="form-group row">
 														<div class="col col-md-4">
-															<label for="status_wn">Status Warga Negara</label>
+															<label for="status_wn">Status Warga Negara*</label>
 															<select name="status_wn" id="status_wn" class="form-control" required>
 														    	<option value="">-- Pilih Hubungan Dalam Keluarga --</option>
 																<option value="WNI" {{ $itemPenduduk->status_wn == 'WNI' ? 'selected' : '' }}>Warga Negara Indonesia (WNI)</option>
@@ -322,7 +342,7 @@
 													<div class="form-group row">
 														<div class="col col-md-4">
 															<label for="no_kitas_kitap">Nomor KITAS/KITAP (11 Digit)</label>
-															<input type="text" class="form-control" name="no_kitas_kitap" id="no_kitas_kitap" maxlength="11" pattern="\d{11}" value="{{ $itemPenduduk->no_kitas_kitap }}">
+															<input type="text" class="form-control" name="no_kitas_kitap" id="no_kitas_kitap" maxlength="11" value="{{ $itemPenduduk->no_kitas_kitap }}">
 														</div>
 														<div class="col col-md-4">
 															<label for="negara_asal">Negara Asal</label>
@@ -333,7 +353,7 @@
 													<h5 class="ml-2 mt-5"><strong>Status Pernikahan</strong></h5>
 													<div class="form-group row">
 														<div class="col col-md-6">
-															<label for="status_kawin">Status Pernikahan</label>
+															<label for="status_kawin">Status Pernikahan*</label>
 															<select name="status_kawin" id="status_kawin" class="form-control" required>
 														    	<option value="">-- Pilih Status Pernikahan --</option>
 																@foreach ($status_nikah as $itemStatus)
@@ -359,7 +379,7 @@
 
 													<h5 class="ml-2 mt-5"><strong>Data Kesehatan</strong></h5>
 													<div class="form-group">
-														<label for="golongan_darah">Golongan Darah</label>
+														<label for="golongan_darah">Golongan Darah*</label>
 														<select name="golongan_darah" class="form-control" required>
 													    	<option value="">-- Pilih Golongan Darah --</option>
 															<option value="A" {{ $itemPenduduk->golongan_darah == 'A' ? 'selected' : '' }}>A</option>
@@ -392,7 +412,7 @@
 														</div>
 														<div class="col col-md-4">
 															<label for="no_bpjs_naker">No. BPJS Ketenagakerjaan (11 Digit)</label>
-															<input type="text" class="form-control" name="no_bpjs_naker" id="no_bpjs_naker" maxlength="11" pattern="\d{11}" value="{{ $itemPenduduk->no_bpjs_naker }}">
+															<input type="text" class="form-control" name="no_bpjs_naker" id="no_bpjs_naker" maxlength="11" value="{{ $itemPenduduk->no_bpjs_naker }}">
 														</div>
 													</div>
 													<div class="text-end">
@@ -511,23 +531,23 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 </script>
-</body>
+
 <script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
+<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.')}}"></script>
+<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+<script src="{{url('js/admin/ready.min.js')}}"></script>
+<script src="{{url('js/admin/demo.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
+</body>
 </html>

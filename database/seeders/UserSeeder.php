@@ -16,8 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')-> truncate();
-
         DB::table('users')->insert([
             'name' => 'superadmin',
             'email' => 'superadmin@admin.com',
@@ -26,15 +24,6 @@ class UserSeeder extends Seeder
             'updated_at' => now(),
             'role' => 'superadmin',
             'id_wilayah'=> 13
-        ],
-        [
-            'name' => 'Admin 1',
-            'email' => 'admin1@admin.com',
-            'password' => Hash::make('123'), 
-            'created_at' => now(),
-            'updated_at' => now(),
-            'role' => 'admin',
-            'id_wilayah' => 5
         ]);
     }
 }

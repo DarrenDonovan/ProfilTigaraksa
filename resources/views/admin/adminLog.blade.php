@@ -31,7 +31,8 @@
    <div class="container-fluid bg-primary px-5 d-none d-lg-block topbar">
 		<div class="row gx-0 justify-content-end"> <!-- Tambahkan justify-content-end -->
    			<div class="col-lg-4 text-end"> <!-- Gunakan text-end agar teks sejajar ke kanan -->
-                <div class="d-inline-flex align-items-center" style="height: 45px;">
+                <div class="d-inline-flex align-items-center justify-content-end" style="height: 45px; width: 500px">
+					<small class="me-3 text-light"><i class="fa fa-user me-2"></i>{{ $wilayaheach->nama_wilayah }}</small>
                     @if(Auth::check() && Auth::user()->role==='superadmin')
 					<a href="#" data-bs-toggle="modal" data-bs-target="#modal_removeAdmin"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Remove Admin</small></a>
                     <a href="{{url('admin/createadmin')}}"><small class="me-3 text-light"><i class="fa fa-user me-2"></i>Add Admin</small></a>
@@ -54,7 +55,7 @@
 					<form action="{{ route('removeAdmin')}}" method="post" enctype="multipart/form-data">
 						@csrf
 						<div class="form-group">
-							<label for="admin">Nama Admin</label>
+							<label for="admin">Nama Admin*</label>
 							<select name="admin" class="form-control" required>
 							    <option value="">-- Pilih Admin --</option>
 							    @foreach ($users as $items)
@@ -100,13 +101,18 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{ route('admin.infografis') }}">
-						<p>Infografis</p>
+					<a href="{{ route('admin.wisata') }}">
+						<p>Wisata</p>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="{{ route('admin.wisata') }}">
-						<p>Wisata</p>
+					<a href="{{ route('admin.paketWisata') }}">
+						<p>Paket Wisata</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ route('admin.penginapan') }}">
+						<p>Penginapan</p>
 					</a>
 				</li>
 				<li class="nav-item">
@@ -132,6 +138,7 @@
 		  			<!-- Daftar UMKM -->
 					<div class="d-flex justify-content-between align-items-center">
 						<h4 class="page-title mt-2">Admin Log</h4>
+						<a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal_confirmation">Hapus Log</a>
 					</div>
 					
 					<div class="row">
@@ -151,7 +158,7 @@
 											<tbody>
                                                 @foreach ($user_log as $itemLog)
     										    <tr>
-													<td>{{ $itemLog->id_log }}</td>
+													<td>{{ $loop->iteration }}</td>
                                                     <td>{{ $itemLog->name }}</td>
                                                     <td>{{ $itemLog->email }}</td>
                                                     <td>{{ $itemLog->action }}</td>
@@ -172,24 +179,41 @@
 			</div>
 		</div>
 	</div> 
+
+	<div class="modal fade" id="modal_confirmation" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+   		<div class="modal-dialog">
+    		<div class="modal-content">
+    			<div class="modal-header">
+					<h5 class="modal-title" id="modalTitle">Confirmation</h5>
+    			</div>
+    			<div class="modal-body">
+					<h5>Apakah Anda Yakin Ingin Menghapus Log?</h5>
+					<br>
+					<div class="d-flex justify-content-end">
+						<a href="#" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Batalkan</a>
+						<a href="{{ route('admin.deleteAdminLog') }}" class="btn btn-danger ml-3">Hapus</a>
+					</div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 	
+	<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+	<script src="{{url('js/admin/core/popper.min.js')}}"></script>
+	<script src="{{url('js/admin/core/bootstrap.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/chartist.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/chart-circle/circles.min.js')}}"></script>
+	<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+	<script src="{{url('js/admin/ready.min.js')}}"></script>
+	<script src="{{url('js/admin/demo.js')}}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 </body>
-<script src="{{url('js/admin/core/jquery.3.2.1.min.js')}}"></script>
-<script src="{{url('js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-<script src="{{url('js/admin/core/popper.min.js"></script>
-<script src="{{url('js/admin/core/bootstrap.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/chartist.min.js"></script>
-<script src="{{url('js/admin/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
-<script src="{{url('js/admin/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/jquery.mapael.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-mapael/maps/world_countries.min.js"></script>
-<script src="{{url('js/admin/plugin/chart-circle/circles.min.js"></script>
-<script src="{{url('js/admin/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-<script src="{{url('js/admin/ready.min.js"></script>
-<script src="{{url('js/admin/demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
 </html>

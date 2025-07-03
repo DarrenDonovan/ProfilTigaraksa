@@ -18,13 +18,13 @@
     <form action="{{url('admin/storeadmin')}}" method="post">
         @csrf
       <div class="input-box">
-        <input type="text" placeholder="Enter name" name="name" required>
+        <input type="text" placeholder="Enter name*" name="name" required>
       </div>
       <div class="input-box">
-        <input type="email" placeholder="Enter email" name="email" required>
+        <input type="email" placeholder="Enter email*" name="email" required>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Create password" name="password" required>
+        <input type="password" placeholder="Create password*" name="password" required>
       </div>
       <div class="input-box">
         <select class="form-control" name="wilayah" id="wilayah" required>
